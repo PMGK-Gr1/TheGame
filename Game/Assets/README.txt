@@ -1,10 +1,10 @@
-Assety od grafików.
+ï»¿Assety od grafikÃ³w.
 Dopuszczalne formaty:
 
 .MAX
 .FBX*
 
-*dla formatu fbx pod 3dsm 2013 nale¿y pobraæ aktualizacjê exportera
+*dla formatu fbx pod 3dsm 2013 naleÅ¼y pobraÄ‡ aktualizacjÄ™ exportera
 http://usa.autodesk.com/adsk/servlet/pc/item?siteID=123112&id=19911599
 
-Assety powinny byæ pogrupowane tematycznie w odpowiednie foldery.
+Assety powinny byÄ‡ pogrupowane tematycznie w odpowiednie foldery.
