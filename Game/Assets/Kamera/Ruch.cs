@@ -2,18 +2,20 @@
 using System.Collections;
 
 public class Ruch : MonoBehaviour {
-	
-	public Transform Donut;
-	public Transform Kamera;
-	private Vector3 wektorPrzesuniecia;
+
+	public GameObject cylinder;
 	
 	// Use this for initialization
 	void Start () {
-		wektorPrzesuniecia.Set (0,0,100);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-			Kamera.position = Donut.position + wektorPrzesuniecia;
+		if(Input.GetKeyDown(KeyCode.Escape)) Application.Quit();
+		if(Input.GetKeyDown(KeyCode.Menu)) Application.LoadLevel(0);
+
+		this.transform.position = cylinder.transform.position + new Vector3(1, 0.5f, -3.5f);
 	}
+
+
 }
