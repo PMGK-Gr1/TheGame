@@ -44,6 +44,7 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Donut\Skrypty\CandyPicker.cs" />
      <Compile Include="Assets\Donut\Skrypty\Turlanie.cs" />
      <Compile Include="Assets\Kamera\Ruch.cs" />
      <None Include="Assets\README.txt" />
