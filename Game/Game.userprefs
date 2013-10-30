@@ -1,9 +1,9 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Kamera\Ruch.cs">
+  <MonoDevelop.Ide.Workbench>
     <Files>
-      <File FileName="Assets\Kamera\Ruch.cs" Line="17" Column="58" />
-      <File FileName="Assets\Donut\Skrypty\Turlanie.cs" Line="19" Column="5" />
+      <File FileName="Assets\Level\LevelBuilder.cs" Line="1" Column="1" />
+      <File FileName="Assets\Donut\Skrypty\CandyPicker.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
