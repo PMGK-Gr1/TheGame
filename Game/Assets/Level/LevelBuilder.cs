@@ -3,50 +3,36 @@ using System.Collections;
 
 public class LevelBuilder : MonoBehaviour {
 
-    int x = 0;
-    GameObject currentObject;
-    GameObject nextObject;
-    int blocks = 0;
+
+    public GameObject LevelPrefab;
+    GameObject current;
+    GameObject next;
+
+ 
+
 	// Use this for initialization
 	void Start () {
-        currentObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        currentObject.name = blocks.ToString();
-        blocks++;
-        currentObject.layer = 9;
-        currentObject.transform.localScale = new Vector3(15, 5, 5);
-        currentObject.transform.position = new Vector3(x, Random.Range(-0.5f, 0.5f), 0);
-        float nextPosition = currentObject.transform.position.x + currentObject.transform.localScale.x - 0.1f;
-        nextObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        nextObject.name = blocks.ToString();
-        blocks++;
-        nextObject.transform.localScale = new Vector3(15, 5, 5);
-        nextObject.layer = 9;
 
-        nextObject.transform.position = new Vector3(nextPosition, Random.Range(-5f, 5f), 0);
-        x++;
-	
+        current = Instantiate(LevelPrefab, new Vector3(0,0,0), Quaternion.identity) as GameObject;
+        current.layer = 9;
+        Vector3 nextVector = new Vector3(current.transform.localScale.x,0,0);
+        next = Instantiate(LevelPrefab, nextVector, Quaternion.identity) as GameObject;
+        next.layer = 9;
+
 	}
 	
 	// Update is called once per frame
-	void FixedUpdate () {
-
-        if (this.transform.position.x > nextObject.transform.position.x)
+	void FixedUpdate ()
+    {
+        if (this.transform.position.x > (next.transform.position.x - ((next.transform.localScale.x)/3) ))
         {
-			float nextPosition = nextObject.transform.position.x + nextObject.transform.localScale.x - 0.1f;
-            float nextHeight = nextObject.transform.position.y;
-            Destroy(currentObject);
-            currentObject = nextObject;
-
-           nextObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
-           nextObject.name = blocks.ToString();
-           blocks++;
-           nextObject.layer = 9;
-
-           nextObject.transform.localScale = new Vector3(15, 5, 5);
-           nextObject.transform.position = new Vector3(nextPosition, nextHeight + Random.Range(-5f, 5f), 0);
-            x++;
-
+            float nextPositionX = next.transform.position.x + next.transform.localScale.x - 0.2f;
+            float nextPositionY = next.transform.position.y + Random.Range(-2.0f, 2.0f);
+            Destroy(current);
+            current = next;
+            next = Instantiate(LevelPrefab, new Vector3(nextPositionX, nextPositionY, 0), Quaternion.identity) as GameObject;
+            next.layer = 9;
         }
-
-	}
+        
+    }
 }
