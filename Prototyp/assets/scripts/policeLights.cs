@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Simply simulates police light interpolating interpolating target's light color forth and back between blue and red.
+/// </summary>
+
 public class policeLights : MonoBehaviour {
 
 	private Color colorA, colorB, swapColor;

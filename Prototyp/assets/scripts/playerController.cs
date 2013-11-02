@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// This script allows player to control object which it's assigned to.
+/// </summary>
+
 public class playerController : MonoBehaviour {
 	
 	//public
@@ -15,8 +19,6 @@ public class playerController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		rigidbody.AddForce(Vector3.right*xForce);
-		
-		
 	}
 	
 	/// <summary>
@@ -24,7 +26,9 @@ public class playerController : MonoBehaviour {
 	/// </summary>
 	void OnCollisionStay()
 	{
-	
+		//While the object stays in contact with anything and player taps a screen the object jumps.
+		//TODO: check if collision.collider is a ground
+		//TODO: devide input check from the jump script (ie with a bool variable)
 		if (Input.GetMouseButtonDown(0))
 		{
 			Jump();
@@ -36,6 +40,7 @@ public class playerController : MonoBehaviour {
 	/// </summary>
 	void Jump()
 	{
+		//Add impulsive force
 		rigidbody.AddForce(Vector3.up.normalized*jumpForce, ForceMode.Impulse);
 	}
 }

@@ -1,7 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class kolczatka : MonoBehaviour {
+/// <summary>
+/// Provides functions of a spike stop.
+/// </summary>
+
+public class spikeStop : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
@@ -18,6 +22,8 @@ public class kolczatka : MonoBehaviour {
 	/// </summary>
 	void OnTriggerEnter (Collider other)
 	{
+		//When object taged "Player" inserts the trigger
+		//current level reloads.
 		if (other.tag == "Player")
 		{
 			Application.LoadLevel(Application.loadedLevelName);
