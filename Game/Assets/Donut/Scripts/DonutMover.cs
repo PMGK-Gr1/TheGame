@@ -20,8 +20,8 @@ public class DonutMover : MonoBehaviour {
 		cloth.AddForceAtPosition(new Vector3(force * forceMultiplier, 0, 0), cylinder.transform.position + new Vector3(0, 1f, 0), 1f);
 
 		if ((Input.touchCount != 0 || Input.GetKeyDown(KeyCode.Space)) && cooldown <= 0) {
-			cloth.AddForceAtPosition(new Vector3(0, 2000, 0), cylinder.transform.position + new Vector3(0, -1f, 0), 1f);
-			cloth.AddForceAtPosition(new Vector3(0, 1000, 0), cylinder.transform.position, 4f);
+			cloth.AddForceAtPosition(new Vector3(0, 4000, 0), cylinder.transform.position + new Vector3(0, -1f, 0), 1f);
+			cloth.AddForceAtPosition(new Vector3(0, 8000, 0), cylinder.transform.position, 4f);
 			cooldown = 0.5f;
 		}
 		cooldown -= Time.fixedDeltaTime;
