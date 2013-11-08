@@ -3,33 +3,35 @@ using System.Collections;
 
 public class Pursuit : MonoBehaviour {
 
-	public GameObject donut;
-	public float pursuitSpeed = 10.0f;
-	public float catchDistance = 2.0f;
-	public float pursuitDelay = 2.0f;
+    //public variables
+	public GameObject Donut;
+	public float PursuitSpeed = 10.0f;
+	public float CatchDistance = 2.0f;
+	public float PursuitDelay = 2.0f;
 
-	float startTime = 0.0f;
+    //private variables
+	private float startTime = 0.0f;
 	// Use this for initialization
 	void Start() {
-		startTime = Time.time + pursuitDelay; 
+		startTime = Time.time + PursuitDelay; 
 	}
 
 	// Update is called once per frame
 	void FixedUpdate() {
 		if (Time.time > startTime) {
-			Vector3 delta = donut.transform.position - transform.position;
+			Vector3 tmpDelta = Donut.transform.position - transform.position;
 
-			float x = delta.magnitude / catchDistance;
-			x -= 2;
-			float currentSpeed = x * x * x * 0.2f + 1;
-			currentSpeed *= pursuitSpeed;
-			Vector3 velocity = currentSpeed * Time.fixedDeltaTime * delta.normalized;
+			float tmpX = tmpDelta.magnitude / CatchDistance;
+			tmpX -= 2;
+			float currentSpeed = tmpX * tmpX * tmpX * 0.2f + 1;
+			currentSpeed *= PursuitSpeed;
+			Vector3 tmpVelocity = currentSpeed * Time.fixedDeltaTime * tmpDelta.normalized;
 
-			if (delta.magnitude < catchDistance) {
+			if (tmpDelta.magnitude < CatchDistance) {
 				Debug.Log("You've been caught. HAHAHA!!!!");
 			}
 
-			transform.position += velocity;
+			transform.position += tmpVelocity;
 
 		}
 	}
