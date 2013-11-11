@@ -24,7 +24,7 @@ public class CandyPlacer : MonoBehaviour
                 float candyPositionX = (this.collider.bounds.size.x / tmpCandyQuantity) * i + this.transform.position.x - ((this.transform.localScale.x) / 2) + Candy.transform.localScale.x;
                 float candyPositionY = this.collider.bounds.size.y + 0.5f + this.transform.position.y;
                 var tmpNewCandy = Instantiate(Candy, new Vector3(candyPositionX, candyPositionY, 0), Quaternion.identity) as GameObject;
-                Destroy(tmpNewCandy, 7f);
+                Destroy(tmpNewCandy, 77f);
             }
         }
 
