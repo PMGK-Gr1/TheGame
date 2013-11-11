@@ -5,7 +5,7 @@ using System.Collections;
 /// <summary>
 /// Moving donut.
 /// </summary>
-public class DonutMover : MonoBehaviour {
+public class SoftDonutMover : MonoBehaviour {
 
 	//public variables
 	public GameObject Cylinder;

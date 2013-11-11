@@ -5,8 +5,8 @@ public class Pursuit : MonoBehaviour {
 
     //public variables
 	public GameObject Donut;
-	public float PursuitSpeed = 10.0f;
-	public float CatchDistance = 2.0f;
+	public float PursuitSpeed = 30.0f;
+	public float CatchDistance = 60.0f;
 	public float PursuitDelay = 2.0f;
 
     //private variables
@@ -20,7 +20,6 @@ public class Pursuit : MonoBehaviour {
 	void FixedUpdate() {
 		if (Time.time > startTime) {
 			Vector3 tmpDelta = Donut.transform.position - transform.position;
-
 			float tmpX = tmpDelta.magnitude / CatchDistance;
 			tmpX -= 2;
 			float currentSpeed = tmpX * tmpX * tmpX * 0.2f + 1;
