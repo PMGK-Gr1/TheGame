@@ -49,9 +49,9 @@
      <Compile Include="Assets\Donut\Scripts\CandyPicker.cs" />
      <Compile Include="Assets\Donut\Scripts\DonutMover.cs" />
      <Compile Include="Assets\GameController\GameController.cs" />
-     <Compile Include="Assets\Level\CandyPlacer.cs" />
-     <Compile Include="Assets\Level\LevelBuilder.cs" />
-     <Compile Include="Assets\Level\Properties.cs" />
+     <Compile Include="Assets\Level\Scripts\CandyPlacer.cs" />
+     <Compile Include="Assets\Level\Scripts\LevelBuilder.cs" />
+     <Compile Include="Assets\Level\Scripts\Properties.cs" />
      <Compile Include="Assets\Pursuit\Pursuit.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
