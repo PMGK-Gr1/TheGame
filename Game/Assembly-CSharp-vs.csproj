@@ -51,7 +51,6 @@
      <Compile Include="Assets\Donut\Scripts\SoftDonutMover.cs" />
      <Compile Include="Assets\GameController\GameController.cs" />
      <Compile Include="Assets\General\Localization.cs" />
-     <Compile Include="Assets\General\MonoSingleton.cs" />
      <Compile Include="Assets\Level\Scripts\CandyPlacer.cs" />
      <Compile Include="Assets\Level\Scripts\LevelBuilder.cs" />
      <Compile Include="Assets\Level\Scripts\Properties.cs" />

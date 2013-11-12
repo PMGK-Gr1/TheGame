@@ -2,26 +2,35 @@
 using System.Collections.Generic;
 using System.IO;
 
-public class Localization : MonoSingleton<Localization> {
+public class Localization {
 
 	private Dictionary<string, string> texts;
 	private TextAsset textFile;
+	private static Localization instance;
+
+	public static Localization Instance {
+		get {
+			if (instance == null) instance = new Localization();
+			return instance;
+		}
+	}
 
 	public static void loadLanguage(string language) {
-		instance.textFile = Resources.Load("Localization/" + language) as TextAsset;
-		if (instance.textFile == null) {
+		Instance.textFile = Resources.Load("Localization/" + language) as TextAsset;
+		if (Instance.textFile == null) {
 			Debug.LogError("Localization not supported");
 		}
-		StringReader textReader = new StringReader(instance.textFile.text);
-		instance.texts = new Dictionary<string, string>();
+		StringReader textReader = new StringReader(Instance.textFile.text);
+		Instance.texts = new Dictionary<string, string>();
 		string line;
 		while ((line = textReader.ReadLine()) != null) {
 			string[] pair = line.Split(',');
-			instance.texts.Add(pair[0], pair[1]);
+			Instance.texts.Add(pair[0], pair[1]);
 		}
 	}
 
-	public static string getText(string key){
-		return instance.texts[key];
+	public static string getText(string key) {
+		return Instance.texts[key];
 	}
+
 }
