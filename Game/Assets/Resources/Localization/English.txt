@@ -1,0 +1,2 @@
+CANDY_EATEN,I ate a candy!
+DONUT_CAUGHT,Ha ha ha I've got ya!

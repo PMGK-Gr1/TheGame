@@ -9,7 +9,7 @@ public class GameController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+		Localization.loadLanguage("English");
 	}
 	
 	// Update is called once per frame

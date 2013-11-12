@@ -27,7 +27,7 @@ public class Pursuit : MonoBehaviour {
 			Vector3 tmpVelocity = currentSpeed * Time.fixedDeltaTime * tmpDelta.normalized;
 
 			if (tmpDelta.magnitude < CatchDistance) {
-				Debug.Log("You've been caught. HAHAHA!!!!");
+				Debug.Log(Localization.getText("DONUT_CAUGHT"));
 			}
 
 			transform.position += tmpVelocity;

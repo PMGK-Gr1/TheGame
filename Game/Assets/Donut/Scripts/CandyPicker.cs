@@ -15,7 +15,7 @@ public class CandyPicker : MonoBehaviour {
 	void OnTriggerEnter(Collider other){
 		if (other.tag == "Candy") {
             candiesEaten++;
-            Debug.Log("I Ate Candy!");
+            Debug.Log(Localization.getText("CANDY_EATEN"));
             Score.fontSize = (Screen.height)/15;
             Score.text = "Candies: " + candiesEaten.ToString();
 			Destroy(other.gameObject);
