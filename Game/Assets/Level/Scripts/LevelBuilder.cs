@@ -28,8 +28,8 @@ public class LevelBuilder : MonoBehaviour {
         #region cukiernia!
         GameObject Bakery = GameObject.CreatePrimitive(PrimitiveType.Cube);
         Bakery.layer = 9;
-        Bakery.transform.localScale = new Vector3(40.0f, 30.0f, 30.0f);
-        Bakery.transform.position = new Vector3(85.0f, 15.0f, 0.0f);
+        Bakery.transform.localScale = new Vector3(70.0f, 30.0f, 30.0f);
+        Bakery.transform.position = new Vector3(35.0f, 15.0f, 0.0f);
         Destroy(Bakery, 20.0f);
         #endregion
 
@@ -38,10 +38,16 @@ public class LevelBuilder : MonoBehaviour {
 
         levelPrefab = LevelPrefabs[0];
         var tmpElement = Instantiate(levelPrefab, endPosition, Quaternion.identity) as GameObject;
+        tmpElement.GetComponent<CandyPlacer2>().CandyChance = -1;
+        tmpElement.GetComponent<ObstaclePlacer>().ChanceForObstacle = -1;
+        tmpElement.GetComponent<BoostPlacer>().ChanceForBoost = -1;
         level.Add(tmpElement);
         //current.layer = 9;
 		endPosition += levelPrefab.GetComponent<Properties>().dimentions;
         var tmpElement1 = Instantiate(levelPrefab, endPosition, Quaternion.identity) as GameObject;
+        tmpElement1.GetComponent<CandyPlacer2>().CandyChance = -1;
+        tmpElement1.GetComponent<ObstaclePlacer>().ChanceForObstacle = -1;
+        tmpElement1.GetComponent<BoostPlacer>().ChanceForBoost = -1;
         level.Add(tmpElement1);
 		//next.layer = 9;
 		endPosition += levelPrefab.GetComponent<Properties>().dimentions;
