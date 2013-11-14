@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 
 /// <summary>
@@ -11,8 +12,7 @@ public class LevelBuilder : MonoBehaviour {
 
     //public variables
     public GameObject[] LevelPrefabs;
-    public GameObject Player;
-    public int HowMany = 20;
+    public int ModuleCount = 20;
     //private variables
     private GameObject levelPrefab;
     private Properties prop;
@@ -24,6 +24,7 @@ public class LevelBuilder : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
+		
 
         #region cukiernia!
         GameObject Bakery = GameObject.CreatePrimitive(PrimitiveType.Cube);
@@ -52,7 +53,7 @@ public class LevelBuilder : MonoBehaviour {
 		//next.layer = 9;
 		endPosition += levelPrefab.GetComponent<Properties>().dimentions;
         
-        for (int i = 2; i < HowMany; i++)
+        for (int i = 2; i < ModuleCount; i++)
         {
             
             levelPrefab = LevelPrefabs[RandomPrefab()];
@@ -67,9 +68,9 @@ public class LevelBuilder : MonoBehaviour {
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (Player.transform.position.x > level[HowMany / 2].transform.position.x + 100f)
+        if (transform.position.x > level[ModuleCount / 2].transform.position.x + 100f)
         {
-            for (int i = 0; i < HowMany / 2; i++)
+            for (int i = 0; i < ModuleCount / 2; i++)
             {
                 Destroy(level[0]);
                 level.RemoveAt(0);
@@ -102,11 +103,15 @@ public class LevelBuilder : MonoBehaviour {
 
     int RandomPrefab()
     {
-        float tmp = Random.Range(0.0f, 1.0f);
+        float tmp = UnityEngine.Random.Range(0.0f, 1.0f);
         if (tmp <= 0.2f) return 1;
         if (tmp >= 0.8f) return 2;
         else return 0;
 
 
     }
+
+	void OnGUI() {
+		GUI.Label(new Rect(0, 0, 300, 300), "Your language is: " + Application.systemLanguage.ToString());
+	}
 }
