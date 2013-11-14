@@ -54,6 +54,8 @@
      <Compile Include="Assets\General\Localization.cs" />
      <Compile Include="Assets\General\MonoSingleton.cs" />
      <Compile Include="Assets\Level\Scripts\LevelBuilder.cs" />
+     <Compile Include="Assets\Level\Scripts\ObjectPlacing.cs" />
+     <Compile Include="Assets\Level\Scripts\Placer.cs" />
      <Compile Include="Assets\Level\Scripts\Properties.cs" />
      <Compile Include="Assets\OLD\BoostPlacer.cs" />
      <Compile Include="Assets\OLD\Booster.cs" />

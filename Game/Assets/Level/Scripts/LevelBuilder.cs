@@ -38,17 +38,27 @@ public class LevelBuilder : MonoBehaviour {
 
         levelPrefab = LevelPrefabs[0];
         var tmpElement = Instantiate(levelPrefab, endPosition, Quaternion.identity) as GameObject;
+        /*
         tmpElement.GetComponent<CandyPlacer2>().CandyChance = -1;
         tmpElement.GetComponent<ObstaclePlacer>().ChanceForObstacle = -1;
         tmpElement.GetComponent<BoostPlacer>().ChanceForBoost = -1;
+         */
+        tmpElement.GetComponent<Placer>().CandyChance = -1;
+        tmpElement.GetComponent<Placer>().BoostChance = -1;
+        tmpElement.GetComponent<Placer>().ObstacleChance = -1;
         currentLenght += levelPrefab.GetComponent<Properties>().dimentions.x;
         level.Add(tmpElement);
         //current.layer = 9;
 		endPosition += levelPrefab.GetComponent<Properties>().dimentions;
         var tmpElement1 = Instantiate(levelPrefab, endPosition, Quaternion.identity) as GameObject;
+        /*
         tmpElement1.GetComponent<CandyPlacer2>().CandyChance = -1;
         tmpElement1.GetComponent<ObstaclePlacer>().ChanceForObstacle = -1;
         tmpElement1.GetComponent<BoostPlacer>().ChanceForBoost = -1;
+         */
+        tmpElement1.GetComponent<Placer>().CandyChance = -1;
+        tmpElement1.GetComponent<Placer>().BoostChance = -1;
+        tmpElement1.GetComponent<Placer>().ObstacleChance = -1;
         currentLenght += levelPrefab.GetComponent<Properties>().dimentions.x;
         level.Add(tmpElement1);
 		//next.layer = 9;
