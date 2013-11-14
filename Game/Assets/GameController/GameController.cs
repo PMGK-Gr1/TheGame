@@ -6,10 +6,14 @@ using System.Collections;
 /// Now it does nothing.
 /// </summary>
 public class GameController : MonoBehaviour {
-
+	
+	//private variables
+	private string language;
+	
 	// Use this for initialization
 	void Start () {
-		Localization.loadLanguage("English");
+		language = SaveAndLoad.GetLoadedLanguage();
+		Localization.loadLanguage(language);
 	}
 	
 	// Update is called once per frame

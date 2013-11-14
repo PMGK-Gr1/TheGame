@@ -7,11 +7,12 @@ using System.Collections;
 /// </summary>
 
 public class Killer : MonoBehaviour {
-
+	
     void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Obstacle")
         {
+			SaveAndLoad.Save();
             Debug.Log(Localization.getText("DEAD"));
             Application.LoadLevel(0);
         }

@@ -21,4 +21,9 @@ public class CandyPicker : MonoBehaviour {
 			Destroy(other.gameObject);
 		}
 	}
+	
+	public int GetCandies()
+	{
+		return candiesEaten;
+	}
 }
