@@ -15,11 +15,13 @@ public class LevelBuilder : MonoBehaviour {
     public int ModuleCount = 20;
     //private variables
     private GameObject levelPrefab;
-    private Properties prop;
+    //private Properties prop; // unused removed
     private GameObject current;
     private GameObject next;
 	private Vector3 endPosition = Vector3.zero;
     private List<GameObject> level = new List<GameObject>();
+
+	private const int groundLayer = 10;
 	
 	// Use this for initialization
 	void Start ()
@@ -28,7 +30,7 @@ public class LevelBuilder : MonoBehaviour {
 
         #region cukiernia!
         GameObject Bakery = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        Bakery.layer = 9;
+		Bakery.layer = groundLayer;
         Bakery.transform.localScale = new Vector3(70.0f, 30.0f, 30.0f);
         Bakery.transform.position = new Vector3(35.0f, 15.0f, 0.0f);
         Destroy(Bakery, 20.0f);
@@ -68,6 +70,8 @@ public class LevelBuilder : MonoBehaviour {
     // Update is called once per frame
     void FixedUpdate()
     {
+		// TODO fix this shit
+		// It should work continously not in (ModuleCount /2) increments
         if (transform.position.x > level[ModuleCount / 2].transform.position.x + 100f)
         {
             for (int i = 0; i < ModuleCount / 2; i++)
@@ -78,11 +82,7 @@ public class LevelBuilder : MonoBehaviour {
                 var tmpElem = Instantiate(levelPrefab, endPosition, Quaternion.identity) as GameObject;
                 level.Add(tmpElem);
                 endPosition += levelPrefab.GetComponent<Properties>().dimentions;
-                
-
             }
-
-
         }
         
         /*
@@ -107,11 +107,5 @@ public class LevelBuilder : MonoBehaviour {
         if (tmp <= 0.2f) return 1;
         if (tmp >= 0.8f) return 2;
         else return 0;
-
-
     }
-
-	void OnGUI() {
-		GUI.Label(new Rect(0, 0, 300, 300), "Your language is: " + Application.systemLanguage.ToString());
-	}
 }

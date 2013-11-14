@@ -12,7 +12,7 @@ public class Killer : MonoBehaviour {
     {
         if (other.tag == "Obstacle")
         {
-			SaveAndLoad.Save();
+			SaveSystem.Save();
             Debug.Log(Localization.getText("DEAD"));
             Application.LoadLevel(0);
         }

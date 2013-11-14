@@ -5,7 +5,7 @@ using System.Collections;
 /// Saving and loading game data
 /// </summary>/
 
-public class SaveAndLoad : MonoBehaviour {
+public class SaveSystem : MonoBehaviour {
 	
 	//private variables
 	private static int score;
@@ -17,7 +17,7 @@ public class SaveAndLoad : MonoBehaviour {
 		//checking if it's first run
 		if(!(PlayerPrefs.HasKey ("Score")))
 		{
-			score = 1;
+			score = 0;
 			first = true;
 		}
 		

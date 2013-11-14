@@ -18,8 +18,11 @@ public class Localization {
 	public static void loadLanguage(string language) {
 		Instance.textFile = Resources.Load("Localization/" + language) as TextAsset;
 		if (Instance.textFile == null) {
-			Debug.LogError("Localization not supported");
+			Debug.LogError("Localization not supported: " + language);
 			Instance.textFile = Resources.Load("Localization/English") as TextAsset;
+		}
+		else {
+			Debug.Log("Loaded localization: " + language);
 		}
 		StringReader textReader = new StringReader(Instance.textFile.text);
 		Instance.texts = new Dictionary<string, string>();
@@ -31,7 +34,9 @@ public class Localization {
 	}
 
 	public static string getText(string key) {
-		return Instance.texts[key];
+		string ret;
+		if (Instance.texts.TryGetValue(key, out ret)) return ret;
+		return null;
 	}
 
 }
