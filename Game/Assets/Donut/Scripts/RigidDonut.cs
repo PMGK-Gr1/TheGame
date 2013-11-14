@@ -48,7 +48,7 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
 	public void Death(string Cause) {
 		if (!isAlive) return; // prevent killing multiple times
 		// TODO handle different boost preventing death
-		Debug.Log(Localization.getText("DEATH"));
+		Debug.Log(Localization.getText("DEAD"));
 		Application.LoadLevel(Application.loadedLevel);
 		PlayerPrefs.SetInt("Sugar", PlayerPrefs.GetInt("Sugar") + sugarCubes);
 		PlayerPrefs.Save();
