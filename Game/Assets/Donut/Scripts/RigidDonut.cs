@@ -10,6 +10,7 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
 	//public variables
 	public float TargetSpeed = 20.0f;
 	public float JumpForce = 1000.0f;
+	public bool isTouchingGround = false;
     //private variables
 	private float cooldown = 2;
 	private int sugarCubes = 0;
@@ -27,9 +28,9 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
 
 	void Update() {
 		// Input moved to pdate to prevent ignoring some keystrokes
-		if (((Input.touchCount != 0 && Input.touches[0].phase == TouchPhase.Began)
+		if (/*((Input.touchCount != 0 && Input.touches[0].phase == TouchPhase.Began)
 			|| Input.GetKeyDown(KeyCode.Space))
-			&& cooldown <= 0) {
+			&& cooldown <= 0*/ canIJump()) {
 			rigidbody.AddForce(new Vector3(0, JumpForce, 0), ForceMode.VelocityChange);
 			cooldown = 0.5f;
 		}
@@ -52,5 +53,15 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
 		Application.LoadLevel(Application.loadedLevel);
 		PlayerPrefs.SetInt("Sugar", PlayerPrefs.GetInt("Sugar") + sugarCubes);
 		PlayerPrefs.Save();
+	}
+
+	bool canIJump()
+	{
+		return (jump() && isTouchingGround);
+	}
+
+	bool jump ()
+    {
+		return ((Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Began) || Input.GetKeyDown(KeyCode.Space));
 	}
 }

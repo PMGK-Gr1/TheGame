@@ -46,4 +46,23 @@ public class Picker : MonoBehaviour {
 			return;
 		}
 	}
+
+	void OnTriggerStay(Collider collider)
+	{
+		Debug.Log ("Wywolana Stay");
+		if(collider.tag == "Ground")
+		{
+			RigidDonut.instance.isTouchingGround = true;
+		}
+	}
+	
+	void OnTriggerExit(Collider collider)
+	{
+		Debug.Log ("Wywolana");
+		if(collider.tag == "Ground")
+		{
+			Debug.Log ("Nie, nie dotykasz ziemi");
+			RigidDonut.instance.isTouchingGround = false;
+		}
+	}
 }
