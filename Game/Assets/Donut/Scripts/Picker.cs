@@ -26,6 +26,7 @@ public class Picker : MonoBehaviour {
             //Debug.Log(Localization.getText("CANDY_EATEN"));
             //Score.fontSize = (Screen.height)/15;
             //Score.text = "Candies: " + candiesEaten.ToString();
+			RigidDonut.instance.SugarCubePickup(1);
 			Destroy(other.gameObject);
 			// TODO implement some number popup, animation or something
 			return;
@@ -49,7 +50,6 @@ public class Picker : MonoBehaviour {
 
 	void OnTriggerStay(Collider collider)
 	{
-		Debug.Log ("Wywolana Stay");
 		if(collider.tag == "Ground")
 		{
 			RigidDonut.instance.isTouchingGround = true;
@@ -58,10 +58,8 @@ public class Picker : MonoBehaviour {
 	
 	void OnTriggerExit(Collider collider)
 	{
-		Debug.Log ("Wywolana");
 		if(collider.tag == "Ground")
 		{
-			Debug.Log ("Nie, nie dotykasz ziemi");
 			RigidDonut.instance.isTouchingGround = false;
 		}
 	}
