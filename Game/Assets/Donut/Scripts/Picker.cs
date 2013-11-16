@@ -26,6 +26,7 @@ public class Picker : MonoBehaviour {
             //Debug.Log(Localization.getText("CANDY_EATEN"));
             //Score.fontSize = (Screen.height)/15;
             //Score.text = "Candies: " + candiesEaten.ToString();
+			RigidDonut.instance.SugarCubePickup(1);
 			Destroy(other.gameObject);
 			// TODO implement some number popup, animation or something
 			return;
@@ -44,6 +45,22 @@ public class Picker : MonoBehaviour {
 			donut.Death("Some cause got from the obstacle gameobject");
 			other.collider.enabled = false;			// disable the obstacle so that it doesn't damage us multiple times
 			return;
+		}
+	}
+
+	void OnTriggerStay(Collider collider)
+	{
+		if(collider.tag == "Ground")
+		{
+			RigidDonut.instance.isTouchingGround = true;
+		}
+	}
+	
+	void OnTriggerExit(Collider collider)
+	{
+		if(collider.tag == "Ground")
+		{
+			RigidDonut.instance.isTouchingGround = false;
 		}
 	}
 }
