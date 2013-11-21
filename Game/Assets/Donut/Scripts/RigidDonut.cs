@@ -94,8 +94,4 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
 		return state.JumpNotPossible;
 	}
 
-	void OnGUI()
-	{
-		GUI.Label(new Rect(0,0,100,100), prevState.ToString());
-	}
 }
