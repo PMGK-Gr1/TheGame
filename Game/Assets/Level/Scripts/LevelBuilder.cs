@@ -20,9 +20,9 @@ public class LevelBuilder : MonoBehaviour {
     //private Properties prop; // unused removed
     private GameObject current;
     private GameObject next;
-	public Vector3 endPosition = Vector3.zero;
+	private Vector3 endPosition = Vector3.zero;
     private Queue<GameObject> level = new Queue<GameObject>();
-    public float currentLenght = 0;
+    private float currentLenght = 0;
 	private const int groundLayer = 10;
 	// Use this for initialization
 	void Start ()
@@ -30,6 +30,7 @@ public class LevelBuilder : MonoBehaviour {
         #region cukiernia!
         GameObject Bakery = GameObject.CreatePrimitive(PrimitiveType.Cube);
         Bakery.layer = groundLayer;
+        Bakery.tag = "Ground";
         Bakery.transform.localScale = new Vector3(70.0f, 30.0f, 30.0f);
         Bakery.transform.position = new Vector3(35.0f, 15.0f, 0.0f);
         Destroy(Bakery, 20.0f);

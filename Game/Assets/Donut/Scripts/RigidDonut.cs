@@ -9,13 +9,16 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
 
 	//public variables
 	public float TargetSpeed = 20.0f;
-	public float JumpForce = 1000.0f;
+	public float InstantJumpForce = 1000.0f;
+	public float LongJumpForce = 500.0f;
+	public bool IsTouchingGround = false;
+	public float Cooldown = 1.0f;
     //private variables
-	private float cooldown = 2;
 	private int sugarCubes = 0;
 	private bool isAlive = true;
-
-
+	private enum state {JumpPossible = 0, JumpStarted = 1, JumpOnGoing =2, JumpNotPossible = 3}
+	private state prevState = state.JumpNotPossible;
+	private float cooldown;
 
 	void FixedUpdate() {
 		float force = 0.0f;
@@ -27,13 +30,14 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
 
 	void Update() {
 		// Input moved to pdate to prevent ignoring some keystrokes
-		if (((Input.touchCount != 0 && Input.touches[0].phase == TouchPhase.Began)
-			|| Input.GetKeyDown(KeyCode.Space))
-			&& cooldown <= 0) {
-			rigidbody.AddForce(new Vector3(0, JumpForce, 0), ForceMode.VelocityChange);
-			cooldown = 0.5f;
+		prevState = jumpState ();
+		if (prevState == state.JumpStarted && jump ()) {
+			rigidbody.AddForce(new Vector3(0, InstantJumpForce, 0), ForceMode.VelocityChange);
 		}
-		cooldown -= Time.fixedDeltaTime;
+		else if(prevState == state.JumpOnGoing){
+			rigidbody.AddForce(new Vector3(0, LongJumpForce, 0), ForceMode.Acceleration);
+		}
+
 	}
 
 	public void SugarCubePickup(int value) {
@@ -53,4 +57,41 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
 		PlayerPrefs.SetInt("Sugar", PlayerPrefs.GetInt("Sugar") + sugarCubes);
 		PlayerPrefs.Save();
 	}
+	
+	bool jump ()
+    {
+		return ((Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Began) || Input.GetKeyDown(KeyCode.Space));
+	}
+
+	bool jumpHigher()
+	{
+		return ((Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Stationary)
+		        || Input.GetKey(KeyCode.Space));
+	}
+
+	state jumpState()
+	{
+		if(prevState == state.JumpPossible && jump())
+		{
+			return state.JumpStarted;
+		}
+		if((prevState == state.JumpStarted || prevState == state.JumpOnGoing) && jumpHigher() && cooldown > 0)
+		{
+			cooldown -= Time.deltaTime;
+			return state.JumpOnGoing;
+		}
+		cooldown = Cooldown;
+		if(IsTouchingGround && (prevState == state.JumpNotPossible || prevState == state.JumpPossible))
+		{
+			return state.JumpPossible;
+		}
+		if(!IsTouchingGround && prevState == state.JumpPossible)
+		{
+			return state.JumpNotPossible;
+		}
+
+
+		return state.JumpNotPossible;
+	}
+
 }
