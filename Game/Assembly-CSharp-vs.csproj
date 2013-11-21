@@ -54,8 +54,6 @@
      <Compile Include="Assets\General\Localization.cs" />
      <Compile Include="Assets\General\MonoSingleton.cs" />
      <Compile Include="Assets\Level\Scripts\LevelBuilder.cs" />
-     <Compile Include="Assets\Level\Scripts\ObjectPlacing.cs" />
-     <Compile Include="Assets\Level\Scripts\Placer.cs" />
      <Compile Include="Assets\Level\Scripts\Properties.cs" />
      <Compile Include="Assets\OLD\BoostPlacer.cs" />
      <Compile Include="Assets\OLD\Booster.cs" />
@@ -66,6 +64,7 @@
      <Compile Include="Assets\OLD\SaveSystem.cs" />
      <Compile Include="Assets\OLD\SoftDonutMover.cs" />
      <Compile Include="Assets\Pursuit\Pursuit.cs" />
+     <Compile Include="Assets\SubelementPlacer.cs" />
      <None Include="Assets\Resources\Localization\English.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

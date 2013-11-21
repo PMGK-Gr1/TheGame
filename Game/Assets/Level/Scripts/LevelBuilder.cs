@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using System;
+
 
 
 /// <summary>
@@ -20,11 +20,10 @@ public class LevelBuilder : MonoBehaviour {
     //private Properties prop; // unused removed
     private GameObject current;
     private GameObject next;
-	private Vector3 endPosition = Vector3.zero;
-    private List<GameObject> level = new List<GameObject>();
-    private float currentLenght = 0;
+	public Vector3 endPosition = Vector3.zero;
+    private Queue<GameObject> level = new Queue<GameObject>();
+    public float currentLenght = 0;
 	private const int groundLayer = 10;
-	
 	// Use this for initialization
 	void Start ()
     {
@@ -36,108 +35,29 @@ public class LevelBuilder : MonoBehaviour {
         Destroy(Bakery, 20.0f);
         #endregion
 
-        levelPrefab = LevelPrefabs[0];
-        var tmpElement = Instantiate(levelPrefab, endPosition, Quaternion.identity) as GameObject;
-        /*
-        tmpElement.GetComponent<CandyPlacer2>().CandyChance = -1;
-        tmpElement.GetComponent<ObstaclePlacer>().ChanceForObstacle = -1;
-        tmpElement.GetComponent<BoostPlacer>().ChanceForBoost = -1;
-         */
-        tmpElement.GetComponent<Placer>().CandyChance = -1;
-        tmpElement.GetComponent<Placer>().BoostChance = -1;
-        tmpElement.GetComponent<Placer>().ObstacleChance = -1;
-        currentLenght += levelPrefab.GetComponent<Properties>().dimentions.x;
-        level.Add(tmpElement);
-        //current.layer = 9;
-		endPosition += levelPrefab.GetComponent<Properties>().dimentions;
-        var tmpElement1 = Instantiate(levelPrefab, endPosition, Quaternion.identity) as GameObject;
-        /*
-        tmpElement1.GetComponent<CandyPlacer2>().CandyChance = -1;
-        tmpElement1.GetComponent<ObstaclePlacer>().ChanceForObstacle = -1;
-        tmpElement1.GetComponent<BoostPlacer>().ChanceForBoost = -1;
-         */
-        tmpElement1.GetComponent<Placer>().CandyChance = -1;
-        tmpElement1.GetComponent<Placer>().BoostChance = -1;
-        tmpElement1.GetComponent<Placer>().ObstacleChance = -1;
-        currentLenght += levelPrefab.GetComponent<Properties>().dimentions.x;
-        level.Add(tmpElement1);
-		//next.layer = 9;
-		endPosition += levelPrefab.GetComponent<Properties>().dimentions;
-        
-       /* for (int i = 2; i < ModuleCount; i++)
-        {
-            
-            levelPrefab = LevelPrefabs[RandomPrefab()];
-            var tmpElem = Instantiate(levelPrefab, endPosition, Quaternion.identity) as GameObject;
-            level.Add(tmpElem);
-            endPosition += levelPrefab.GetComponent<Properties>().dimentions;
-        }*/
-
-
-        do
-        {
-            levelPrefab = LevelPrefabs[RandomPrefab()];
-            var tmpElem = Instantiate(levelPrefab, endPosition, Quaternion.identity) as GameObject;
-            currentLenght += levelPrefab.GetComponent<Properties>().dimentions.x;
-            level.Add(tmpElem);
-            endPosition += levelPrefab.GetComponent<Properties>().dimentions;
-
-        } while (currentLenght < LevelLenght);
-
+        AddPrefab(LevelPrefabs[0]);
 
         
 	}
 
     // Update is called once per frame
+    
     void FixedUpdate()
     {
-		// TODO fix this shit
-		// It should work continously not in (ModuleCount /2) increments
-        /*if (transform.position.x > level[ModuleCount / 2].transform.position.x + 100f)
+
+       
+        while(transform.position.x - level.Peek().transform.localPosition.x > DestrucionDistance)
         {
-            for (int i = 0; i < ModuleCount / 2; i++)
-            {
-                Destroy(level[0]);
-                level.RemoveAt(0);
-                levelPrefab = LevelPrefabs[RandomPrefab()];
-                var tmpElem = Instantiate(levelPrefab, endPosition, Quaternion.identity) as GameObject;
-                level.Add(tmpElem);
-                endPosition += levelPrefab.GetComponent<Properties>().dimentions;
-            }
-        }*/
-
-        if (transform.position.x - level[0].transform.localPosition.x > DestrucionDistance)
-        {
-            Destroy(level[0]);
-            level.RemoveAt(0);
-            do
-            {
-                levelPrefab = LevelPrefabs[RandomPrefab()];
-                var tmpElem = Instantiate(levelPrefab, endPosition, Quaternion.identity) as GameObject;
-                currentLenght += levelPrefab.GetComponent<Properties>().dimentions.x;
-                level.Add(tmpElem);
-                endPosition += levelPrefab.GetComponent<Properties>().dimentions;
-
-            } while (currentLenght < LevelLenght);
-
+            currentLenght -= level.Peek().GetComponent<Properties>().dimentions.x;
+            Destroy(level.Dequeue());
         }
 
-        
-        /*
-
-        if (Player.transform.position.x > next.transform.position.x + 50.0f)
-        {            
-            levelPrefab = LevelPrefabs[Random.Range(0, LevelPrefabs.GetLength(0))];
-            Destroy(current);
-            current = next;
-			next = Instantiate(levelPrefab, endPosition, Quaternion.identity) as GameObject;
-			next.layer = 9;
-			endPosition += levelPrefab.GetComponent<Properties>().dimentions;
+        while (currentLenght < LevelLenght)
+        {
+            AddPrefab(LevelPrefabs[RandomPrefab()]);
         }
-        
-    */
     }
-
+    
 
     int RandomPrefab()
     {
@@ -146,4 +66,77 @@ public class LevelBuilder : MonoBehaviour {
         if (tmp >= 0.8f) return 2;
         else return 0;
     }
+
+
+    void AddPrefab(GameObject prefabToAdd)
+    {
+        Properties prefabProperties = prefabToAdd.GetComponent<Properties>();
+        var tmpElem = Instantiate(prefabToAdd, endPosition, Quaternion.identity) as GameObject;
+        level.Enqueue(tmpElem);
+        currentLenght += prefabToAdd.GetComponent<Properties>().dimentions.x;
+        endPosition += prefabToAdd.GetComponent<Properties>().dimentions;
+        var placesList = tmpElem.GetComponentsInChildren<SubelementPlacer>();
+  
+
+        foreach (var place in placesList)
+        {
+            List<GameObject> obstaclesList, boostsList, candiesList;
+            obstaclesList = new List<GameObject>();
+            boostsList = new List<GameObject>();
+            candiesList = new List<GameObject>();
+
+            foreach (var objectToPlace in place.ObjectsToPlace)
+            {
+                if (objectToPlace.tag == "Boost")
+                {
+                    boostsList.Add(objectToPlace);                  
+                    //break;
+                }
+                if (objectToPlace.tag == "Sugar")
+                {
+                    candiesList.Add(objectToPlace);
+                 //   break;
+                }
+                if (objectToPlace.tag == "Obstacle")
+                {
+                    obstaclesList.Add(objectToPlace);
+                //    break;
+                }
+                
+            }
+
+            float obstacleChance, candyChance, boostChance, nothingChance;
+            obstacleChance = prefabProperties.ObstacleChance;
+            candyChance = prefabProperties.CandyChance;
+            boostChance = prefabProperties.BoostChance;
+            nothingChance = prefabProperties.NothingChance;
+          
+            if (candiesList.Count == 0) candyChance = 0;
+            if (boostsList.Count == 0) boostChance = 0;
+            if (obstaclesList.Count == 0) obstacleChance = 0;
+            float whatToInstatiate = Random.Range(0, obstacleChance + candyChance + boostChance + nothingChance);
+
+            if (whatToInstatiate < obstacleChance)
+            {
+                var tmpObject = Instantiate(obstaclesList[Random.Range(0, obstaclesList.Count)], place.transform.position, place.transform.rotation);
+                Destroy(tmpObject, prefabProperties.LifeTime);
+            }
+            else if (whatToInstatiate < obstacleChance + candyChance)
+            {
+                var tmpObject = Instantiate(candiesList[Random.Range(0, candiesList.Count)], place.transform.position, place.transform.rotation);
+                Destroy(tmpObject, prefabProperties.LifeTime);
+            }
+            else if (whatToInstatiate < obstacleChance + candyChance + boostChance)
+            {
+                var tmpObject = Instantiate(boostsList[Random.Range(0, boostsList.Count)], place.transform.position, place.transform.rotation);
+                Destroy(tmpObject, prefabProperties.LifeTime);
+            }
+            else place.GetComponent<SubelementPlacer>().Suicide();
+            
+           
+
+        }
+    }
 }
+
+
