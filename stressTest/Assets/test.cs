@@ -13,8 +13,7 @@ public class test : MonoBehaviour {
 	public GameObject phyObject;
 	public GameObject particle;
 	
-	private const int btnW = 120, btnH = 100, margin = 10;
-	
+	private const int btnW = 200, btnH = 200, margin = 20;
 	// Use this for initialization
 	void Start () {
 		frameRate = 0;
@@ -35,6 +34,8 @@ public class test : MonoBehaviour {
 	/// </summary>
 	void OnGUI ()
 	{
+
+		
 		//Column 1
 		if(GUI.RepeatButton(new Rect(margin, margin, btnW, btnH), "Create meshes."))
 		{
@@ -51,7 +52,7 @@ public class test : MonoBehaviour {
 			//Instantiate(mesh);
 		}
 		
-		if(GUI.RepeatButton(new Rect(margin, 2*margin + btnH, btnW, btnH), "Colliders"))
+		if(GUI.RepeatButton(new Rect(margin, 2*margin + btnH, btnW, btnH), "Create meshes with colliders."))
 		{
 			meshesWCollider += 10;
 			for (int i = 0; i < 10; i++)
@@ -67,7 +68,7 @@ public class test : MonoBehaviour {
 		}
 		
 		//Column 2
-		if(GUI.RepeatButton(new Rect(2*margin + btnW, margin, btnW, btnH), "Rigid Bodies"))
+		if(GUI.RepeatButton(new Rect(2*margin + btnW, margin, btnW, btnH), "Create meshes with rigidBody."))
 		{
 			phyObjects++;
 			GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
@@ -76,10 +77,13 @@ public class test : MonoBehaviour {
 			cube.transform.position = new Vector3((1000*Random.value) % 18 - 9.0f, (100*Random.value) % 20 - 3, (100*Random.value) % 260.0f);
 		}
 		
-		if(GUI.Button(new Rect(2*margin + btnW, 2*margin + btnH, btnW, btnH), "Create particles."))
+		if(GUI.RepeatButton(new Rect(2*margin + btnW, 2*margin + btnH, btnW, btnH), "Create particles."))
 		{
 			particles++;
-			GameObject particle1 = (GameObject)Instantiate(particle, new Vector3((1000*Random.value) % 18 - 9.0f, (100*Random.value) % 20 - 3, (100*Random.value) % 260.0f), Quaternion.identity);
+			GameObject particle1 = new GameObject("Particle Test");
+			particle1.transform.position = new Vector3((1000*Random.value) % 18 - 9.0f, (100*Random.value) % 20 - 3, (100*Random.value) % 260.0f);
+			particle1.AddComponent("ParticleSystem");
+			
 		}
 		
 		//Column 3
@@ -90,17 +94,19 @@ public class test : MonoBehaviour {
 		}
 		
 		//Column 1
-		GUI.Label(new Rect(30, 30, 80, 20), meshes.ToString(), myStyle);
-		GUI.Label(new Rect(30, 30 + margin + btnH, 80, 20), meshesWCollider.ToString(), myStyle);
+		GUI.Label(new Rect(50, 50, 100, 30), meshes.ToString(), myStyle);
+		GUI.Label(new Rect(50, 50 + margin + btnH, 100, 30), meshesWCollider.ToString(), myStyle);
 		
 		
 		//Column 2
-		GUI.Label(new Rect(20 + 2*margin + btnW, 30, 90, 20), phyObjects.ToString(), myStyle);
-		GUI.Label(new Rect(30 + 2*margin + btnW, 30 + margin + btnH, 90, 20), particles.ToString(), myStyle);
+		GUI.Label(new Rect(50 + 2*margin + btnW, 50, 100, 30), phyObjects.ToString(), myStyle);
+		GUI.Label(new Rect(50 + 2*margin + btnW, 50 + margin + btnH, 100, 30), particles.ToString(), myStyle);
 		
 		//Column 3
-		GUI.Box(new Rect(3*margin + 2*btnW, 2*margin + btnH, btnW+50, btnH),  "FPS: " + frameRate.ToString()  + 
-			"\nMalloc: " + Profiler.GetTotalAllocatedMemory()/1000, myStyle);
+		GUI.Box(new Rect(3*margin + 2*btnW, 2*margin + btnH, btnW, btnH),  "FPS: " + frameRate.ToString()  + 
+			"\nMalloc: " + Profiler.GetTotalAllocatedMemory()/1000 +
+			"\nHeap Size: " + Profiler.GetMonoHeapSize()/1000 + 
+			"\nUsed Size: " + Profiler.GetMonoUsedSize()/1000, myStyle);
 		
 		
 	}

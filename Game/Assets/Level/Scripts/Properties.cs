@@ -8,30 +8,10 @@ using System.Collections;
 /// </summary>
 public class Properties : MonoBehaviour {
 
-    //public variables
-    //public float NextY;
-    //public int Type;
 	public Vector3 dimentions;
-
-	/*
-
-	// Use this for initialization
-	void Start () {
-		switch (Type)
-		{
-			case 1:
-				NextY = 0;
-				break;
-			case 2:
-				NextY = 0;
-				break;
-			case 3:
-				NextY = (-1) * (this.collider.bounds.size.y) / 2;
-				break;
-			default:
-				NextY = 0;
-				break;
-		}
-	}
-	 */
-}
+    public float CandyChance = 0.7f;
+    public float BoostChance = 0.1f;
+    public float ObstacleChance = 0.5f;
+    public float NothingChance = 0.30f;
+    public float LifeTime = 30.0f;
+ }

@@ -52,15 +52,15 @@ public class Picker : MonoBehaviour {
 	{
 		if(collider.tag == "Ground")
 		{
-			RigidDonut.instance.isTouchingGround = true;
+			RigidDonut.instance.IsTouchingGround = true;
 		}
 	}
-	
+
 	void OnTriggerExit(Collider collider)
 	{
 		if(collider.tag == "Ground")
 		{
-			RigidDonut.instance.isTouchingGround = false;
+			RigidDonut.instance.IsTouchingGround = false;
 		}
 	}
 }
