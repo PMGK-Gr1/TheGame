@@ -53,8 +53,14 @@
      <Compile Include="Assets\GameController\GameController.cs" />
      <Compile Include="Assets\General\Localization.cs" />
      <Compile Include="Assets\General\MonoSingleton.cs" />
+     <Compile Include="Assets\Level\Scripts\BurntDonut.cs" />
+     <Compile Include="Assets\Level\Scripts\DoubleFrosting.cs" />
      <Compile Include="Assets\Level\Scripts\LevelBuilder.cs" />
      <Compile Include="Assets\Level\Scripts\Properties.cs" />
+     <Compile Include="Assets\Level\Scripts\SecondLife.cs" />
+     <Compile Include="Assets\Level\Scripts\Stinger.cs" />
+     <Compile Include="Assets\Level\Scripts\SubelementPlacer.cs" />
+     <Compile Include="Assets\Level\Scripts\Sugar.cs" />
      <Compile Include="Assets\OLD\BoostPlacer.cs" />
      <Compile Include="Assets\OLD\Booster.cs" />
      <Compile Include="Assets\OLD\CandyPlacer.cs" />
@@ -64,7 +70,6 @@
      <Compile Include="Assets\OLD\SaveSystem.cs" />
      <Compile Include="Assets\OLD\SoftDonutMover.cs" />
      <Compile Include="Assets\Pursuit\Pursuit.cs" />
-     <Compile Include="Assets\SubelementPlacer.cs" />
      <None Include="Assets\Resources\Localization\English.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -21,8 +21,7 @@ public class LevelBuilder : MonoBehaviour {
     private GameObject current;
     private GameObject next;
 	private Vector3 endPosition = Vector3.zero;
-    private Queue<GameObject> level = new Queue<GameObject>();
-    private float currentLenght = 0;
+	private Queue<Properties> level = new Queue<Properties>();
 	private const int groundLayer = 10;
 	// Use this for initialization
 	void Start ()
@@ -43,13 +42,12 @@ public class LevelBuilder : MonoBehaviour {
     
     void FixedUpdate()
     {
-        while(transform.position.x - level.Peek().transform.localPosition.x > DestrucionDistance)
+		while (transform.position.x - level.Peek().transform.position.x - level.Peek().dimentions.x > DestrucionDistance)
         {
-            currentLenght -= level.Peek().GetComponent<Properties>().dimentions.x;
-            Destroy(level.Dequeue());
+            Destroy(level.Dequeue().gameObject);
         }
 
-        while (currentLenght < LevelLenght)
+		while (endPosition.x - transform.position.x < LevelLenght)
         {
             AddPrefab(LevelPrefabs[RandomPrefab()]);
         }
@@ -67,10 +65,8 @@ public class LevelBuilder : MonoBehaviour {
 
     void AddPrefab(GameObject prefabToAdd)
     {
-        Properties prefabProperties = prefabToAdd.GetComponent<Properties>();
-        var segmentInstance = Instantiate(prefabToAdd, endPosition, Quaternion.identity) as GameObject;
+		var segmentInstance = (Instantiate(prefabToAdd, endPosition, Quaternion.identity) as GameObject).GetComponent<Properties>();
         level.Enqueue(segmentInstance);
-        currentLenght += prefabToAdd.GetComponent<Properties>().dimentions.x;
         endPosition += prefabToAdd.GetComponent<Properties>().dimentions;
         var placesList = segmentInstance.GetComponentsInChildren<SubelementPlacer>();
   
@@ -99,10 +95,10 @@ public class LevelBuilder : MonoBehaviour {
             }
 
             float obstacleChance, sugarChance, boostChance, nothingChance;
-            obstacleChance = prefabProperties.ObstacleChance;
-            sugarChance = prefabProperties.SugarChance;
-            boostChance = prefabProperties.BoostChance;
-            nothingChance = prefabProperties.NothingChance;
+			obstacleChance = segmentInstance.ObstacleChance;
+			sugarChance = segmentInstance.SugarChance;
+			boostChance = segmentInstance.BoostChance;
+			nothingChance = segmentInstance.NothingChance;
           
             if (candiesList.Count == 0) sugarChance = 0;
             if (boostsList.Count == 0) boostChance = 0;

@@ -32,7 +32,7 @@ public class Pursuit : MonoBehaviour {
 			Vector3 tmpVelocity = currentSpeed * Time.fixedDeltaTime * tmpDelta.normalized;
 
 			if (tmpDelta.magnitude < CatchDistance) {
-				RigidDonut.instance.Death("DONUT_CAUGHT");
+				RigidDonut.instance.Death("Cops");
 			}
 
 			transform.position += tmpVelocity;
