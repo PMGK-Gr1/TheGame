@@ -9,7 +9,7 @@ using System.Collections;
 public class Properties : MonoBehaviour {
 
 	public Vector3 dimentions;
-    public float CandyChance = 0.7f;
+    public float SugarChance = 0.7f;
     public float BoostChance = 0.1f;
     public float ObstacleChance = 0.5f;
     public float NothingChance = 0.30f;

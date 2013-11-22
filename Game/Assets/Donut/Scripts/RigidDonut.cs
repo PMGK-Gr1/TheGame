@@ -23,7 +23,7 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
 	void FixedUpdate() {
 		float force = 0.0f;
 
-		force = 10.0f / (1.0f + Mathf.Pow(2, this.rigidbody.velocity.x - TargetSpeed));
+		force = 50.0f / (1.0f + Mathf.Pow(2, this.rigidbody.velocity.x - TargetSpeed));
 		rigidbody.AddForceAtPosition(new Vector3(force, 0, 0), transform.position + new Vector3(0, 5f, 0), ForceMode.Acceleration);
 	}
 

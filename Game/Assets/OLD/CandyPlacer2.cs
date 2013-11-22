@@ -5,18 +5,18 @@ using System.Collections;
 /// Placing candies. New version. Now, with prefabs of candies arrangement.
 /// </summary>
 
-public class CandyPlacer2 : MonoBehaviour {
+public class SugarPlacer2 : MonoBehaviour {
 
     //public variables
-    public GameObject[] CandyPrefabs;
-    public float CandyChance = 0.75f;
+    public GameObject[] SugarPrefabs;
+    public float SugarChance = 0.75f;
 
 	// Use this for initialization
 	void Start () {
 
-        if (Random.Range(0.0f, 1.0f) <= CandyChance)
+        if (Random.Range(0.0f, 1.0f) <= SugarChance)
         {
-            GameObject tmpPref = CandyPrefabs[Random.Range(0, CandyPrefabs.GetLength(0))];
+            GameObject tmpPref = SugarPrefabs[Random.Range(0, SugarPrefabs.GetLength(0))];
             var tmpNewPref = Instantiate(tmpPref, this.transform.localPosition, Quaternion.identity);
             Destroy(tmpNewPref, 70f);
 

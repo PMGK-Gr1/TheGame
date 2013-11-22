@@ -49,7 +49,7 @@ public class SaveSystem : MonoBehaviour {
 	
 	// Saving game data
 	public static void Save(){
-	//	score += CandyPicker.GetCandies();
+	//	score += SugarPicker.GetCandies();
 		PlayerPrefs.SetString("Language", language);
 		PlayerPrefs.SetInt ("Score", score);
 	}

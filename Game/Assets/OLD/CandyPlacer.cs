@@ -6,25 +6,25 @@ using System.Collections;
 /// At the moment, candies are only placed in straight line.
 /// </summary>
 
-public class CandyPlacer : MonoBehaviour
+public class SugarPlacer : MonoBehaviour
 {
     //public variables
-    public GameObject Candy;
+    public GameObject Sugar;
     public int MaxCandiesPerBlock = 5;
 
     // Use this for initialization
     void Start()
     {
 
-        int tmpCandyQuantity = Random.Range(0, MaxCandiesPerBlock+1);
-        if (tmpCandyQuantity != 0)
+        int tmpSugarQuantity = Random.Range(0, MaxCandiesPerBlock+1);
+        if (tmpSugarQuantity != 0)
         {
-            for (int i = 0; i < tmpCandyQuantity; i++)
+            for (int i = 0; i < tmpSugarQuantity; i++)
             {
-                float candyPositionX = (this.collider.bounds.size.x / tmpCandyQuantity) * i + this.transform.position.x - ((this.transform.localScale.x) / 2) + Candy.transform.localScale.x;
-                float candyPositionY = this.collider.bounds.size.y + 0.5f + this.transform.position.y;
-                var tmpNewCandy = Instantiate(Candy, new Vector3(candyPositionX, candyPositionY, 0), Quaternion.identity) as GameObject;
-                Destroy(tmpNewCandy, 77f);
+                float sugarPositionX = (this.collider.bounds.size.x / tmpSugarQuantity) * i + this.transform.position.x - ((this.transform.localScale.x) / 2) + Sugar.transform.localScale.x;
+                float sugarPositionY = this.collider.bounds.size.y + 0.5f + this.transform.position.y;
+                var tmpNewSugar = Instantiate(Sugar, new Vector3(sugarPositionX, sugarPositionY, 0), Quaternion.identity) as GameObject;
+                Destroy(tmpNewSugar, 77f);
             }
         }
 

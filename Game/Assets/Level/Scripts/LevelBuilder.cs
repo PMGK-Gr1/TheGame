@@ -37,16 +37,12 @@ public class LevelBuilder : MonoBehaviour {
         #endregion
 
         AddPrefab(LevelPrefabs[0]);
-
-        
 	}
 
     // Update is called once per frame
     
     void FixedUpdate()
     {
-
-       
         while(transform.position.x - level.Peek().transform.localPosition.x > DestrucionDistance)
         {
             currentLenght -= level.Peek().GetComponent<Properties>().dimentions.x;
@@ -72,11 +68,11 @@ public class LevelBuilder : MonoBehaviour {
     void AddPrefab(GameObject prefabToAdd)
     {
         Properties prefabProperties = prefabToAdd.GetComponent<Properties>();
-        var tmpElem = Instantiate(prefabToAdd, endPosition, Quaternion.identity) as GameObject;
-        level.Enqueue(tmpElem);
+        var segmentInstance = Instantiate(prefabToAdd, endPosition, Quaternion.identity) as GameObject;
+        level.Enqueue(segmentInstance);
         currentLenght += prefabToAdd.GetComponent<Properties>().dimentions.x;
         endPosition += prefabToAdd.GetComponent<Properties>().dimentions;
-        var placesList = tmpElem.GetComponentsInChildren<SubelementPlacer>();
+        var placesList = segmentInstance.GetComponentsInChildren<SubelementPlacer>();
   
 
         foreach (var place in placesList)
@@ -90,52 +86,46 @@ public class LevelBuilder : MonoBehaviour {
             {
                 if (objectToPlace.tag == "Boost")
                 {
-                    boostsList.Add(objectToPlace);                  
-                    //break;
+                    boostsList.Add(objectToPlace);
                 }
-                if (objectToPlace.tag == "Sugar")
+                else if (objectToPlace.tag == "Sugar")
                 {
                     candiesList.Add(objectToPlace);
-                 //   break;
                 }
-                if (objectToPlace.tag == "Obstacle")
+                else if (objectToPlace.tag == "Obstacle")
                 {
                     obstaclesList.Add(objectToPlace);
-                //    break;
                 }
-                
             }
 
-            float obstacleChance, candyChance, boostChance, nothingChance;
+            float obstacleChance, sugarChance, boostChance, nothingChance;
             obstacleChance = prefabProperties.ObstacleChance;
-            candyChance = prefabProperties.CandyChance;
+            sugarChance = prefabProperties.SugarChance;
             boostChance = prefabProperties.BoostChance;
             nothingChance = prefabProperties.NothingChance;
           
-            if (candiesList.Count == 0) candyChance = 0;
+            if (candiesList.Count == 0) sugarChance = 0;
             if (boostsList.Count == 0) boostChance = 0;
             if (obstaclesList.Count == 0) obstacleChance = 0;
-            float whatToInstatiate = Random.Range(0, obstacleChance + candyChance + boostChance + nothingChance);
+
+            float whatToInstatiate = Random.Range(0, obstacleChance + sugarChance + boostChance + nothingChance);
+			GameObject tmpObject = null;
 
             if (whatToInstatiate < obstacleChance)
             {
-                var tmpObject = Instantiate(obstaclesList[Random.Range(0, obstaclesList.Count)], place.transform.position, place.transform.rotation);
-                Destroy(tmpObject, prefabProperties.LifeTime);
+                tmpObject = Instantiate(obstaclesList[Random.Range(0, obstaclesList.Count)], place.transform.position, place.transform.rotation) as GameObject;
             }
-            else if (whatToInstatiate < obstacleChance + candyChance)
+            else if (whatToInstatiate < obstacleChance + sugarChance)
             {
-                var tmpObject = Instantiate(candiesList[Random.Range(0, candiesList.Count)], place.transform.position, place.transform.rotation);
-                Destroy(tmpObject, prefabProperties.LifeTime);
+				tmpObject = Instantiate(candiesList[Random.Range(0, candiesList.Count)], place.transform.position, place.transform.rotation) as GameObject;
             }
-            else if (whatToInstatiate < obstacleChance + candyChance + boostChance)
+            else if (whatToInstatiate < obstacleChance + sugarChance + boostChance)
             {
-                var tmpObject = Instantiate(boostsList[Random.Range(0, boostsList.Count)], place.transform.position, place.transform.rotation);
-                Destroy(tmpObject, prefabProperties.LifeTime);
-            }
-            else place.GetComponent<SubelementPlacer>().Suicide();
-            
-           
+				tmpObject = Instantiate(boostsList[Random.Range(0, boostsList.Count)], place.transform.position, place.transform.rotation) as GameObject;
+			}
 
+			if(tmpObject != null) tmpObject.transform.parent = segmentInstance.transform;
+            Destroy(place.gameObject);
         }
     }
 }
