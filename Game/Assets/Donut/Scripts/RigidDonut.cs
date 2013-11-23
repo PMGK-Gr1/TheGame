@@ -70,9 +70,8 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
 	}
 
 
-
-
 	public void MilkCannonHit() {
+		Debug.Log("Cannon hit");
 		if (milkCannonResistLeft > 0) {
 			milkCannonResistLeft--;
 			if (milkCannonResistLeft == 0) UnfrostDonut();
