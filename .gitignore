@@ -1,2 +1,11 @@
 /Game/Library
 Library
+*.pidb
+*.csproj
+*.sln
+*.userprefs
+*.sln
+*.csproj
+
+/Game/*.suo
+/Game/obj
