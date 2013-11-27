@@ -12,10 +12,14 @@ public class CameraMover : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		if(Input.GetKeyDown(KeyCode.Escape)) Application.Quit();
-		if(Input.GetKeyDown(KeyCode.Menu)) Application.LoadLevel(0);     
-        this.transform.position = cylinder.transform.position + startVector;
+	void FixedUpdate () {
+		Vector3 moveDirection = cylinder.transform.position + startVector - transform.position;
+        this.transform.position += moveDirection * 0.2f;
+	}
+
+	void Update() {
+		if (Input.GetKeyDown(KeyCode.Escape)) Application.Quit();
+		if (Input.GetKeyDown(KeyCode.Menu)) Application.LoadLevel(0);
 	}
 
 

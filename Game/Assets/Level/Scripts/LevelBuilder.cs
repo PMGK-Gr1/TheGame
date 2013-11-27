@@ -35,7 +35,11 @@ public class LevelBuilder : MonoBehaviour {
         Destroy(Bakery, 20.0f);
         #endregion
 
-        AddPrefab(LevelPrefabs[0]);
+        
+        AddPrefab(LevelPrefabs[0], true);
+        AddPrefab(LevelPrefabs[0], true);
+        AddPrefab(LevelPrefabs[0], true);
+      
 	}
 
     // Update is called once per frame
@@ -50,6 +54,7 @@ public class LevelBuilder : MonoBehaviour {
 		while (endPosition.x - transform.position.x < LevelLenght)
         {
             AddPrefab(LevelPrefabs[RandomPrefab()]);
+           
         }
     }
     
@@ -63,7 +68,7 @@ public class LevelBuilder : MonoBehaviour {
     }
 
 
-    void AddPrefab(GameObject prefabToAdd)
+    void AddPrefab(GameObject prefabToAdd, bool empty=false)
     {
 		var segmentInstance = (Instantiate(prefabToAdd, endPosition, Quaternion.identity) as GameObject).GetComponent<Properties>();
         level.Enqueue(segmentInstance);
@@ -95,10 +100,14 @@ public class LevelBuilder : MonoBehaviour {
             }
 
             float obstacleChance, sugarChance, boostChance, nothingChance;
-			obstacleChance = segmentInstance.ObstacleChance;
-			sugarChance = segmentInstance.SugarChance;
-			boostChance = segmentInstance.BoostChance;
-			nothingChance = segmentInstance.NothingChance;
+            if (empty) { obstacleChance = sugarChance = boostChance = 0; nothingChance = 1; }
+            else
+            {
+                obstacleChance = segmentInstance.ObstacleChance;
+                sugarChance = segmentInstance.SugarChance;
+                boostChance = segmentInstance.BoostChance;
+                nothingChance = segmentInstance.NothingChance;
+            }
           
             if (candiesList.Count == 0) sugarChance = 0;
             if (boostsList.Count == 0) boostChance = 0;

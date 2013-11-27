@@ -22,8 +22,9 @@ public class Options : MonoBehaviour
            obj.GetComponent<Animator>().SetBool("state2", false);
 
            obj.GetComponent<Animator>().SetBool("state1", true);
-       }  
-   
+           
+       }
+      
    }
 
    public void ComeBack()
@@ -34,6 +35,7 @@ public class Options : MonoBehaviour
            obj.GetComponent<Animator>().SetBool("state1", false);
 
        }
+     
      
 
    }

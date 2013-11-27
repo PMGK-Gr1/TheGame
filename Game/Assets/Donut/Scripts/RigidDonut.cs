@@ -14,6 +14,7 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
 	public bool IsTouchingGround = false;
 	public float JumpLength = 1.0f;
 	public bool GodMode = false;
+    public GameObject Score;
     //private variables
 	private int sugarCubes = 0;
 	private bool isAlive = true;
@@ -47,6 +48,7 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
 
 	public void SugarPickup(int value) {
 		sugarCubes += value;
+        Score.guiText.text = sugarCubes.ToString();
 	}
 
 
@@ -71,12 +73,17 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
 
 
 	public void MilkCannonHit() {
-		Debug.Log("Cannon hit");
+
 		if (milkCannonResistLeft > 0) {
 			milkCannonResistLeft--;
 			if (milkCannonResistLeft == 0) UnfrostDonut();
 		}
-		else Death("Milk");
+		else {
+			float force = 200;
+			Death("Milk");
+			Debug.Log("Cannon hit");
+			rigidbody.AddForce(new Vector3(-force, 0, 0), ForceMode.Impulse);
+		}
 	}
 
 	public void FrostDonut() {

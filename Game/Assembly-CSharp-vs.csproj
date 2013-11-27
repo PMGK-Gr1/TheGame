@@ -48,6 +48,7 @@
   <ItemGroup>
      <Compile Include="Assets\Camera\CameraMover.cs" />
      <Compile Include="Assets\Camera\Reset.cs" />
+     <Compile Include="Assets\Camera\UpgradeButtons.cs" />
      <Compile Include="Assets\Death\Scripts\Buttons.cs" />
      <Compile Include="Assets\Donut\Scripts\Picker.cs" />
      <Compile Include="Assets\Donut\Scripts\RigidDonut.cs" />
@@ -55,9 +56,11 @@
      <Compile Include="Assets\General\Localization.cs" />
      <Compile Include="Assets\General\MonoSingleton.cs" />
      <Compile Include="Assets\Level\Scripts\BurntDonut.cs" />
+     <Compile Include="Assets\Level\Scripts\CannonShoot.cs" />
      <Compile Include="Assets\Level\Scripts\DoubleFrosting.cs" />
      <Compile Include="Assets\Level\Scripts\LevelBuilder.cs" />
      <Compile Include="Assets\Level\Scripts\Properties.cs" />
+     <Compile Include="Assets\Level\Scripts\RigidbodySleeper.cs" />
      <Compile Include="Assets\Level\Scripts\SecondLife.cs" />
      <Compile Include="Assets\Level\Scripts\Stinger.cs" />
      <Compile Include="Assets\Level\Scripts\SubelementPlacer.cs" />
@@ -77,6 +80,7 @@
      <Compile Include="Assets\OLD\SaveSystem.cs" />
      <Compile Include="Assets\OLD\SoftDonutMover.cs" />
      <Compile Include="Assets\Pursuit\Pursuit.cs" />
+     <Compile Include="Assets\Shop\Scripts\BackFromShopButton.cs" />
      <None Include="Assets\Resources\Localization\English.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

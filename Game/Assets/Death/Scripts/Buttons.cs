@@ -33,7 +33,7 @@ public class Buttons : MonoBehaviour
         shopButton.height = Screen.height * 0.1f;
         if (GUI.Button(shopButton, "Shop"))
         {
-            //Application.LoadLevel(3);
+            Application.LoadLevel(3);
         }
 
     }
