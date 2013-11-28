@@ -80,7 +80,6 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
 		}
 		else {
 			float force = 200;
-			Death("Milk");
 			Debug.Log("Cannon hit");
 			rigidbody.AddForce(new Vector3(-force, 0, 0), ForceMode.Impulse);
 		}
