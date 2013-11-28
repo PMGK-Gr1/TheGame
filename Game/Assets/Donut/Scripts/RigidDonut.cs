@@ -21,6 +21,7 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
 	private enum state {JumpPossible = 0, JumpStarted = 1, JumpOnGoing =2, JumpNotPossible = 3}
 	private state prevState = state.JumpNotPossible;
 	private float cooldown;
+	private float radius = 7;
 
 	private int stingersResistLeft = 0;
 	private int milkCannonResistLeft = 0;
@@ -30,7 +31,9 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
 		float force = 0.0f;
 
 		force = 50.0f / (1.0f + Mathf.Pow(2, this.rigidbody.velocity.x - TargetSpeed));
-		rigidbody.AddForceAtPosition(new Vector3(force, 0, 0), transform.position + new Vector3(0, 5f, 0), ForceMode.Acceleration);
+		//rigidbody.AddForceAtPosition(new Vector3(force, 0, 0), transform.position + new Vector3(0, 5f, 0), ForceMode.Acceleration);
+		rigidbody.AddForce(new Vector3(force, 0, 0), ForceMode.Acceleration);
+		//rigidbody.angularVelocity = new Vector3(0, 0, -rigidbody.velocity.magnitude / radius);
 	}
 
 
@@ -80,7 +83,6 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
 		}
 		else {
 			float force = 200;
-			Death("Milk");
 			Debug.Log("Cannon hit");
 			rigidbody.AddForce(new Vector3(-force, 0, 0), ForceMode.Impulse);
 		}
