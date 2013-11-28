@@ -61,10 +61,11 @@ public class LevelBuilder : MonoBehaviour {
 
     int RandomPrefab()
     {
-        float tmp = UnityEngine.Random.Range(0.0f, 1.0f);
+		return Random.Range(0, LevelPrefabs.Length);
+        /*float tmp = UnityEngine.Random.Range(0.0f, 1.0f);
         if (tmp <= 0.2f) return 1;
         if (tmp >= 0.8f) return 2;
-        else return 0;
+        else return 0;*/
     }
 
 
