@@ -56,7 +56,7 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
 
 
 
-	public void StingerHit() {
+	public void     StingerHit() {
 		if (stingersResistLeft > 0) {
 			stingersResistLeft--;
 			if (stingersResistLeft == 0) UnburntDonut();
@@ -74,6 +74,11 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
 		// TODO reverse the effects
 	}
 
+
+    public void Fall()
+    {
+        Death("Fall");
+    }
 
 	public void MilkCannonHit() {
 

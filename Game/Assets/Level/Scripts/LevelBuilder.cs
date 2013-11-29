@@ -39,7 +39,6 @@ public class LevelBuilder : MonoBehaviour {
         AddPrefab(LevelPrefabs[0], true);
         AddPrefab(LevelPrefabs[0], true);
         AddPrefab(LevelPrefabs[0], true);
-      
 	}
 
     // Update is called once per frame

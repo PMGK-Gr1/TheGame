@@ -39,15 +39,10 @@
 	<Reference Include="System.Core" />
 	<Reference Include="System.Xml.Linq" />
 	<Reference Include="UnityEngine">
-	  <HintPath>D:/Applications/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
-	  <HintPath>C:/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
-	</Reference>
-	<Reference Include="UnityEditor">
-	  <HintPath>C:/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
 	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
 	</Reference>
 	<Reference Include="UnityEditor">
-	  <HintPath>D:/Applications/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
+	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
 	</Reference>
   </ItemGroup>
   <ItemGroup>
@@ -63,6 +58,7 @@
      <Compile Include="Assets\Level\Scripts\BurntDonut.cs" />
      <Compile Include="Assets\Level\Scripts\CannonShoot.cs" />
      <Compile Include="Assets\Level\Scripts\DoubleFrosting.cs" />
+     <Compile Include="Assets\Level\Scripts\Hole.cs" />
      <Compile Include="Assets\Level\Scripts\LevelBuilder.cs" />
      <Compile Include="Assets\Level\Scripts\Properties.cs" />
      <Compile Include="Assets\Level\Scripts\RigidbodySleeper.cs" />
