@@ -80,7 +80,7 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
         Death("Fall");
     }
 
-	public void MilkCannonHit() {
+	public void MilkCannonHit(Vector3 forceImpact) {
 
 		if (milkCannonResistLeft > 0) {
 			milkCannonResistLeft--;
@@ -88,8 +88,7 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
 		}
 		else {
 			float force = 200;
-			Debug.Log("Cannon hit");
-			rigidbody.AddForce(new Vector3(-force, 0, 0), ForceMode.Impulse);
+			rigidbody.AddForce(forceImpact*force, ForceMode.Impulse);
 		}
 	}
 

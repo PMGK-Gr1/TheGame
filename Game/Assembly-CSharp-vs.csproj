@@ -56,7 +56,6 @@
      <Compile Include="Assets\General\Localization.cs" />
      <Compile Include="Assets\General\MonoSingleton.cs" />
      <Compile Include="Assets\Level\Scripts\BurntDonut.cs" />
-     <Compile Include="Assets\Level\Scripts\Cannon.cs" />
      <Compile Include="Assets\Level\Scripts\CannonShoot.cs" />
      <Compile Include="Assets\Level\Scripts\DoubleFrosting.cs" />
      <Compile Include="Assets\Level\Scripts\Hole.cs" />
