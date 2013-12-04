@@ -124,6 +124,7 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
 			Rebirth();
 			return;
 		}
+		isAlive = false;
 		Debug.Log(Localization.getText("DEAD"));
 		if(!GodMode) Application.LoadLevel(2);
 		PlayerPrefs.SetInt("Sugar", PlayerPrefs.GetInt("Sugar") + sugarCubes);
