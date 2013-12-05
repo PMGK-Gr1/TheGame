@@ -15,9 +15,13 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
 	public float JumpLength = 1.0f;
 	public bool GodMode = false;
     public GameObject Score;
+    public GameObject Distance;
     public GameObject Sticky;
+    public Achievements achieve;
+    public int sugarCubes = 0;
+    public int billboardHits = 0;
     //private variables
-	private int sugarCubes = 0;
+	
 	private bool isAlive = true;
 	private enum state {JumpPossible = 0, JumpStarted = 1, JumpOnGoing =2, JumpNotPossible = 3}
 	private state prevState = state.JumpNotPossible;
@@ -28,9 +32,10 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
 	private int milkCannonResistLeft = 0;
 	private bool secondLife = false;
 
+    
 	void FixedUpdate() {
 		float force = 0.0f;
-
+        Distance.guiText.text = ((int)transform.position.x/10).ToString() + " m";
 		force = 50.0f / (1.0f + Mathf.Pow(2, this.rigidbody.velocity.x - TargetSpeed));
 		//rigidbody.AddForceAtPosition(new Vector3(force, 0, 0), transform.position + new Vector3(0, 5f, 0), ForceMode.Acceleration);
 		rigidbody.AddForce(new Vector3(force, 0, 0), ForceMode.Acceleration);
@@ -58,11 +63,17 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
 
 
 	public void     StingerHit() {
+        achieve.DonutStinger();
 		if (stingersResistLeft > 0) {
 			stingersResistLeft--;
 			if (stingersResistLeft == 0) UnburntDonut();
 		}else Death("Stinger");
 	}
+
+    public void BillboardHit()
+    {
+        billboardHits++;
+    }
 
 	public void BurntDonut() {
 		Debug.Log("I am hot tonight.");
@@ -136,6 +147,7 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
 
 	void Rebirth() {
 		secondLife = false;
+        achieve.DonutRebirth();
 		Debug.Log("I died, but only temporally.");
 		// TODO some epic rebirth effect
 	}
@@ -148,9 +160,13 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
 			return;
 		}
 		isAlive = false;
+        achieve.death = true;
 		Debug.Log(Localization.getText("DEAD"));
 		if(!GodMode) Application.LoadLevel(2);
 		PlayerPrefs.SetInt("Sugar", PlayerPrefs.GetInt("Sugar") + sugarCubes);
+        PlayerPrefs.SetInt("TotalSugarEver", PlayerPrefs.GetInt("TotalSugarEver") + sugarCubes);
+        PlayerPrefs.SetInt("TotalDistance", PlayerPrefs.GetInt("TotalDistance") + (int)(transform.position.x / 10));
+        PlayerPrefs.SetInt("TotalBillboardHits", PlayerPrefs.GetInt("TotalBillboardHits") + billboardHits);
 		PlayerPrefs.Save();
 	}
 	
