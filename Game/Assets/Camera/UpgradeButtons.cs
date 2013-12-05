@@ -2,7 +2,12 @@
 using System.Collections;
 
 public class UpgradeButtons : MonoBehaviour {
+    private RigidDonut donut;
 
+    void Start()
+    {
+        donut = RigidDonut.instance;
+    }
     void OnGUI()
     {
         Rect button1 = new Rect();
@@ -18,7 +23,9 @@ public class UpgradeButtons : MonoBehaviour {
         button1.height = button2.height = button3.height = Screen.height * 0.1f;
         button1.width = button2.width = button3.width = Screen.width * 0.2f;
 
-        if(GUI.Button(button1, "Uprgade 1"))  {};
+        if(GUI.Button(button1, "Uprgade 1"))  {
+            donut.SticykDonut(10);
+        };
         if (GUI.Button(button2, "Uprgade 2")) { };
         if (GUI.Button(button3, "Uprgade 3")) { };
 

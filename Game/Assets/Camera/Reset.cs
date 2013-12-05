@@ -12,6 +12,7 @@ public class Reset : MonoBehaviour {
         rectButton.width = Screen.width * 0.1f;
         rectButton.height = Screen.height * 0.1f;        
         if(GUI.Button(rectButton, "Reset")){
+            Time.timeScale = 1;
             Application.LoadLevel(0);
         }
 

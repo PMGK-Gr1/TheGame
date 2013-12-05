@@ -15,6 +15,7 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
 	public float JumpLength = 1.0f;
 	public bool GodMode = false;
     public GameObject Score;
+    public GameObject Sticky;
     //private variables
 	private int sugarCubes = 0;
 	private bool isAlive = true;
@@ -102,6 +103,28 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
 		Debug.Log("I am no longer frosted.");
 		// TODO reverse the effects
 	}
+
+
+    public void SticykDonut(float t)
+    {
+
+        Debug.Log("Come to me, my dear sugar");
+        StartCoroutine("StickyTime", t);
+    }
+
+    IEnumerator StickyTime(float t)
+    {
+        Sticky.GetComponent<SphereCollider>().enabled = true;
+        yield return new WaitForSeconds(t);
+        UnstickyDonut();
+    }
+           
+    void UnstickyDonut() 
+    {
+       Debug.Log("well... ");
+       Sticky.GetComponent<SphereCollider>().enabled = false;
+            
+    }
 
 
 
