@@ -9,9 +9,11 @@ public class GameController : MonoSingleton<GameController> {
 	
 	//private variables
 	private string language;
+	FlurryAgent flurry = new FlurryAgent();
 	
 	// Use this for initialization
 	void Start () {
+		flurry.onStartSession ("DSYXWKHNM2H2C3QVR9HM");
 		LoadLanguage();
 	}
 	
@@ -31,5 +33,20 @@ public class GameController : MonoSingleton<GameController> {
 			PlayerPrefs.Save();
 		}
 		Localization.loadLanguage(language);
+	}
+
+	void OnApplicationPause(bool pause)
+	{
+		if (pause) {
+			flurry.onEndSession ();
+				}
+		else {
+			flurry.onStartSession("DSYXWKHNM2H2C3QVR9HM");
+				}
+	}
+
+	void OnApplicationQuit()
+	{
+		flurry.onEndSession();
 	}
 }
