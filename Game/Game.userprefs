@@ -1,8 +1,10 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\GameController\GameController.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Level\Scripts\Billboard.cs">
     <Files>
-      <File FileName="Assets\GameController\GameController.cs" Line="50" Column="25" />
+      <File FileName="Assets\Level\Scripts\Billboard.cs" Line="27" Column="42" />
+      <File FileName="Assets\GameController\GameController.cs" Line="45" Column="6" />
+      <File FileName="Assets\Level\Scripts\RigidbodySleeper.cs" Line="8" Column="5" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

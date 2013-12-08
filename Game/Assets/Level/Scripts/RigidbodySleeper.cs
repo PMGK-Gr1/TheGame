@@ -5,7 +5,7 @@ public class RigidbodySleeper : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		Debug.Log("Instance");
+		//Debug.Log("Instance");
 		rigidbody.Sleep();
 		Destroy(this);
 	}
