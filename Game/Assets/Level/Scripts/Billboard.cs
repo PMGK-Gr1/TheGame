@@ -5,12 +5,7 @@ public class Billboard : MonoBehaviour {
 
 	public GameObject particlesOnHit;
 
-	void Load()
-	{
-
-	}
-
-	void Update()
+	void Start()
 	{
 		this.GetComponentInChildren<ParticleSystem>().enableEmission = false;
 	}
