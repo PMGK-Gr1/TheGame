@@ -20,6 +20,8 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
     public Achievements achieve;
     public int sugarCubes = 0;
     public int billboardHits = 0;
+	public GameObject explosionParticle;
+	public GameObject smokeParticle;
     //private variables
 	
 	private bool isAlive = true;
@@ -32,6 +34,15 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
 	private int milkCannonResistLeft = 0;
 	private bool secondLife = false;
 
+	void Start()
+	{
+		explosionParticle.particleSystem.enableEmission = true;
+		explosionParticle.particleSystem.Stop();
+
+		smokeParticle.particleSystem.enableEmission = true;
+		smokeParticle.particleSystem.Stop();
+	}
+
     
 	void FixedUpdate() {
 		float force = 0.0f;
@@ -40,6 +51,7 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
 		//rigidbody.AddForceAtPosition(new Vector3(force, 0, 0), transform.position + new Vector3(0, 5f, 0), ForceMode.Acceleration);
 		rigidbody.AddForce(new Vector3(force, 0, 0), ForceMode.Acceleration);
 		//rigidbody.angularVelocity = new Vector3(0, 0, -rigidbody.velocity.magnitude / radius);
+
 	}
 
 
@@ -77,13 +89,19 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
 
 	public void BurntDonut() {
 		Debug.Log("I am hot tonight.");
-		// TODO nice pickup particle effect or some other spectacular thingy
+
+		explosionParticle.particleSystem.Play();
+		smokeParticle.particleSystem.Play();
+
 		stingersResistLeft = 3;
 	}
 
 	void UnburntDonut() {
 		Debug.Log("I am no longer burnt.");
 		// TODO reverse the effects
+		explosionParticle.particleSystem.Stop();
+		smokeParticle.particleSystem.Stop();
+
 	}
 
 
