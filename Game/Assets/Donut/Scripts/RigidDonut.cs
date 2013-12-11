@@ -34,6 +34,10 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
 	private int milkCannonResistLeft = 0;
 	private bool secondLife = false;
 
+
+    private bool isSticky = false;
+    
+
 	void Start()
 	{
 		explosionParticle.particleSystem.enableEmission = true;
@@ -69,6 +73,7 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
 
 	public void SugarPickup(int value) {
 		sugarCubes += value;
+        if (isSticky) achieve.stickyScore += value;
         Score.guiText.text = sugarCubes.ToString();
 	}
 
@@ -136,7 +141,7 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
 
     public void SticykDonut(float t)
     {
-
+        isSticky = true;
         Debug.Log("Come to me, my dear sugar");
         StartCoroutine("StickyTime", t);
     }
@@ -150,6 +155,7 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
            
     void UnstickyDonut() 
     {
+        isSticky = false;
        Debug.Log("well... ");
        Sticky.GetComponent<SphereCollider>().enabled = false;
             
@@ -187,7 +193,15 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
         PlayerPrefs.SetInt("TotalBillboardHits", PlayerPrefs.GetInt("TotalBillboardHits") + billboardHits);
 		PlayerPrefs.Save();
 	}
-	
+
+
+    public void AllGathered(string name)
+    {
+        Debug.Log("gathered all of " + name);
+    }
+
+
+
 	bool jump ()
     {
 		return ((Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Began) || Input.GetKeyDown(KeyCode.Space));

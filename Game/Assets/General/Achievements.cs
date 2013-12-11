@@ -25,6 +25,9 @@ public class Achievements : MonoBehaviour {
 
     private bool billboard10 = true, billboard100 = true;
 
+
+    private bool sticky50 = true;
+    public int stickyScore = 0;
     void Start()
     {
         donut = RigidDonut.instance;
@@ -45,12 +48,12 @@ public class Achievements : MonoBehaviour {
 #endregion
 
 #region distance
-        if (dist100 && (donut.transform.position.x >= 100)) Dist100();
-        if (dist200 && (donut.transform.position.x >= 200)) Dist200();
-        if (dist500 && (donut.transform.position.x >= 500)) Dist500();
-        if (dist1000 && (donut.transform.position.x >= 1000)) Dist1000();
-        if (dist2000 && (donut.transform.position.x >= 2000)) Dist2000();
-        if (dist5000 && (donut.transform.position.x >= 5000)) Dist5000();
+        if (dist100 && (donut.transform.position.x/10 >= 100)) Dist100();
+        if (dist200 && (donut.transform.position.x/10 >= 200)) Dist200();
+        if (dist500 && (donut.transform.position.x/10 >= 500)) Dist500();
+        if (dist1000 && (donut.transform.position.x/10 >= 1000)) Dist1000();
+        if (dist2000 && (donut.transform.position.x/10 >= 2000)) Dist2000();
+        if (dist5000 && (donut.transform.position.x/10 >= 5000)) Dist5000();
 
       if (marathon && ((PlayerPrefs.GetInt("TotalDistance") + donut.transform.position.x) >= 42195)) Marathon(); 
 #endregion
@@ -67,7 +70,7 @@ public class Achievements : MonoBehaviour {
 
       if (billboard10 && (donut.billboardHits >= 10)) Billboard10();
       if (billboard100 && (PlayerPrefs.GetInt("TotalBillboardHits") + donut.billboardHits >= 100)) Billboard100();
- 
+      if (sticky50 && (stickyScore >= 50)) Sticky50();
     }
 
 
@@ -214,6 +217,11 @@ public class Achievements : MonoBehaviour {
         Debug.Log("Achievement unlocked: AdBlock");
     }
 
+    void Sticky50()
+    {
+        Debug.Log("Achievement unlocked: Lepkie ręce");
+        sticky50 = false;
+    }
 
 
 
