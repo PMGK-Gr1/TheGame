@@ -1,6 +1,16 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace />
-  <MonoDevelop.Ide.Workbench />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Donut\Scripts\RigidDonut.cs">
+    <Files>
+      <File FileName="Assets\Donut\Scripts\RigidDonut.cs" Line="270" Column="1" />
+      <File FileName="Assets\Donut\Scripts\RigidDonut.cs" Line="150" Column="6" />
+      <File FileName="e:\Donut Madness\TheGame\Game\Assets\Level\Scripts\LevelBuilder.cs" Line="1" Column="1" />
+      <File FileName="Assets\Level\Scripts\Viaduct.cs" Line="1" Column="1" />
+      <File FileName="Assets\Level\Scripts\DoubleFrosting.cs" Line="1" Column="1" />
+      <File FileName="Assets\Level\Scripts\Stinger.cs" Line="1" Column="1" />
+      <File FileName="Assets\Level\Scripts\FreshAsphalt.cs" Line="1" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
