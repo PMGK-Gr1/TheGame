@@ -33,7 +33,7 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
 	private int stingersResistLeft = 0;
 	private int milkCannonResistLeft = 0;
 	private bool secondLife = false;
-
+	private int freshAsphaltResistLeft = 0;
 
     private bool isSticky = false;
     
@@ -130,7 +130,7 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
 	public void FrostDonut() {
 		Debug.Log("I am double frosted ?!?.");
 		// TODO nice pickup particle effect or some other spectacular thingy
-		milkCannonResistLeft = 3;
+		freshAsphaltResistLeft = 3;
 	}
 
 	void UnfrostDonut() {
@@ -176,6 +176,34 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
 		// TODO some epic rebirth effect
 	}
 
+	public void FreshAsphalt() {
+		Debug.Log ("Oops, fresh asphalt");
+		if (freshAsphaltResistLeft > 0) {
+						freshAsphaltResistLeft--;		
+		} 
+		else if (this.rigidbody.velocity.x > 0) {
+			float force = 50.0f / (1.0f + Mathf.Pow (2, this.rigidbody.velocity.x - TargetSpeed));
+			rigidbody.AddForce (-1.0f * new Vector3 (force, 0, 0), ForceMode.Acceleration);	
+		}
+	}
+
+	public void Viaduct() {
+		Debug.Log ("Oops, viaduct");
+		Death ("Viaduct");
+	}
+
+	void SpeedBoost() {
+		float force = 1000.0f;
+		this.rigidbody.AddForce (new Vector3 (force, 0, 0), ForceMode.Acceleration);
+	}
+
+	void Marmelade() {
+		//TODO particles and slower pursuit
+	}
+
+	void ChockolateRain() {
+		//TODO particles and destroying billboards
+	}
 
 	public void Death(string Cause) {
 		if (!isAlive) return; // prevent killing multiple times
