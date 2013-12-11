@@ -5,6 +5,6 @@ public class Twitter : MonoBehaviour {
 
     void OnMouseUp()
     {
-        Application.OpenURL("http://www.twitter.com");
+        Application.OpenURL("http://www.twitter.com/donutmadness");
     }
 }
