@@ -30,9 +30,9 @@ public class UpgradeButtons : MonoBehaviour {
 
         if(GUI.Button(button1, "Uprgade"))  {
             //donut.SticykDonut(10);	//Coins, coins and more coins
-			//StartCoroutine("ChocolateRain");		//Let it rain
+			StartCoroutine("ChocolateRain");		//Let it rain
 			//StartCoroutine("Marmolade");	//Pursuit is slower for 2 sec
-			SpeedBoost();			//speeeeeeeeed
+			//SpeedBoost();			//speeeeeeeeed
         };
        // if (GUI.Button(button2, "Uprgade 2")) { };
        // if (GUI.Button(button3, "Uprgade 3")) { };

@@ -13,6 +13,10 @@ public class Picker : MonoBehaviour {
 		donut = RigidDonut.instance;
 	}
 
+	void FixedUpdate() {
+		donut.IsTouchingGround = false;
+	}
+
 
 	void OnTriggerEnter(Collider other) {
 		if (collider.tag == "Ground") donut.IsTouchingGround = true;
@@ -20,10 +24,5 @@ public class Picker : MonoBehaviour {
 
 	void OnTriggerStay(Collider collider) {
 		if (collider.tag == "Ground") donut.IsTouchingGround = true;
-	}
-
-	void OnTriggerExit(Collider collider)
-	{
-		if(collider.tag == "Ground") donut.IsTouchingGround = false;
 	}
 }
