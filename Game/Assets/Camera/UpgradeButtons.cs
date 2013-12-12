@@ -7,6 +7,8 @@ public class UpgradeButtons : MonoBehaviour {
 	public Pursuit pursuit;
 	public RigidDonut dount;
 	public float speed;
+	public GameObject ChocolateRainParticle;
+
     private int upgrade;
     private string upgradebutton;
     void Start()
@@ -28,6 +30,7 @@ public class UpgradeButtons : MonoBehaviour {
                     break;
         }
 
+		ChocolateRainParticle.particleSystem.enableEmission = false;
     }
     void OnGUI()
     {
@@ -45,7 +48,6 @@ public class UpgradeButtons : MonoBehaviour {
         button1.width =/* button2.width = button3.width = */Screen.width * 0.35f;
 
         if(GUI.Button(button1, upgradebutton+donut.upgradeCount.ToString()))  {
-
             if (donut.upgradeCount > 0)
             {
                 switch (donut.upgrade)
@@ -77,7 +79,10 @@ public class UpgradeButtons : MonoBehaviour {
 
 	IEnumerator ChocolateRain() {
 		GameController.instance.chocolateRain = true;
+		ChocolateRainParticle.particleSystem.enableEmission = true;
+
 		yield return new WaitForSeconds(3.0f);
+		ChocolateRainParticle.particleSystem.enableEmission = false;
 		GameController.instance.chocolateRain = false;
 	}
 
