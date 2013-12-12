@@ -30,9 +30,15 @@ public class UpgradeButtons : MonoBehaviour {
 
         if(GUI.Button(button1, "Uprgade"))  {
             //donut.SticykDonut(10);	//Coins, coins and more coins
+
+
 			//StartCoroutine("ChocolateRain");		//Let it rain
+            //donut.chocoRains++;
+
 			//StartCoroutine("Marmolade");	//Pursuit is slower for 2 sec
-			SpeedBoost();			//speeeeeeeeed
+            //if (donut.isFrosted) donut.achieve.VerySweet();
+			
+            SpeedBoost();			//speeeeeeeeed
         };
        // if (GUI.Button(button2, "Uprgade 2")) { };
        // if (GUI.Button(button3, "Uprgade 3")) { };
@@ -59,5 +65,6 @@ public class UpgradeButtons : MonoBehaviour {
 	
 	void SpeedBoost() {
 		donut.rigidbody.AddForce (new Vector3 (speed, 0, 0), ForceMode.Acceleration);
+        if (donut.isBurnt) donut.achieve.BurntandSpeed();
 	}
 }

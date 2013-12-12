@@ -10,6 +10,8 @@ public class Hole : MonoBehaviour {
         {
             Debug.Log("Fallen one");
             donut.Fall();
+            PlayerPrefs.SetInt("FallIntoHole", PlayerPrefs.GetInt("FallIntoHole") + 1);
+            if (PlayerPrefs.GetInt("FallIntoHole") == 10) donut.achieve.Fall10();
         }
     }
 }

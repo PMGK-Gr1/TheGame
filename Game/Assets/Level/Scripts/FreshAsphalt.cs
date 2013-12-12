@@ -23,6 +23,7 @@ public class FreshAsphalt : MonoBehaviour {
 				other.rigidbody.drag = 10.0f;
 			}
 		}
+        donut.slippyCount++;
 	}
 
 	void OnTriggerExit(Collider other) {

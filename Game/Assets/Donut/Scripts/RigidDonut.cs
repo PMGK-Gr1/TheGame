@@ -37,7 +37,12 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
 	private int freshAsphaltResistLeft = 0;
 
     private bool isSticky = false;
-    
+    public bool isBurnt = false;
+    public bool isFrosted = false;
+
+    public int chocoRains = 0;
+
+    public int slippyCount = 0;
 
 	void Start()
 	{
@@ -99,7 +104,7 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
 
 	public void BurntDonut() {
 		Debug.Log("I am hot tonight.");
-
+        isBurnt = true;
 		explosionParticle.particleSystem.Play();
 		smokeParticle.particleSystem.Play();
 
@@ -108,6 +113,7 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
 
 	void UnburntDonut() {
 		Debug.Log("I am no longer burnt.");
+        isBurnt = false;
 		// TODO reverse the effects
 		explosionParticle.particleSystem.Stop();
 		smokeParticle.particleSystem.Stop();
@@ -134,12 +140,14 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
 
 	public void FrostDonut() {
 		Debug.Log("I am double frosted ?!?.");
+        isFrosted = true;
 		// TODO nice pickup particle effect or some other spectacular thingy
 		freshAsphaltResistLeft = 3;
 	}
 
 	void UnfrostDonut() {
 		Debug.Log("I am no longer frosted.");
+        isFrosted = false;
 		// TODO reverse the effects
 	}
 
@@ -179,8 +187,16 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
 		secondLife = false;
         achieve.DonutRebirth();
 		Debug.Log("I died, but only temporally.");
+        achieve.fiveseconds = true;
+        StartCoroutine("fiveseconds");
 		// TODO some epic rebirth effect
 	}
+
+    IEnumerator fiveseconds()
+    {
+        yield return new WaitForSeconds(5.0f);
+        achieve.fiveseconds = false;
+    }
 
 	public bool FreshAsphalt() {
 		Debug.Log ("Oops, fresh asphalt");
@@ -221,6 +237,7 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
         PlayerPrefs.SetInt("TotalSugarEver", PlayerPrefs.GetInt("TotalSugarEver") + sugarCubes);
         PlayerPrefs.SetInt("TotalDistance", PlayerPrefs.GetInt("TotalDistance") + (int)(transform.position.x / 10));
         PlayerPrefs.SetInt("TotalBillboardHits", PlayerPrefs.GetInt("TotalBillboardHits") + billboardHits);
+        PlayerPrefs.SetInt("ChocalateRains", PlayerPrefs.GetInt("ChocalateRains") + chocoRains);
 		PlayerPrefs.Save();
 	}
 

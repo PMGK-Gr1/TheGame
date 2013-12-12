@@ -1,16 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Achievements : MonoBehaviour {
+public class Achievements : MonoBehaviour
+{
 
 
     public bool death = false;
-    
+
     private RigidDonut donut;
 
     private bool sugar20 = true, sugar50 = true, sugar100 = true, sugar200 = true, sugar500 = true, sugar1000 = true;
     private bool dist100 = true, dist200 = true, dist500 = true, dist1000 = true, dist2000 = true, dist5000 = true;
-    private  bool marathon = true;
+    private bool marathon = true;
 
     private bool rebirth1 = true, rebirth4 = true, rebirth8 = true;
     private int rebirthCount = 0;
@@ -29,22 +30,33 @@ public class Achievements : MonoBehaviour {
     private bool sticky50 = true;
     public int stickyScore = 0;
 
+    public bool fiveseconds = false;
 
     private bool candy1 = false, candy2 = false, candy3 = false, candy4 = false, candy5 = false, candy6 = false, candy7 = false, candy8 = false,
         candy9 = false, candy10 = false, candy11 = false, candy12 = false;
 
-    private bool allCandy1 =true, allCandy2 = true, allCandy5 = true, allCandy12 = true, allCandyDM = true;
+    private bool allCandy1 = true, allCandy2 = true, allCandy5 = true, allCandy12 = true, allCandyDM = true;
 
 
+    private bool overViaduct = true;
+    public bool over = false;
+
+
+    private bool choco = true;
+
+    private bool warpSpeed = true;
+
+    private bool slippy = true;
     void Start()
     {
         donut = RigidDonut.instance;
     }
-	
-	
-	void Update () {
 
-#region sugar quantity 
+
+    void Update()
+    {
+
+        #region sugar quantity
         if (sugar20 && (donut.sugarCubes >= 20)) Sugar20();
         if (sugar50 && (donut.sugarCubes >= 50)) Sugar50();
         if (sugar100 && (donut.sugarCubes >= 100)) Sugar100();
@@ -53,44 +65,69 @@ public class Achievements : MonoBehaviour {
         if (sugar1000 && (donut.sugarCubes >= 1000)) Sugar1000();
 
         if (death && (donut.sugarCubes == 300)) Sugar300();
-#endregion
-#region distance
-        if (dist100 && (donut.transform.position.x/10 >= 100)) Dist100();
-        if (dist200 && (donut.transform.position.x/10 >= 200)) Dist200();
-        if (dist500 && (donut.transform.position.x/10 >= 500)) Dist500();
-        if (dist1000 && (donut.transform.position.x/10 >= 1000)) Dist1000();
-        if (dist2000 && (donut.transform.position.x/10 >= 2000)) Dist2000();
-        if (dist5000 && (donut.transform.position.x/10 >= 5000)) Dist5000();
+        #endregion
+        #region distance
+        if (dist100 && (donut.transform.position.x / 10 >= 100)) Dist100();
+        if (dist200 && (donut.transform.position.x / 10 >= 200)) Dist200();
+        if (dist500 && (donut.transform.position.x / 10 >= 500)) Dist500();
+        if (dist1000 && (donut.transform.position.x / 10 >= 1000)) Dist1000();
+        if (dist2000 && (donut.transform.position.x / 10 >= 2000)) Dist2000();
+        if (dist5000 && (donut.transform.position.x / 10 >= 5000)) Dist5000();
 
-      if (marathon && ((PlayerPrefs.GetInt("TotalDistance") + donut.transform.position.x) >= 42195)) Marathon(); 
-#endregion
-#region rebirths
-      if (rebirth1 && (rebirthCount == 1)) Rebirth1();
-      if (rebirth4 && (rebirthCount == 4)) Rebirth4();
-      if (rebirth8 && (rebirthCount == 8)) Rebirth8();
-#endregion
-#region allcandies
-      if (allCandy1 && (AllCandyCount() >= 1)) AllCandy1();
-      if (allCandy2 && (AllCandyCount() >= 2)) AllCandy2();
-      if (allCandy5 && (AllCandyCount() >= 5)) AllCandy5();
-      if (allCandy12 && (AllCandyCount() >= 12)) AllCandy12();
-      if (allCandyDM && candy9) AllCandyDM();
-      #endregion
-
-
-      if (diet && (donut.sugarCubes == 0) && ((donut.transform.position.x / 10) >= 1000)) Diet();
-      if (stinger10 && (stingerCount >= 10)) Stinger10();
-      if (marmolade5 && (marmoladeCount >= 5)) Marmolade5();
-
-      if (billboard10 && (donut.billboardHits >= 10)) Billboard10();
-      if (billboard100 && (PlayerPrefs.GetInt("TotalBillboardHits") + donut.billboardHits >= 100)) Billboard100();
-      if (sticky50 && (stickyScore >= 50)) Sticky50();
+        if (marathon && ((PlayerPrefs.GetInt("TotalDistance") + donut.transform.position.x) >= 42195)) Marathon();
+        #endregion
+        #region rebirths
+        if (rebirth1 && (rebirthCount == 1)) Rebirth1();
+        if (rebirth4 && (rebirthCount == 4)) Rebirth4();
+        if (rebirth8 && (rebirthCount == 8)) Rebirth8();
+        #endregion
+        #region allcandies
+        if (allCandy1 && (AllCandyCount() >= 1)) AllCandy1();
+        if (allCandy2 && (AllCandyCount() >= 2)) AllCandy2();
+        if (allCandy5 && (AllCandyCount() >= 5)) AllCandy5();
+        if (allCandy12 && (AllCandyCount() >= 12)) AllCandy12();
+        if (allCandyDM && candy9) AllCandyDM();
+        #endregion
 
 
+        if (diet && (donut.sugarCubes == 0) && ((donut.transform.position.x / 10) >= 1000)) Diet();
+        if (stinger10 && (stingerCount >= 10)) Stinger10();
+        if (marmolade5 && (marmoladeCount >= 5)) Marmolade5();
 
+        if (billboard10 && (donut.billboardHits >= 10)) Billboard10();
+        if (billboard100 && (PlayerPrefs.GetInt("TotalBillboardHits") + donut.billboardHits >= 100)) Billboard100();
+        if (sticky50 && (stickyScore >= 50)) Sticky50();
+        if (overViaduct && over) OverViaduct();
+        if (fiveseconds && death) FiveSeconds();
+        if (choco&&(PlayerPrefs.GetInt("ChocalateRains") + donut.chocoRains) >= 10) Choco();
+        if (warpSpeed && (donut.rigidbody.velocity.x > 100)) WarpSpeed();
+        if (slippy && (donut.slippyCount >= 5)) Slippy();
     }
 
 
+    void WarpSpeed()
+    {
+        warpSpeed = false;
+        Debug.Log("Achievement unlocked: Prędkość warpowa panie Sulu");
+    }
+  void FiveSeconds()
+    {
+        Debug.Log("Achievement unlocked: Bezsensowny wysiłek");
+    }
+
+  void Slippy()
+  {
+      slippy = false;
+      Debug.Log("Achievement unlocked: Śliski pączek");
+  }
+  public void VerySweet()
+  {
+      Debug.Log("Achievement unlocked: Ultrasłitaśny");
+  }
+  public void BurntandSpeed()
+  {
+      Debug.Log("Achievement unlocked: 88 mil na godzinę");
+  }
 
     public void DonutRebirth()
     {
@@ -305,4 +342,28 @@ public class Achievements : MonoBehaviour {
     }
 
 
+    void OverViaduct()
+    {
+        Debug.Log("Achievement unlocked: Trasa alternatywna");
+        overViaduct = false;
     }
+
+
+    public void Fall10()
+     {
+         Debug.Log("Achievement unlocked: Górnik");
+    }
+    void Choco()
+    {
+        choco = false;
+        Debug.Log("Achievement unlocked: Apokalipsa");
+    }
+
+
+
+
+
+
+
+}
+

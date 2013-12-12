@@ -3,7 +3,7 @@ using System.Collections;
 
 public class AllSugarGathered : MonoBehaviour {
 
-    public int name;
+    public int SugarId;
     private RigidDonut donut;
     private bool cleared = false;
 
@@ -17,7 +17,7 @@ public class AllSugarGathered : MonoBehaviour {
         var MySugars = this.GetComponentsInChildren<Sugar>();
         if ((!cleared)&&(MySugars.GetLength(0) == 0))
         {
-            donut.achieve.setAllCandy(name);
+            donut.achieve.setAllCandy(SugarId);
             
             cleared = true;
         }
