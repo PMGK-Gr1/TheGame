@@ -28,6 +28,14 @@ public class Achievements : MonoBehaviour {
 
     private bool sticky50 = true;
     public int stickyScore = 0;
+
+
+    private bool candy1 = false, candy2 = false, candy3 = false, candy4 = false, candy5 = false, candy6 = false, candy7 = false, candy8 = false,
+        candy9 = false, candy10 = false, candy11 = false, candy12 = false;
+
+    private bool allCandy1 =true, allCandy2 = true, allCandy5 = true, allCandy12 = true, allCandyDM = true;
+
+
     void Start()
     {
         donut = RigidDonut.instance;
@@ -46,7 +54,6 @@ public class Achievements : MonoBehaviour {
 
         if (death && (donut.sugarCubes == 300)) Sugar300();
 #endregion
-
 #region distance
         if (dist100 && (donut.transform.position.x/10 >= 100)) Dist100();
         if (dist200 && (donut.transform.position.x/10 >= 200)) Dist200();
@@ -57,12 +64,19 @@ public class Achievements : MonoBehaviour {
 
       if (marathon && ((PlayerPrefs.GetInt("TotalDistance") + donut.transform.position.x) >= 42195)) Marathon(); 
 #endregion
-
 #region rebirths
       if (rebirth1 && (rebirthCount == 1)) Rebirth1();
       if (rebirth4 && (rebirthCount == 4)) Rebirth4();
       if (rebirth8 && (rebirthCount == 8)) Rebirth8();
 #endregion
+#region allcandies
+      if (allCandy1 && (AllCandyCount() >= 1)) AllCandy1();
+      if (allCandy2 && (AllCandyCount() >= 2)) AllCandy2();
+      if (allCandy5 && (AllCandyCount() >= 5)) AllCandy5();
+      if (allCandy12 && (AllCandyCount() >= 12)) AllCandy12();
+      if (allCandyDM && candy9) AllCandyDM();
+      #endregion
+
 
       if (diet && (donut.sugarCubes == 0) && ((donut.transform.position.x / 10) >= 1000)) Diet();
       if (stinger10 && (stingerCount >= 10)) Stinger10();
@@ -71,6 +85,9 @@ public class Achievements : MonoBehaviour {
       if (billboard10 && (donut.billboardHits >= 10)) Billboard10();
       if (billboard100 && (PlayerPrefs.GetInt("TotalBillboardHits") + donut.billboardHits >= 100)) Billboard100();
       if (sticky50 && (stickyScore >= 50)) Sticky50();
+
+
+
     }
 
 
@@ -223,11 +240,69 @@ public class Achievements : MonoBehaviour {
         sticky50 = false;
     }
 
+    void AllCandy1()
+    {
+        Debug.Log("Achievement unlocked: (wszystkie z 1 formacji)");
+        allCandy1 = false;
+    }
+
+    void AllCandy2()
+    {
+        Debug.Log("Achievement unlocked: (wszystkie z 2 formacji)");
+        allCandy2 = false;
+    }
+
+    void AllCandy5()
+    {
+        Debug.Log("Achievement unlocked: (wszystkie z 5 formacji)");
+        allCandy5 = false;
+    }
+    void AllCandy12()
+    {
+        Debug.Log("Achievement unlocked: (wszystkie ze wszystkich)");
+        allCandy12 = false;
+    }
+    void AllCandyDM()
+    {
+        Debug.Log("Achievement unlocked:    DONUT MADNESS");
+        allCandyDM = false;
+    }
+
+    int AllCandyCount()
+    {
+        int count = 0;
+        if (candy1) count++;
+        if (candy2) count++;
+        if (candy3) count++;
+        if (candy4) count++;
+        if (candy5) count++;
+        if (candy6) count++;
+        if (candy7) count++;
+        if (candy8) count++;
+        if (candy9) count++;
+        if (candy10) count++;
+        if (candy11) count++;
+        if (candy12) count++;
+        return count;
+    }
+
+    public void setAllCandy(int f)
+    {
+        if (f == 1) candy1 = true;
+        if (f == 2) candy2 = true;
+        if (f == 3) candy3 = true;
+        if (f == 4) candy4 = true;
+        if (f == 5) candy5 = true;
+        if (f == 6) candy6 = true;
+        if (f == 7) candy7 = true;
+        if (f == 8) candy8 = true;
+        if (f == 9) candy9 = true;
+        if (f == 10) candy10 = true;
+        if (f == 11) candy11 = true;
+        if (f == 12) candy12 = true;
 
 
-
-
-
+    }
 
 
     }
