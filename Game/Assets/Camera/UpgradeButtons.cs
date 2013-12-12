@@ -7,11 +7,27 @@ public class UpgradeButtons : MonoBehaviour {
 	public Pursuit pursuit;
 	public RigidDonut dount;
 	public float speed;
-	
+    private int upgrade;
+    private string upgradebutton;
     void Start()
     {
         donut = RigidDonut.instance;
 		speed = 1000.0f;
+        donut.upgrade = PlayerPrefs.GetInt("ChosenUpgrade");
+        donut.upgradeCount = PlayerPrefs.GetInt("Upgrade" + donut.upgrade.ToString());
+        switch(donut.upgrade)
+        {
+            case 1:
+                upgradebutton = "Chocolate rain ";
+                break;
+            case 2:
+                upgradebutton = "Speed boost ";
+                break;
+            default:
+                upgradebutton = "Upgrade";
+                    break;
+        }
+
     }
     void OnGUI()
     {
@@ -26,19 +42,33 @@ public class UpgradeButtons : MonoBehaviour {
       //  button3.x = Screen.width * 0.65f;
       //  button3.y = Screen.height * 0.8f;
         button1.height =/* button2.height = button3.height =*/ Screen.height * 0.1f;
-        button1.width =/* button2.width = button3.width = */Screen.width * 0.2f;
+        button1.width =/* button2.width = button3.width = */Screen.width * 0.35f;
 
-        if(GUI.Button(button1, "Uprgade"))  {
+        if(GUI.Button(button1, upgradebutton+donut.upgradeCount.ToString()))  {
+
+            if (donut.upgradeCount > 0)
+            {
+                switch (donut.upgrade)
+                {
+                    case 0:
+                        break;
+                    case 1:
+                        StartCoroutine("ChocolateRain");		//Let it rain
+                        donut.chocoRains++;
+                        donut.upgradeCount--;
+                        break;
+                    case 2:
+                        SpeedBoost();
+                        donut.upgradeCount--;
+                        break;
+                }
+            }
             //donut.SticykDonut(10);	//Coins, coins and more coins
-
-
-			//StartCoroutine("ChocolateRain");		//Let it rain
-            //donut.chocoRains++;
+                    		
 
 			//StartCoroutine("Marmolade");	//Pursuit is slower for 2 sec
             //if (donut.isFrosted) donut.achieve.VerySweet();
-			
-            SpeedBoost();			//speeeeeeeeed
+		
         };
        // if (GUI.Button(button2, "Uprgade 2")) { };
        // if (GUI.Button(button3, "Uprgade 3")) { };

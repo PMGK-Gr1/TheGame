@@ -44,6 +44,8 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
 
     public int slippyCount = 0;
 
+    public int upgrade, upgradeCount;
+
 	void Start()
 	{
 		explosionParticle.particleSystem.enableEmission = true;
@@ -238,6 +240,9 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
         PlayerPrefs.SetInt("TotalDistance", PlayerPrefs.GetInt("TotalDistance") + (int)(transform.position.x / 10));
         PlayerPrefs.SetInt("TotalBillboardHits", PlayerPrefs.GetInt("TotalBillboardHits") + billboardHits);
         PlayerPrefs.SetInt("ChocalateRains", PlayerPrefs.GetInt("ChocalateRains") + chocoRains);
+        PlayerPrefs.SetInt("Upgrade"+upgrade.ToString(), upgradeCount);
+        PlayerPrefs.SetInt("LastDistance", (int)(transform.position.x / 10));
+        PlayerPrefs.SetInt("LastSugar", sugarCubes);
 		PlayerPrefs.Save();
 	}
 

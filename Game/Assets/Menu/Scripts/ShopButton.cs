@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BackFromShopButton : MonoBehaviour {
+public class ShopButton : MonoBehaviour {
 
     void OnMouseUp()
     {
-        Application.LoadLevel(2);
+        Application.LoadLevel(3);
     }
 }
