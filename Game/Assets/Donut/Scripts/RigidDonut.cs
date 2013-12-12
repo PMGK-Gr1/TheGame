@@ -146,6 +146,7 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
 
     public void SticykDonut(float t)
     {
+        achieve.stickyScore = 0;
         isSticky = true;
         Debug.Log("Come to me, my dear sugar");
         StartCoroutine("StickyTime", t);
@@ -222,14 +223,6 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
         PlayerPrefs.SetInt("TotalBillboardHits", PlayerPrefs.GetInt("TotalBillboardHits") + billboardHits);
 		PlayerPrefs.Save();
 	}
-
-
-    public void AllGathered(string name)
-    {
-        Debug.Log("gathered all of " + name);
-    }
-
-
 
 	bool jump ()
     {
