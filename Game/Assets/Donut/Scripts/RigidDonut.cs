@@ -22,6 +22,7 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
     public int billboardHits = 0;
 	public GameObject explosionParticle;
 	public GameObject smokeParticle;
+	public bool stingerDisabled;
     //private variables
 	
 	private bool isAlive = true;
@@ -79,12 +80,16 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
 
 
 
-	public void     StingerHit() {
-        achieve.DonutStinger();
-		if (stingersResistLeft > 0) {
-			stingersResistLeft--;
-			if (stingersResistLeft == 0) UnburntDonut();
-		}else Death("Stinger");
+	public void StingerHit() {
+        if (!stingerDisabled) {
+			achieve.DonutStinger ();
+			if (stingersResistLeft > 0) {
+				stingersResistLeft--;
+				if (stingersResistLeft == 0)
+					UnburntDonut ();
+			} else
+				Death ("Stinger");
+		}
 	}
 
     public void BillboardHit()
@@ -176,15 +181,16 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
 		// TODO some epic rebirth effect
 	}
 
-	public void FreshAsphalt() {
+	public bool FreshAsphalt() {
 		Debug.Log ("Oops, fresh asphalt");
 		if (freshAsphaltResistLeft > 0) {
-						freshAsphaltResistLeft--;		
-		} 
-		else if (this.rigidbody.velocity.x > 0) {
-			float force = 50.0f / (1.0f + Mathf.Pow (2, this.rigidbody.velocity.x - TargetSpeed));
-			rigidbody.AddForce (-1.0f * new Vector3 (force, 0, 0), ForceMode.Acceleration);	
+						freshAsphaltResistLeft--;
+			if(freshAsphaltResistLeft == 0) {
+				UnfrostDonut();
+			}
+			return false;
 		}
+		return true;
 	}
 
 	public void Viaduct() {
@@ -192,17 +198,12 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
 		Death ("Viaduct");
 	}
 
-	void SpeedBoost() {
-		float force = 1000.0f;
-		this.rigidbody.AddForce (new Vector3 (force, 0, 0), ForceMode.Acceleration);
+	void DisableStinger() {
+		stingerDisabled = true;
 	}
 
-	void Marmelade() {
-		//TODO particles and slower pursuit
-	}
-
-	void ChockolateRain() {
-		//TODO particles and destroying billboards
+	void EnableStinger() {
+		stingerDisabled = false;
 	}
 
 	public void Death(string Cause) {

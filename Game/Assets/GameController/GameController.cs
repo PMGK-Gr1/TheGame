@@ -1,14 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-
-/// <summary>
-/// Now it does nothing.
-/// </summary>
 public class GameController : MonoSingleton<GameController> {
 	
 	//private variables
 	private string language;
+
+	//public variables
+	public RigidDonut donut;
+	public Pursuit helicopter;
+	public bool chocolateRain = false;
 	
 	// Use this for initialization
 	void Start () {
