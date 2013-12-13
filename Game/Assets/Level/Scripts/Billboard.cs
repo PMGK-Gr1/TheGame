@@ -13,7 +13,6 @@ public class Billboard : MonoBehaviour {
 	void FixedUpdate()
 	{
 		if (GameController.instance.chocolateRain) {
-			//TODO destroying billboards
 			foreach(Transform child in this.transform){
 				if(child.rigidbody != null)
 					child.rigidbody.WakeUp(); 
