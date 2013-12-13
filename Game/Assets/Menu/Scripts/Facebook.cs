@@ -5,6 +5,6 @@ public class Facebook : MonoBehaviour {
 
     void OnMouseUp()
     {
-        Application.OpenURL("http://www.facebook.com/donutmadness");
+        Application.OpenURL("http://www.facebook.com/pages/Donut-Madness/343761999100579");
     }
 }

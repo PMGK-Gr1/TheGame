@@ -235,16 +235,7 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
         achieve.death = true;
 		Debug.Log(Localization.getText("DEAD"));
 		if(!GodMode) Application.LoadLevel(2);
-		PlayerPrefs.SetInt("Sugar", PlayerPrefs.GetInt("Sugar") + sugarCubes);
-        PlayerPrefs.SetInt("TotalSugarEver", PlayerPrefs.GetInt("TotalSugarEver") + sugarCubes);
-        PlayerPrefs.SetInt("TotalDistance", PlayerPrefs.GetInt("TotalDistance") + (int)(transform.position.x / 10));
-        PlayerPrefs.SetInt("TotalBillboardHits", PlayerPrefs.GetInt("TotalBillboardHits") + billboardHits);
-        PlayerPrefs.SetInt("ChocalateRains", PlayerPrefs.GetInt("ChocalateRains") + chocoRains);
-        PlayerPrefs.SetInt("Upgrade"+upgrade.ToString(), upgradeCount);
-        PlayerPrefs.SetInt("LastDistance", (int)(transform.position.x / 10));
-        PlayerPrefs.SetInt("LastSugar", sugarCubes);
-        if (((int)(transform.position.x / 10)) > PlayerPrefs.GetInt("HighestScore")) PlayerPrefs.SetInt("HighestScore", (int)(transform.position.x / 10));
-		PlayerPrefs.Save();
+        SaveAll();
 	}
 
 	bool jump ()
@@ -283,4 +274,19 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
 		return state.JumpNotPossible;
 	}
 
+
+
+    public void SaveAll()
+    {
+        PlayerPrefs.SetInt("Sugar", PlayerPrefs.GetInt("Sugar") + sugarCubes);
+        PlayerPrefs.SetInt("TotalSugarEver", PlayerPrefs.GetInt("TotalSugarEver") + sugarCubes);
+        PlayerPrefs.SetInt("TotalDistance", PlayerPrefs.GetInt("TotalDistance") + (int)(transform.position.x / 10));
+        PlayerPrefs.SetInt("TotalBillboardHits", PlayerPrefs.GetInt("TotalBillboardHits") + billboardHits);
+        PlayerPrefs.SetInt("ChocalateRains", PlayerPrefs.GetInt("ChocalateRains") + chocoRains);
+        PlayerPrefs.SetInt("Upgrade" + upgrade.ToString(), upgradeCount);
+        PlayerPrefs.SetInt("LastDistance", (int)(transform.position.x / 10));
+        PlayerPrefs.SetInt("LastSugar", sugarCubes);
+        if (((int)(transform.position.x / 10)) > PlayerPrefs.GetInt("HighestScore")) PlayerPrefs.SetInt("HighestScore", (int)(transform.position.x / 10));
+        PlayerPrefs.Save();
+    }
 }
