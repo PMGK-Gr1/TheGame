@@ -100,7 +100,9 @@ public class Achievements : MonoBehaviour
         if (overViaduct && over) OverViaduct();
         if (fiveseconds && death) FiveSeconds();
         if (choco&&(PlayerPrefs.GetInt("ChocalateRains") + donut.chocoRains) >= 10) Choco();
-        if (warpSpeed && (donut.rigidbody.velocity.x > 100)) WarpSpeed();
+		if (donut.gameObject.GetComponent<Rigidbody> () != null) {
+						if (warpSpeed && (donut.rigidbody.velocity.x > 100)) WarpSpeed ();
+				}
         if (slippy && (donut.slippyCount >= 5)) Slippy();
     }
 

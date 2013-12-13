@@ -14,15 +14,17 @@ public class CameraMover : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
 		Vector3 moveDirection = cylinder.transform.position + startVector - transform.position;
-		Vector3 dynamicCamera = new Vector3(0,0, startVector.z - Mathf.Abs(cylinder.rigidbody.velocity.x));
+		if (cylinder.rigidbody != null) {
+						Vector3 dynamicCamera = new Vector3 (0, 0, startVector.z - Mathf.Abs (cylinder.rigidbody.velocity.x));
+				
 		
-		
-		this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, Mathf.Lerp(this.transform.position.z, 0.9f*dynamicCamera.z, 0.2f));
+						this.transform.position = new Vector3 (this.transform.position.x, this.transform.position.y, Mathf.Lerp (this.transform.position.z, 0.9f * dynamicCamera.z, 0.2f));
 
-		this.transform.position += new Vector3(moveDirection.x*0.05f, moveDirection.y*0.01f, 0);
-		this.transform.LookAt(cylinder.transform.position - new Vector3(startVector.x + 0.18f*Mathf.Lerp(this.transform.position.z, dynamicCamera.z, 0.02f), 0, 0));
-		//Debug.Log(moveDirection);
-		//this.transform.position += moveDirection;// * 0.2f;
+						this.transform.position += new Vector3 (moveDirection.x * 0.05f, moveDirection.y * 0.01f, 0);
+						this.transform.LookAt (cylinder.transform.position - new Vector3 (startVector.x + 0.18f * Mathf.Lerp (this.transform.position.z, dynamicCamera.z, 0.02f), 0, 0));
+						//Debug.Log(moveDirection);
+						//this.transform.position += moveDirection;// * 0.2f;
+				}
 	}
 
 	void Update() {
