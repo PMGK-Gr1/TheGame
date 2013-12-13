@@ -262,6 +262,7 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
         PlayerPrefs.SetInt("Upgrade"+upgrade.ToString(), upgradeCount);
         PlayerPrefs.SetInt("LastDistance", (int)(transform.position.x / 10));
         PlayerPrefs.SetInt("LastSugar", sugarCubes);
+        if (((int)(transform.position.x / 10)) > PlayerPrefs.GetInt("HighestScore")) PlayerPrefs.SetInt("HighestScore", (int)(transform.position.x / 10));
 		PlayerPrefs.Save();
 	}
 

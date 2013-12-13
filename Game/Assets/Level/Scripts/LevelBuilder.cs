@@ -30,8 +30,8 @@ public class LevelBuilder : MonoBehaviour {
         GameObject Bakery = GameObject.CreatePrimitive(PrimitiveType.Cube);
         Bakery.layer = groundLayer;
         Bakery.tag = "Ground";
-        Bakery.transform.localScale = new Vector3(70.0f, 30.0f, 30.0f);
-        Bakery.transform.position = new Vector3(35.0f, 15.0f, 0.0f);
+        Bakery.transform.localScale = new Vector3(90.0f, 30.0f, 30.0f);
+        Bakery.transform.position = new Vector3(45.0f, 15.0f, 0.0f);
         Destroy(Bakery, 20.0f);
         #endregion
 
@@ -39,6 +39,7 @@ public class LevelBuilder : MonoBehaviour {
         AddPrefab(LevelPrefabs[0], true);
         AddPrefab(LevelPrefabs[0], true);
         AddPrefab(LevelPrefabs[0], true);
+        
 	}
 
     // Update is called once per frame
