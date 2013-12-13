@@ -23,6 +23,11 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
 	public GameObject explosionParticle;
 	public GameObject smokeParticle;
 	public bool stingerDisabled;
+
+	public Material normalMat;
+	public Material burntMat;
+	public Material sugarMat;
+
     //private variables
 	
 	private bool isAlive = true;
@@ -56,6 +61,8 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
 
 		smokeParticle.particleSystem.enableEmission = true;
 		smokeParticle.particleSystem.Stop();
+
+		this.renderer.material = normalMat;
 	}
 
     
@@ -115,8 +122,8 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
         isBurnt = true;
 		explosionParticle.particleSystem.Play();
 		smokeParticle.particleSystem.Play();
-
 		stingersResistLeft = 3;
+		this.renderer.material = burntMat;
 	}
 
 	void UnburntDonut() {
@@ -125,7 +132,7 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
 		// TODO reverse the effects
 		explosionParticle.particleSystem.Stop();
 		smokeParticle.particleSystem.Stop();
-
+		this.renderer.material = normalMat;
 	}
 
 
@@ -151,12 +158,14 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
         isFrosted = true;
 		// TODO nice pickup particle effect or some other spectacular thingy
 		freshAsphaltResistLeft = 3;
+		this.renderer.material = sugarMat;
 	}
 
 	void UnfrostDonut() {
 		Debug.Log("I am no longer frosted.");
         isFrosted = false;
 		// TODO reverse the effects
+		this.renderer.material = normalMat;
 	}
 
 
@@ -186,9 +195,9 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
 
 
 	public void GiveSecondLife() {
-		Debug.Log("I've got a second life.");
+		//Debug.Log("I've got a second life.");
 		// TODO nice pickup particle effect or some other spectacular thingy
-		milkCannonResistLeft = 3;
+		secondLife = true;
 	}
 
 	void Rebirth() {
