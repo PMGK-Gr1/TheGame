@@ -8,15 +8,19 @@ public class UpgradeButtons : MonoBehaviour {
 	public RigidDonut dount;
 	public float speed;
 	public GameObject ChocolateRainParticle;
+	public GameObject SpeedParticle;
 
     private int upgrade;
     private string upgradebutton;
+
     void Start()
     {
         donut = RigidDonut.instance;
 		speed = 1000.0f;
         donut.upgrade = PlayerPrefs.GetInt("ChosenUpgrade");
         donut.upgradeCount = PlayerPrefs.GetInt("Upgrade" + donut.upgrade.ToString());
+
+		SpeedParticle.particleSystem.Stop();
         switch(donut.upgrade)
         {
             case 1:
@@ -99,7 +103,10 @@ public class UpgradeButtons : MonoBehaviour {
 
 	
 	void SpeedBoost() {
+		SpeedParticle.particleSystem.Play();
+
 		donut.rigidbody.AddForce (new Vector3 (speed, 0, 0), ForceMode.Acceleration);
         if (donut.isBurnt) donut.achieve.BurntandSpeed();
 	}
+
 }
