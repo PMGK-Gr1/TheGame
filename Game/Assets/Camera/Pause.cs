@@ -35,7 +35,7 @@ public class Pause : MonoBehaviour
         {
             if (Time.timeScale == 0)
             {
-                Light.GetComponent<Light>().intensity = 0.5f;
+                Light.GetComponent<Light>().intensity = 1.1f;
                 pausebuttons = false;
 
                 Time.timeScale = 1;
