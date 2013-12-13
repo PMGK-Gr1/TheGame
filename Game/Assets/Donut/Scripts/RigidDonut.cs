@@ -30,6 +30,9 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
 	private state prevState = state.JumpNotPossible;
 	private float cooldown;
 	private float radius = 7;
+	private Vector3 donutLastVelocity;
+	private Vector3 donutLastLastVelocity;
+
 
 	private int stingersResistLeft = 0;
 	private int milkCannonResistLeft = 0;
@@ -59,9 +62,12 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
 	void FixedUpdate() {
 		float force = 0.0f;
         Distance.guiText.text = ((int)transform.position.x/10).ToString() + " m";
+		if(rigidbody != null)
 		force = 50.0f / (1.0f + Mathf.Pow(2, this.rigidbody.velocity.x - TargetSpeed));
 		//rigidbody.AddForceAtPosition(new Vector3(force, 0, 0), transform.position + new Vector3(0, 5f, 0), ForceMode.Acceleration);
 		rigidbody.AddForce(new Vector3(force, 0, 0), ForceMode.Acceleration);
+		donutLastLastVelocity = donutLastVelocity;
+		donutLastVelocity = rigidbody.velocity;
 		//rigidbody.angularVelocity = new Vector3(0, 0, -rigidbody.velocity.magnitude / radius);
 
 	}
@@ -214,6 +220,19 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
 
 	public void Viaduct() {
 		Debug.Log ("Oops, viaduct");
+		Destroy (GetComponent("SphereCollider"));
+		InteractiveCloth cloth = gameObject.AddComponent<InteractiveCloth> () as InteractiveCloth;
+		cloth.pressure = 1.0f;
+		cloth.stretchingStiffness = 0.5f;
+		cloth.bendingStiffness = 0.5f;
+		gameObject.AddComponent ("ClothRenderer");
+		GetComponent<ClothRenderer> ().material = GetComponent<MeshRenderer>().material;
+		Destroy (GetComponent("MeshRenderer"));
+		cloth.mesh = (GetComponent<MeshFilter> () as MeshFilter).mesh;
+		Destroy (GetComponent<MeshFilter> ());
+		cloth.density = 1.0f;
+		cloth.externalAcceleration = donutLastLastVelocity;
+		rigidbody.drag = 0.0f;
 		Death ("Viaduct");
 	}
 
