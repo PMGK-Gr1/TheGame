@@ -7,5 +7,6 @@ public class Equip : MonoBehaviour {
     void OnMouseUp()
     {
         PlayerPrefs.SetInt("ChosenUpgrade", id);
+        PlayerPrefs.Save();
     }
 }

@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
+/// <summary>
+/// In fact, all buttons in main scene
+/// </summary>
 public class UpgradeButtons : MonoBehaviour {
     private RigidDonut donut;
 
@@ -9,10 +13,12 @@ public class UpgradeButtons : MonoBehaviour {
 	public float speed;
 	public GameObject ChocolateRainParticle;
 	public GameObject SpeedParticle;
+    public Texture PauseButton;
+    public GameObject Light;
 
     private int upgrade;
     private string upgradebutton;
-
+    bool pausebuttons = false;
     void Start()
     {
         donut = RigidDonut.instance;
@@ -51,7 +57,7 @@ public class UpgradeButtons : MonoBehaviour {
         button1.height =/* button2.height = button3.height =*/ Screen.height * 0.1f;
         button1.width =/* button2.width = button3.width = */Screen.width * 0.35f;
 
-        if(GUI.Button(button1, upgradebutton+donut.upgradeCount.ToString()))  {
+        if((!pausebuttons)&&(GUI.Button(button1, upgradebutton+donut.upgradeCount.ToString())))  {
             if (donut.upgradeCount > 0)
             {
                 switch (donut.upgrade)
@@ -78,6 +84,44 @@ public class UpgradeButtons : MonoBehaviour {
         };
        // if (GUI.Button(button2, "Uprgade 2")) { };
        // if (GUI.Button(button3, "Uprgade 3")) { };
+
+
+
+        Rect button = new Rect(Screen.width * 0.1f, Screen.height * 0.1f, Screen.width * 0.1f, Screen.height * 0.1f);
+
+        if (pausebuttons && (GUI.Button(new Rect(Screen.width * 0.4f, Screen.height * 0.1f, Screen.width * 0.2f, Screen.height * 0.1f), "menu")))
+        {
+            Time.timeScale = 1.0f;
+            donut.Death("Exit");
+        }
+
+        if (pausebuttons && (GUI.Button(new Rect(Screen.width * 0.4f, Screen.height * 0.3f, Screen.width * 0.2f, Screen.height * 0.1f), "sound"))) { }
+        if (pausebuttons && (GUI.Button(new Rect(Screen.width * 0.4f, Screen.height * 0.5f, Screen.width * 0.2f, Screen.height * 0.1f), "music"))) { }
+
+
+
+        if (GUI.Button(button, PauseButton))
+        {
+            if (Time.timeScale == 0)
+            {
+                Light.GetComponent<Light>().intensity = 1.1f;
+                pausebuttons = false;
+
+                Time.timeScale = 1;
+            }
+
+            else
+            {
+
+                Light.GetComponent<Light>().intensity = 0.0f;
+
+                pausebuttons = true;
+                Time.timeScale = 0;
+            }
+        }
+
+
+
 
     }
 

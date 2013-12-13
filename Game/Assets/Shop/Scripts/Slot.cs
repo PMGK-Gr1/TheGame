@@ -5,10 +5,10 @@ public class Slot : MonoBehaviour {
 
 
     public Texture[] upgrades;
-
+    public int upgrade;
 	void FixedUpdate () {
 
-        int upgrade = PlayerPrefs.GetInt("ChosenUpgrade");
+        upgrade = PlayerPrefs.GetInt("ChosenUpgrade");
         this.guiTexture.texture = upgrades[upgrade];
 
 	}

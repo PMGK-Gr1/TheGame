@@ -255,15 +255,25 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
 
 	public void Death(string Cause) {
 		if (!isAlive) return; // prevent killing multiple times
-		if (secondLife && Cause != "Cops") {
+		if (secondLife && Cause != "Cops" && Cause != "Exit") {
 			Rebirth();
 			return;
 		}
 		isAlive = false;
         achieve.death = true;
 		Debug.Log(Localization.getText("DEAD"));
-		if(!GodMode) Application.LoadLevel(2);
-        SaveAll();
+        if (Cause == "Exit") Application.LoadLevel(0);
+		else if(!GodMode) Application.LoadLevel(2);
+        PlayerPrefs.SetInt("Sugar", PlayerPrefs.GetInt("Sugar") + sugarCubes);
+        PlayerPrefs.SetInt("TotalSugarEver", PlayerPrefs.GetInt("TotalSugarEver") + sugarCubes);
+        PlayerPrefs.SetInt("TotalDistance", PlayerPrefs.GetInt("TotalDistance") + (int)(transform.position.x / 10));
+        PlayerPrefs.SetInt("TotalBillboardHits", PlayerPrefs.GetInt("TotalBillboardHits") + billboardHits);
+        PlayerPrefs.SetInt("ChocalateRains", PlayerPrefs.GetInt("ChocalateRains") + chocoRains);
+        PlayerPrefs.SetInt("Upgrade" + upgrade.ToString(), upgradeCount);
+        PlayerPrefs.SetInt("LastDistance", (int)(transform.position.x / 10));
+        PlayerPrefs.SetInt("LastSugar", sugarCubes);
+        if (((int)(transform.position.x / 10)) > PlayerPrefs.GetInt("HighestScore")) PlayerPrefs.SetInt("HighestScore", (int)(transform.position.x / 10));
+        PlayerPrefs.Save();
 	}
 
 	bool jump ()
@@ -304,17 +314,5 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
 
 
 
-    public void SaveAll()
-    {
-        PlayerPrefs.SetInt("Sugar", PlayerPrefs.GetInt("Sugar") + sugarCubes);
-        PlayerPrefs.SetInt("TotalSugarEver", PlayerPrefs.GetInt("TotalSugarEver") + sugarCubes);
-        PlayerPrefs.SetInt("TotalDistance", PlayerPrefs.GetInt("TotalDistance") + (int)(transform.position.x / 10));
-        PlayerPrefs.SetInt("TotalBillboardHits", PlayerPrefs.GetInt("TotalBillboardHits") + billboardHits);
-        PlayerPrefs.SetInt("ChocalateRains", PlayerPrefs.GetInt("ChocalateRains") + chocoRains);
-        PlayerPrefs.SetInt("Upgrade" + upgrade.ToString(), upgradeCount);
-        PlayerPrefs.SetInt("LastDistance", (int)(transform.position.x / 10));
-        PlayerPrefs.SetInt("LastSugar", sugarCubes);
-        if (((int)(transform.position.x / 10)) > PlayerPrefs.GetInt("HighestScore")) PlayerPrefs.SetInt("HighestScore", (int)(transform.position.x / 10));
-        PlayerPrefs.Save();
-    }
+   
 }
