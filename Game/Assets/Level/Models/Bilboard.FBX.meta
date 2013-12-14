@@ -6,17 +6,62 @@ ModelImporter:
     100000: //RootNode
     100002: Bilboard
     100004: Box001
+    100006: Board_01
+    100008: Board_02
+    100010: Board_03
+    100012: Board_04
+    100014: Board_05
+    100016: Board_06
+    100018: Board_07
+    100020: Board_08
+    100022: Pales
     400000: //RootNode
     400002: Bilboard
     400004: Box001
+    400006: Board_01
+    400008: Board_02
+    400010: Board_03
+    400012: Board_04
+    400014: Board_05
+    400016: Board_06
+    400018: Board_07
+    400020: Board_08
+    400022: Pales
     2300000: //RootNode
     2300002: Bilboard
     2300004: Box001
+    2300006: Board_01
+    2300008: Board_02
+    2300010: Board_03
+    2300012: Board_04
+    2300014: Board_05
+    2300016: Board_06
+    2300018: Board_07
+    2300020: Board_08
+    2300022: Pales
     3300000: //RootNode
     3300002: Bilboard
     3300004: Box001
+    3300006: Board_01
+    3300008: Board_02
+    3300010: Board_03
+    3300012: Board_04
+    3300014: Board_05
+    3300016: Board_06
+    3300018: Board_07
+    3300020: Board_08
+    3300022: Pales
     4300000: Bilboard
     4300002: Box001
+    4300004: Pales
+    4300006: Board_01
+    4300008: Board_02
+    4300010: Board_03
+    4300012: Board_04
+    4300014: Board_05
+    4300016: Board_06
+    4300018: Board_07
+    4300020: Board_08
     9500000: //RootNode
   materials:
     importMaterials: 1
