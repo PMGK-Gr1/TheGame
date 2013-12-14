@@ -4,10 +4,19 @@ ModelImporter:
   serializedVersion: 15
   fileIDToRecycleName:
     100000: //RootNode
+    100002: Viaduct
+    100004: Viaduct_asphalt
     400000: //RootNode
+    400002: Viaduct
+    400004: Viaduct_asphalt
     2300000: //RootNode
+    2300002: Viaduct
+    2300004: Viaduct_asphalt
     3300000: //RootNode
+    3300002: Viaduct
+    3300004: Viaduct_asphalt
     4300000: Viaduct
+    4300002: Viaduct_asphalt
     9500000: //RootNode
   materials:
     importMaterials: 1
