@@ -60,7 +60,7 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
     
 	void FixedUpdate() {
 		float force = 0.0f;
-        Distance.guiText.text = ((int)transform.position.x/10).ToString() + " m";
+        Distance.guiText.text = ((int) GetDistanceTravelled()).ToString() + " m";
 		if(rigidbody != null)
 		force = 50.0f / (1.0f + Mathf.Pow(2, this.rigidbody.velocity.x - TargetSpeed));
 		//rigidbody.AddForceAtPosition(new Vector3(force, 0, 0), transform.position + new Vector3(0, 5f, 0), ForceMode.Acceleration);
@@ -87,9 +87,12 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
 			if (stingersResistLeft > 0) {
 				stingersResistLeft--;
 				if (stingersResistLeft == 0)
-					UnburntDonut ();
-			} else
-				Death ("Stinger");
+					UnburntDonut();
+			}
+			else {
+				Soften();
+				Death("Stinger");
+			}
 		}
 	}
 
@@ -198,54 +201,66 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
 
 	public void Viaduct() {
 		Debug.Log ("Oops, viaduct");
-		Destroy (GetComponent("SphereCollider"));
-		InteractiveCloth cloth = gameObject.AddComponent<InteractiveCloth> () as InteractiveCloth;
-		cloth.pressure = 1.0f;
-		cloth.stretchingStiffness = 0.5f;
-		cloth.bendingStiffness = 0.5f;
-		gameObject.AddComponent ("ClothRenderer");
-		GetComponent<ClothRenderer> ().material = GetComponent<MeshRenderer>().material;
-		Destroy (GetComponent("MeshRenderer"));
-		cloth.mesh = (GetComponent<MeshFilter> () as MeshFilter).mesh;
-		Destroy (GetComponent<MeshFilter> ());
-		cloth.density = 1.0f;
-		cloth.externalAcceleration = donutLastLastVelocity;
-		rigidbody.drag = 0.0f;
+		Soften();
 		Death ("Viaduct");
 	}
 
-	void DisableStinger() {
-		stingerDisabled = true;
-	}
-
-	void EnableStinger() {
-		stingerDisabled = false;
+	void Soften() {
+		Destroy(GetComponent<Collider>());
+		InteractiveCloth cloth = gameObject.AddComponent<InteractiveCloth>() as InteractiveCloth;
+		cloth.pressure = 1.0f;
+		cloth.stretchingStiffness = 0.5f;
+		cloth.bendingStiffness = 0.5f;
+		gameObject.AddComponent<ClothRenderer>();
+		GetComponent<ClothRenderer>().material = GetComponent<MeshRenderer>().material;
+		Destroy(GetComponent<MeshRenderer>());
+		cloth.mesh = (GetComponent<MeshFilter>() as MeshFilter).mesh;
+		Destroy(GetComponent<MeshFilter>());
+		cloth.density = 1.0f;
+		//cloth.externalAcceleration = donutLastLastVelocity;
+		rigidbody.isKinematic = true;
 	}
 
 	public void Death(string Cause) {
 		if (!isAlive) return; // prevent killing multiple times
-		if (secondLife && Cause != "Cops" && Cause != "Exit") {
+		if (secondLife && Cause != "Cops") {
 			Rebirth();
 			return;
 		}
 		isAlive = false;
         achieve.death = true;
 		Debug.Log(Localization.getText("DEAD"));
-        if (Cause == "Exit") Application.LoadLevel(0);
-		else if(!GodMode) Application.LoadLevel(2);
-        PlayerPrefs.SetInt("Sugar", PlayerPrefs.GetInt("Sugar") + sugarCubes);
-        PlayerPrefs.SetInt("TotalSugarEver", PlayerPrefs.GetInt("TotalSugarEver") + sugarCubes);
-        PlayerPrefs.SetInt("TotalDistance", PlayerPrefs.GetInt("TotalDistance") + (int)(transform.position.x / 10));
-        PlayerPrefs.SetInt("TotalBillboardHits", PlayerPrefs.GetInt("TotalBillboardHits") + billboardHits);
-        PlayerPrefs.SetInt("ChocalateRains", PlayerPrefs.GetInt("ChocalateRains") + chocoRains);
-        PlayerPrefs.SetInt("Upgrade" + upgrade.ToString(), upgradeCount);
-        PlayerPrefs.SetInt("LastDistance", (int)(transform.position.x / 10));
-        PlayerPrefs.SetInt("LastSugar", sugarCubes);
-        if (((int)(transform.position.x / 10)) > PlayerPrefs.GetInt("HighestScore")) PlayerPrefs.SetInt("HighestScore", (int)(transform.position.x / 10));
-        PlayerPrefs.Save();
+
+		Save();
+
+		StartCoroutine(DelayDeath(2));
 	}
 
-	
+	public void Save() {
+
+		int distance = (int) GetDistanceTravelled();
+
+		PlayerPrefs.SetInt("Sugar", PlayerPrefs.GetInt("Sugar") + sugarCubes);
+		PlayerPrefs.SetInt("TotalSugarEver", PlayerPrefs.GetInt("TotalSugarEver") + sugarCubes);
+		PlayerPrefs.SetInt("TotalDistance", PlayerPrefs.GetInt("TotalDistance") + distance);
+		PlayerPrefs.SetInt("TotalBillboardHits", PlayerPrefs.GetInt("TotalBillboardHits") + billboardHits);
+		PlayerPrefs.SetInt("ChocalateRains", PlayerPrefs.GetInt("ChocalateRains") + chocoRains);
+		PlayerPrefs.SetInt("Upgrade" + upgrade.ToString(), upgradeCount);
+		PlayerPrefs.SetInt("LastDistance", distance);
+		PlayerPrefs.SetInt("LastSugar", sugarCubes);
+
+		if (distance > PlayerPrefs.GetInt("HighestScore")) PlayerPrefs.SetInt("HighestScore", distance);
+		PlayerPrefs.Save();
+	}
+
+	public float GetDistanceTravelled() {
+		return transform.position.x / 10;
+	}
+
+	IEnumerator DelayDeath(float delay) {
+		yield return new WaitForSeconds(delay);
+		if (!GodMode) Application.LoadLevel(2);
+	}
 
 
 

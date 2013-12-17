@@ -55,6 +55,7 @@ public class Achievements : MonoBehaviour
 
     void Update()
     {
+		float donutDistance = donut.GetDistanceTravelled();
 
         #region sugar quantity
         if (sugar20 && (donut.sugarCubes >= 20)) Sugar20();
@@ -67,14 +68,14 @@ public class Achievements : MonoBehaviour
         if (death && (donut.sugarCubes == 300)) Sugar300();
         #endregion
         #region distance
-        if (dist100 && (donut.transform.position.x / 10 >= 100)) Dist100();
-        if (dist200 && (donut.transform.position.x / 10 >= 200)) Dist200();
-        if (dist500 && (donut.transform.position.x / 10 >= 500)) Dist500();
-        if (dist1000 && (donut.transform.position.x / 10 >= 1000)) Dist1000();
-        if (dist2000 && (donut.transform.position.x / 10 >= 2000)) Dist2000();
-        if (dist5000 && (donut.transform.position.x / 10 >= 5000)) Dist5000();
+		if (dist100 && (donutDistance >= 100)) Dist100();
+		if (dist200 && (donutDistance >= 200)) Dist200();
+		if (dist500 && (donutDistance >= 500)) Dist500();
+		if (dist1000 && (donutDistance >= 1000)) Dist1000();
+		if (dist2000 && (donutDistance >= 2000)) Dist2000();
+		if (dist5000 && (donutDistance >= 5000)) Dist5000();
 
-        if (marathon && ((PlayerPrefs.GetInt("TotalDistance") + donut.transform.position.x) >= 42195)) Marathon();
+		if (marathon && ((PlayerPrefs.GetInt("TotalDistance") + donutDistance) >= 42195)) Marathon();
         #endregion
         #region rebirths
         if (rebirth1 && (rebirthCount == 1)) Rebirth1();
@@ -90,7 +91,7 @@ public class Achievements : MonoBehaviour
         #endregion
 
 
-        if (diet && (donut.sugarCubes == 0) && ((donut.transform.position.x / 10) >= 1000)) Diet();
+		if (diet && (donut.sugarCubes == 0) && (donutDistance >= 1000)) Diet();
         if (stinger10 && (stingerCount >= 10)) Stinger10();
         if (marmolade5 && (marmoladeCount >= 5)) Marmolade5();
 
