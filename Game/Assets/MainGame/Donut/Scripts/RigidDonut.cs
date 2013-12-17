@@ -9,10 +9,6 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
 
 	//public variables
 	public float TargetSpeed = 20.0f;
-	public float InstantJumpForce = 1000.0f;
-	public float LongJumpForce = 500.0f;
-	public bool IsTouchingGround = false;
-	public float JumpLength = 1.0f;
 	public bool GodMode = false;
     public GameObject Score;
     public GameObject Distance;
@@ -31,10 +27,6 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
     //private variables
 	
 	private bool isAlive = true;
-	private enum state {JumpPossible = 0, JumpStarted = 1, JumpOnGoing =2, JumpNotPossible = 3}
-	private state prevState = state.JumpNotPossible;
-	private float cooldown;
-	private float radius = 7;
 	private Vector3 donutLastVelocity;
 	private Vector3 donutLastLastVelocity;
 
@@ -80,17 +72,6 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
 	}
 
 
-	void Update() {
-		// Input moved to pdate to prevent ignoring some keystrokes
-		prevState = GetJumpState ();
-		if (prevState == state.JumpStarted) {
-			rigidbody.AddForce(new Vector3(0, InstantJumpForce, 0), ForceMode.VelocityChange);
-		}
-		else if(prevState == state.JumpOnGoing){
-			rigidbody.AddForce(new Vector3(0, LongJumpForce, 0), ForceMode.Acceleration);
-		}
-
-	}
 
 	public void SugarPickup(int value) {
 		sugarCubes += value;
@@ -140,18 +121,6 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
     {
         Death("Fall");
     }
-
-	public void MilkCannonHit(Vector3 forceImpact) {
-
-		if (milkCannonResistLeft > 0) {
-			milkCannonResistLeft--;
-			if (milkCannonResistLeft == 0) UnfrostDonut();
-		}
-		else {
-			float force = 200;
-			rigidbody.AddForce(forceImpact*force, ForceMode.Impulse);
-		}
-	}
 
 	public void FrostDonut() {
 		Debug.Log("I am double frosted ?!?.");
@@ -276,41 +245,7 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
         PlayerPrefs.Save();
 	}
 
-	bool jump ()
-    {
-		return ((Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Began) || Input.GetKeyDown(KeyCode.Space));
-	}
-
-	bool jumpHigher()
-	{
-		return ((Input.touchCount > 0)// && Input.touches[0].phase == TouchPhase.Stationary)
-		        || Input.GetKey(KeyCode.Space));
-	}
-
-	state GetJumpState()
-	{
-		if(prevState == state.JumpPossible && jump())
-		{
-			return state.JumpStarted;
-		}
-		if((prevState == state.JumpStarted || prevState == state.JumpOnGoing) && jumpHigher() && cooldown > 0)
-		{
-			cooldown -= Time.deltaTime;
-			return state.JumpOnGoing;
-		}
-		cooldown = JumpLength;
-		if(IsTouchingGround && (prevState == state.JumpNotPossible || prevState == state.JumpPossible))
-		{
-			return state.JumpPossible;
-		}
-		if(!IsTouchingGround && prevState == state.JumpPossible)
-		{
-			return state.JumpNotPossible;
-		}
-
-
-		return state.JumpNotPossible;
-	}
+	
 
 
 
