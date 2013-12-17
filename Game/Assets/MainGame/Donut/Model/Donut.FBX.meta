@@ -6,15 +6,25 @@ ModelImporter:
     100000: //RootNode
     100002: Oczy
     100004: Paczek
+    100006: Oko_lewe
+    100008: Oko_prawe
     400000: //RootNode
     400002: Oczy
     400004: Paczek
+    400006: Oko_lewe
+    400008: Oko_prawe
     2300000: Oczy
     2300002: Paczek
+    2300004: Oko_lewe
+    2300006: Oko_prawe
     3300000: Oczy
     3300002: Paczek
+    3300004: Oko_lewe
+    3300006: Oko_prawe
     4300000: Paczek
     4300002: Oczy
+    4300004: Oko_lewe
+    4300006: Oko_prawe
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -23,11 +33,13 @@ ModelImporter:
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
+    optimizeGameObjects: 0
     animationCompression: 1
     animationRotationError: .5
     animationPositionError: .5
     animationScaleError: .5
     animationWrapMode: 0
+    extraExposedTransformPaths: []
     clipAnimations: []
     isReadable: 1
   meshes:
@@ -46,16 +58,15 @@ ModelImporter:
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
   tangentSpace:
-    normalSmoothAngle: 60
-    splitTangentsAcrossUV: 1
-    normalImportMode: 0
-    tangentImportMode: 1
+    normalSmoothAngle: 103
+    splitTangentsAcrossUV: 0
+    normalImportMode: 1
+    tangentImportMode: 2
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
     human: []
     skeleton: []
-    handles: []
     armTwist: .5
     foreArmTwist: .5
     upperLegTwist: .5
@@ -65,6 +76,5 @@ ModelImporter:
     feetSpacing: 0
     rootMotionBoneName: 
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  additionalBone: 1
   animationType: 0
   userData: 

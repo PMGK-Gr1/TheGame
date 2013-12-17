@@ -14,8 +14,8 @@ public class FreshAsphalt : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider other) {
-		RigidDonut donut;
-		if ((donut = other.gameObject.GetComponent<RigidDonut> ()) != null) {
+		Donut donut;
+		if ((donut = other.gameObject.GetComponent<Donut> ()) != null) {
 			if(!donut.FreshAsphalt()) {
 				Destroy(this);
 			}
@@ -27,8 +27,8 @@ public class FreshAsphalt : MonoBehaviour {
 	}
 
 	void OnTriggerExit(Collider other) {
-		RigidDonut donut;
-		if ((donut = other.gameObject.GetComponent<RigidDonut> ()) != null) {
+		Donut donut;
+		if ((donut = other.gameObject.GetComponent<Donut> ()) != null) {
 			other.rigidbody.drag = 0.0f;
 		}
 	}

@@ -5,8 +5,8 @@ public class OverViaduct : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-        RigidDonut donut;
-        if ((donut = other.gameObject.GetComponent<RigidDonut>()) != null)
+        Donut donut;
+        if ((donut = other.gameObject.GetComponent<Donut>()) != null)
         {
             donut.achieve.over = true;
         }

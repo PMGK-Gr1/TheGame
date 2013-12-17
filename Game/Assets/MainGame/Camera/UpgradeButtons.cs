@@ -6,10 +6,10 @@ using System.Collections;
 /// In fact, all buttons in main scene
 /// </summary>
 public class UpgradeButtons : MonoBehaviour {
-    private RigidDonut donut;
+    private Donut donut;
 
 	public Pursuit pursuit;
-	public RigidDonut dount;
+	public Donut dount;
 	public float speed;
 	public GameObject ChocolateRainParticle;
 	public GameObject SpeedParticle;
@@ -21,7 +21,7 @@ public class UpgradeButtons : MonoBehaviour {
     bool pausebuttons = false;
     void Start()
     {
-        donut = RigidDonut.instance;
+        donut = GameController.instance.donut;
 		speed = 1000.0f;
         donut.upgrade = PlayerPrefs.GetInt("ChosenUpgrade");
         donut.upgradeCount = PlayerPrefs.GetInt("Upgrade" + donut.upgrade.ToString());

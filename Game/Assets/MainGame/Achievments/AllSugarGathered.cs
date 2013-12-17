@@ -4,12 +4,12 @@ using System.Collections;
 public class AllSugarGathered : MonoBehaviour {
 
     public int SugarId;
-    private RigidDonut donut;
+    private Donut donut;
     private bool cleared = false;
 
     void Start()
     {
-        donut = RigidDonut.instance;
+        donut = GameController.instance.donut;
     }
 
 	void FixedUpdate () {

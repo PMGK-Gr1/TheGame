@@ -6,14 +6,14 @@ public class Jumper : MonoBehaviour {
 	public float LongJumpForce = 500.0f;
 	public float JumpLength = 1.0f;
 
-	private RigidDonut donut;
+	private Donut donut;
 	private enum JumpPhase { JumpPossible = 0, JumpStarted, JumpOnGoing, JumpNotPossible}
 	private JumpPhase prevJumpPhase = JumpPhase.JumpNotPossible;
 	private float cooldown;
 	private bool isTouchingGround = false;
 
 	void Start() {
-		donut = RigidDonut.instance;
+		donut = GameController.instance.donut;
 	}
 
 	void Update() {

@@ -7,7 +7,7 @@ public class GameController : MonoSingleton<GameController> {
 	private string language;
 
 	//public variables
-	public RigidDonut donut;
+	public Donut donut;
 	public Pursuit helicopter;
 	public bool chocolateRain = false;
 	

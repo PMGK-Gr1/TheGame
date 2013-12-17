@@ -7,7 +7,7 @@ public class Achievements : MonoBehaviour
 
     public bool death = false;
 
-    private RigidDonut donut;
+    private Donut donut;
 
     private bool sugar20 = true, sugar50 = true, sugar100 = true, sugar200 = true, sugar500 = true, sugar1000 = true;
     private bool dist100 = true, dist200 = true, dist500 = true, dist1000 = true, dist2000 = true, dist5000 = true;
@@ -49,7 +49,7 @@ public class Achievements : MonoBehaviour
     private bool slippy = true;
     void Start()
     {
-        donut = RigidDonut.instance;
+        donut = GameController.instance.donut;
     }
 
 

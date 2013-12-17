@@ -11,13 +11,13 @@ public class Pursuit : MonoBehaviour {
 
     //private variables
 	private float startTime = 0.0f;
-	private RigidDonut donut;
+	private Donut donut;
 
 
 	// Use this for initialization
 	void Start() {
 		startTime = Time.time + PursuitDelay;
-		donut = RigidDonut.instance;
+		donut = GameController.instance.donut;
 		pursuitSpeed = donut.TargetSpeed;
 	}
 
@@ -33,7 +33,7 @@ public class Pursuit : MonoBehaviour {
 			Vector3 tmpVelocity = currentSpeed * Time.fixedDeltaTime * tmpDelta.normalized;
 
 			if (tmpDelta.magnitude < CatchDistance) {
-				RigidDonut.instance.Death("Cops");
+				GameController.instance.donut.Death("Cops");
 			}
 
 			transform.position += tmpVelocity;

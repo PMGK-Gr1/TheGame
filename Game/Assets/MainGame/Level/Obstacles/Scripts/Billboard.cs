@@ -23,10 +23,10 @@ public class Billboard : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-        RigidDonut donut;
+        Donut donut;
 
 
-        if ((donut = other.gameObject.GetComponent<RigidDonut>()) != null)
+        if ((donut = other.gameObject.GetComponent<Donut>()) != null)
         {
             donut.BillboardHit();
 			particlesOnHit.transform.position = new Vector3(transform.position.x, other.transform.position.y, other.transform.position.z);

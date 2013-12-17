@@ -5,12 +5,12 @@ public class Sticky : MonoBehaviour {
 
     public float Radius = 60.0f;
     public float Speed = 2.0f;
-    private RigidDonut donut;
+    private Donut donut;
     
 
 	void Start() {
         this.GetComponent<SphereCollider>().radius = Radius;
-		donut = RigidDonut.instance;
+		donut = GameController.instance.donut;
 	}
     void OnTriggerStay(Collider other)
     {

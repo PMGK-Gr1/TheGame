@@ -5,7 +5,7 @@ using System.Collections;
 /// <summary>
 /// Moving donut.
 /// </summary>
-public class RigidDonut : MonoSingleton<RigidDonut> {
+public class Donut : MonoBehaviour{
 
 	//public variables
 	public float TargetSpeed = 20.0f;
@@ -32,7 +32,6 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
 
 
 	private int stingersResistLeft = 0;
-	private int milkCannonResistLeft = 0;
 	private bool secondLife = false;
 	private int freshAsphaltResistLeft = 0;
 
@@ -59,16 +58,15 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
 
     
 	void FixedUpdate() {
-		float force = 0.0f;
-        Distance.guiText.text = ((int) GetDistanceTravelled()).ToString() + " m";
-		if(rigidbody != null)
-		force = 50.0f / (1.0f + Mathf.Pow(2, this.rigidbody.velocity.x - TargetSpeed));
-		//rigidbody.AddForceAtPosition(new Vector3(force, 0, 0), transform.position + new Vector3(0, 5f, 0), ForceMode.Acceleration);
-		rigidbody.AddForce(new Vector3(force, 0, 0), ForceMode.Acceleration);
-		donutLastLastVelocity = donutLastVelocity;
-		donutLastVelocity = rigidbody.velocity;
-		//rigidbody.angularVelocity = new Vector3(0, 0, -rigidbody.velocity.magnitude / radius);
+		if (isAlive) {
+			float force = 0.0f;
+			Distance.guiText.text = ((int)GetDistanceTravelled()).ToString() + " m";
 
+			force = 50.0f / (1.0f + Mathf.Pow(2, this.rigidbody.velocity.x - TargetSpeed));
+			rigidbody.AddForce(new Vector3(force, 0, 0), ForceMode.Acceleration);
+			donutLastLastVelocity = donutLastVelocity;
+			donutLastVelocity = rigidbody.velocity;
+		}
 	}
 
 
@@ -90,7 +88,6 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
 					UnburntDonut();
 			}
 			else {
-				Soften();
 				Death("Stinger");
 			}
 		}
@@ -200,25 +197,48 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
 	}
 
 	public void Viaduct() {
-		Debug.Log ("Oops, viaduct");
-		Soften();
 		Death ("Viaduct");
 	}
 
-	void Soften() {
-		Destroy(GetComponent<Collider>());
-		InteractiveCloth cloth = gameObject.AddComponent<InteractiveCloth>() as InteractiveCloth;
+	IEnumerator Soften() {
+		Debug.Log("dsadasdas");
+		InteractiveCloth cloth = gameObject.AddComponent<InteractiveCloth>();
 		cloth.pressure = 1.0f;
 		cloth.stretchingStiffness = 0.5f;
 		cloth.bendingStiffness = 0.5f;
+		cloth.density = 1.0f;
+
 		gameObject.AddComponent<ClothRenderer>();
 		GetComponent<ClothRenderer>().material = GetComponent<MeshRenderer>().material;
 		Destroy(GetComponent<MeshRenderer>());
+
 		cloth.mesh = (GetComponent<MeshFilter>() as MeshFilter).mesh;
 		Destroy(GetComponent<MeshFilter>());
-		cloth.density = 1.0f;
-		//cloth.externalAcceleration = donutLastLastVelocity;
-		rigidbody.isKinematic = true;
+
+		SphereCollider sphere = GetComponent<SphereCollider>();
+		sphere.radius = 6.5f;
+		cloth.AttachToCollider(sphere, false, true);
+		cloth.attachmentResponse = 1;
+		rigidbody.mass = 10;
+		rigidbody.constraints = new RigidbodyConstraints();
+		Vector3 vel = donutLastLastVelocity;
+
+		for (int i = 0; i < 2; i++) {
+			GameObject eye = transform.FindChild("Eye").gameObject; 
+			eye.transform.parent = null;
+			eye.AddComponent<SphereCollider>();
+			eye.AddComponent<Rigidbody>();
+			eye.rigidbody.velocity = vel + Vector3.Cross(transform.position - eye.transform.position, Vector3.forward) * rigidbody.angularVelocity.z;
+			eye.layer = 8;
+		}
+
+
+
+		yield return new WaitForEndOfFrame();
+
+		cloth.AddForceAtPosition(rigidbody.velocity, transform.position, 1000, ForceMode.VelocityChange);
+		
+		
 	}
 
 	public void Death(string Cause) {
@@ -230,10 +250,12 @@ public class RigidDonut : MonoSingleton<RigidDonut> {
 		isAlive = false;
         achieve.death = true;
 		Debug.Log(Localization.getText("DEAD"));
+		if (Cause == "Viaduct" || Cause == "Stinger")
+			StartCoroutine(this.Soften());
 
 		Save();
 
-		StartCoroutine(DelayDeath(2));
+		StartCoroutine(DelayDeath(4));
 	}
 
 	public void Save() {
