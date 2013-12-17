@@ -1,4 +1,0 @@
-CANDY_EATEN,I ate a sugar!
-DONUT_CAUGHT,Ha ha ha I've got ya!
-DEAD,You're dead.
-BOOST,Feelin' good
