@@ -99,7 +99,6 @@ public class Donut : MonoBehaviour{
     }
 
 	public void BurntDonut() {
-		Debug.Log("I am hot tonight.");
         isBurnt = true;
 		explosionParticle.particleSystem.Play();
 		smokeParticle.particleSystem.Play();
@@ -108,7 +107,6 @@ public class Donut : MonoBehaviour{
 	}
 
 	void UnburntDonut() {
-		Debug.Log("I am no longer burnt.");
         isBurnt = false;
 		// TODO reverse the effects
 		explosionParticle.particleSystem.Stop();
@@ -172,7 +170,6 @@ public class Donut : MonoBehaviour{
 	void Rebirth() {
 		secondLife = false;
         achieve.DonutRebirth();
-		Debug.Log("I died, but only temporally.");
         achieve.fiveseconds = true;
         StartCoroutine("fiveseconds");
 		// TODO some epic rebirth effect
@@ -201,7 +198,6 @@ public class Donut : MonoBehaviour{
 	}
 
 	IEnumerator Soften() {
-		Debug.Log("dsadasdas");
 		InteractiveCloth cloth = gameObject.AddComponent<InteractiveCloth>();
 		cloth.pressure = 1.0f;
 		cloth.stretchingStiffness = 0.5f;
@@ -249,7 +245,6 @@ public class Donut : MonoBehaviour{
 		}
 		isAlive = false;
         achieve.death = true;
-		Debug.Log(Localization.getText("DEAD"));
 		if (Cause == "Viaduct" || Cause == "Stinger")
 			StartCoroutine(this.Soften());
 
