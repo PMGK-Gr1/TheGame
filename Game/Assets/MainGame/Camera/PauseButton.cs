@@ -5,9 +5,10 @@ public class PauseButton : MonoBehaviour {
     public GameObject Light;
     public bool paused;
     public GameObject pauseoptions;
+    private Donut donut;
 	// Use this for initialization
 	void Start () {
-	
+        donut = GameController.instance.donut;
 	}
 	
 	// Update is called once per frame
@@ -25,6 +26,8 @@ public class PauseButton : MonoBehaviour {
 
             Time.timeScale = 1;
             pauseoptions.active = false;
+            donut.GetComponentInChildren<Jumper>().enabled = true;       
+
 
         }
 
@@ -36,6 +39,7 @@ public class PauseButton : MonoBehaviour {
             paused = true;
             Time.timeScale = 0;
             pauseoptions.active = true;
+            donut.GetComponentInChildren<Jumper>().enabled = false;       
         }
     }
 
