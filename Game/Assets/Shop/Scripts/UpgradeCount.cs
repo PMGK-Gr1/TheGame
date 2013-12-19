@@ -5,6 +5,6 @@ public class UpgradeCount : MonoBehaviour {
 
     public int id;
 	void Update () {
-        this.guiText.text = PlayerPrefs.GetInt("Upgrade" + id.ToString()).ToString(); 
+        this.GetComponent<TextMesh>().text= PlayerPrefs.GetInt("Upgrade" + id.ToString()).ToString(); 
 	}
 }

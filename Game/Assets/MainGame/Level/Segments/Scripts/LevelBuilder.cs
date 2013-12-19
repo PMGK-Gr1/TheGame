@@ -23,6 +23,7 @@ public class LevelBuilder : MonoBehaviour {
 	private Vector3 endPosition = Vector3.zero;
 	private Queue<Properties> level = new Queue<Properties>();
 	private const int groundLayer = 10;
+    private int difficulty = 4;
 	// Use this for initialization
 	void Start ()
     {
@@ -38,7 +39,7 @@ public class LevelBuilder : MonoBehaviour {
         
         AddPrefab(LevelPrefabs[0], true);
         AddPrefab(LevelPrefabs[0], true);
-        AddPrefab(LevelPrefabs[0], true);
+        //AddPrefab(LevelPrefabs[0], true);
         
 	}
 
@@ -46,6 +47,13 @@ public class LevelBuilder : MonoBehaviour {
     
     void FixedUpdate()
     {
+        if (transform.position.x > 2000) difficulty = 3;
+        if (transform.position.x > 5000) difficulty = 2;
+        if (transform.position.x > 9500) difficulty = 1;
+        if (transform.position.x > 15000) difficulty = 0;
+
+
+
 		while (transform.position.x - level.Peek().transform.position.x - level.Peek().dimentions.x > DestrucionDistance)
         {
             Destroy(level.Dequeue().gameObject);
@@ -61,7 +69,7 @@ public class LevelBuilder : MonoBehaviour {
 
     int RandomPrefab()
     {
-		return Random.Range(0, LevelPrefabs.Length);
+		return Random.Range(0, LevelPrefabs.Length-difficulty);
         /*float tmp = UnityEngine.Random.Range(0.0f, 1.0f);
         if (tmp <= 0.2f) return 1;
         if (tmp >= 0.8f) return 2;

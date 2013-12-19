@@ -58,6 +58,7 @@ public class Donut : MonoBehaviour{
 
     
 	void FixedUpdate() {
+        if ((((int)(transform.position.x)) % 200) == 0) TargetSpeed++;
 		if (isAlive) {
 			float force = 0.0f;
 			Distance.guiText.text = ((int)GetDistanceTravelled()).ToString() + " m";

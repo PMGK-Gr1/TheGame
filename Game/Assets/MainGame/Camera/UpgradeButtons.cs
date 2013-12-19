@@ -14,13 +14,14 @@ public class UpgradeButtons : MonoBehaviour {
 	public GameObject ChocolateRainParticle;
 	public GameObject SpeedParticle;
     public Texture PauseButton;
-    public GameObject Light;
-
+    
+    public bool jump = true;
     private int upgrade;
     private string upgradebutton;
     bool pausebuttons = false;
     void Start()
     {
+
         donut = GameController.instance.donut;
 		speed = 1000.0f;
         donut.upgrade = PlayerPrefs.GetInt("ChosenUpgrade");
@@ -42,6 +43,7 @@ public class UpgradeButtons : MonoBehaviour {
 
 		ChocolateRainParticle.particleSystem.enableEmission = false;
     }
+
     void OnGUI()
     {
         Rect button1 = new Rect();
@@ -57,73 +59,60 @@ public class UpgradeButtons : MonoBehaviour {
         button1.height =/* button2.height = button3.height =*/ Screen.height * 0.1f;
         button1.width =/* button2.width = button3.width = */Screen.width * 0.35f;
 
-        if((!pausebuttons)&&(GUI.Button(button1, upgradebutton+donut.upgradeCount.ToString())))  {
-            if (donut.upgradeCount > 0)
+            if ((!pausebuttons) && (GUI.Button(button1, upgradebutton + donut.upgradeCount.ToString())))
             {
-                switch (donut.upgrade)
+                
+
+
+                if (donut.upgradeCount > 0)
                 {
-                    case 0:
-                        break;
-                    case 1:
-                        StartCoroutine("ChocolateRain");		//Let it rain
-                        donut.chocoRains++;
-                        donut.upgradeCount--;
-                        break;
-                    case 2:
-                        SpeedBoost();
-                        donut.upgradeCount--;
-                        break;
+                    switch (donut.upgrade)
+                    {
+                        case 0:
+                            break;
+                        case 1:
+                            StartCoroutine("ChocolateRain");		//Let it rain
+                            donut.chocoRains++;
+                            donut.upgradeCount--;
+                            break;
+                        case 2:
+                            SpeedBoost();
+                            donut.upgradeCount--;
+                            break;
+                    }
                 }
-            }
-            //donut.SticykDonut(10);	//Coins, coins and more coins
-                    		
+                //donut.SticykDonut(10);	//Coins, coins and more coins               		
+                //StartCoroutine("Marmolade");	//Pursuit is slower for 2 sec
+                //if (donut.isFrosted) donut.achieve.VerySweet();		
+            };
+            // if (GUI.Button(button2, "Uprgade 2")) { };
+            // if (GUI.Button(button3, "Uprgade 3")) { };
 
-			//StartCoroutine("Marmolade");	//Pursuit is slower for 2 sec
-            //if (donut.isFrosted) donut.achieve.VerySweet();
-		
-        };
-       // if (GUI.Button(button2, "Uprgade 2")) { };
-       // if (GUI.Button(button3, "Uprgade 3")) { };
+            Rect button = new Rect(Screen.width * 0.1f, Screen.height * 0.1f, Screen.width * 0.1f, Screen.height * 0.1f);
 
-
-
-        Rect button = new Rect(Screen.width * 0.1f, Screen.height * 0.1f, Screen.width * 0.1f, Screen.height * 0.1f);
-
-        if (pausebuttons && (GUI.Button(new Rect(Screen.width * 0.4f, Screen.height * 0.1f, Screen.width * 0.2f, Screen.height * 0.1f), "menu")))
-        {
-            Time.timeScale = 1.0f;
-            donut.Save();
-			Application.LoadLevel(0);
-        }
-
-        if (pausebuttons && (GUI.Button(new Rect(Screen.width * 0.4f, Screen.height * 0.3f, Screen.width * 0.2f, Screen.height * 0.1f), "sound"))) { }
-        if (pausebuttons && (GUI.Button(new Rect(Screen.width * 0.4f, Screen.height * 0.5f, Screen.width * 0.2f, Screen.height * 0.1f), "music"))) { }
-
-
-
-        if (GUI.Button(button, PauseButton))
-        {
-            if (Time.timeScale == 0)
+            if (pausebuttons && (GUI.Button(new Rect(Screen.width * 0.4f, Screen.height * 0.1f, Screen.width * 0.2f, Screen.height * 0.1f), "menu")))
             {
-                Light.GetComponent<Light>().intensity = 1.1f;
-                pausebuttons = false;
+               
 
-                Time.timeScale = 1;
+                Time.timeScale = 1.0f;
+                donut.Save();
+                Application.LoadLevel(0);
             }
+
+            if (pausebuttons && (GUI.Button(new Rect(Screen.width * 0.4f, Screen.height * 0.3f, Screen.width * 0.2f, Screen.height * 0.1f), "sound"))) { }
+            if (pausebuttons && (GUI.Button(new Rect(Screen.width * 0.4f, Screen.height * 0.5f, Screen.width * 0.2f, Screen.height * 0.1f), "music"))) { }
+
+
+
+     
 
             else
             {
 
-                Light.GetComponent<Light>().intensity = 0.0f;
 
-                pausebuttons = true;
-                Time.timeScale = 0;
+
             }
-        }
-
-
-
-
+        
     }
 
 	IEnumerator ChocolateRain() {

@@ -12,6 +12,7 @@ public class Jumper : MonoBehaviour {
 	private float cooldown;
 	private bool isTouchingGround = false;
 
+    public bool canjump = true;
 	void Start() {
 		donut = GameController.instance.donut;
 	}
@@ -19,12 +20,14 @@ public class Jumper : MonoBehaviour {
 	void Update() {
 		prevJumpPhase = GetJumpPhase();
 
+   if(canjump){
 		if (prevJumpPhase == JumpPhase.JumpStarted) {
 			donut.rigidbody.AddForce(new Vector3(0, InstantJumpForce, 0), ForceMode.VelocityChange);
 		}
 		else if (prevJumpPhase == JumpPhase.JumpOnGoing) {
 			donut.rigidbody.AddForce(new Vector3(0, LongJumpForce, 0), ForceMode.Acceleration);
 		}
+       }
 	}
 
 	void FixedUpdate() {
