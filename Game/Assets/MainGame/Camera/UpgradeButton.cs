@@ -8,6 +8,7 @@ public class UpgradeButton : MonoBehaviour {
     public GameObject ChocolateRainParticle;
     public GameObject SpeedParticle;
 
+
     public Pursuit pursuit;
     public float speed;
 
@@ -22,8 +23,10 @@ public class UpgradeButton : MonoBehaviour {
 
         donut.upgrade = PlayerPrefs.GetInt("ChosenUpgrade");
         donut.upgradeCount = PlayerPrefs.GetInt("Upgrade" + donut.upgrade.ToString());
+
         SpeedParticle.particleSystem.Stop();
         ChocolateRainParticle.particleSystem.enableEmission = false;
+
 
         this.GetComponent<SpriteRenderer>().sprite = sprite[donut.upgrade];
 	}
@@ -79,8 +82,11 @@ public class UpgradeButton : MonoBehaviour {
     {
         GameController.instance.chocolateRain = true;
         ChocolateRainParticle.particleSystem.enableEmission = true;
+		ChocolateRainParticle.particleSystem.Play();
 
         yield return new WaitForSeconds(3.0f);
+
+		ChocolateRainParticle.particleSystem.Stop();
         ChocolateRainParticle.particleSystem.enableEmission = false;
         GameController.instance.chocolateRain = false;
     }
