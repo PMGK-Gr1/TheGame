@@ -18,6 +18,8 @@ public class Donut : MonoBehaviour{
     public int billboardHits = 0;
 	public GameObject explosionParticle;
 	public GameObject smokeParticle;
+	public GameObject secondLifeOnParticle;
+
 	public bool stingerDisabled;
 
 	public Material normalMat;
@@ -47,6 +49,9 @@ public class Donut : MonoBehaviour{
 
 	void Start()
 	{
+		secondLifeOnParticle.particleSystem.enableEmission = false;
+		secondLifeOnParticle.particleSystem.Stop();
+
 		explosionParticle.particleSystem.enableEmission = true;
 		explosionParticle.particleSystem.Stop();
 
@@ -165,6 +170,8 @@ public class Donut : MonoBehaviour{
 	public void GiveSecondLife() {
 		//Debug.Log("I've got a second life.");
 		// TODO nice pickup particle effect or some other spectacular thingy
+		secondLifeOnParticle.particleSystem.enableEmission = true;
+		secondLifeOnParticle.particleSystem.Emit(1);
 		secondLife = true;
 	}
 
