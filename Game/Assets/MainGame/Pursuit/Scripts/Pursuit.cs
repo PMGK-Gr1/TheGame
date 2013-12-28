@@ -8,7 +8,7 @@ public class Pursuit : MonoBehaviour {
 	public float CatchDistance = 60.0f;
 	public float PursuitDelay = 2.0f;
 	public float pursuitSpeed;
-
+    public bool DonutCatchable = true;
     //private variables
 	private float startTime = 0.0f;
 	private Donut donut;
@@ -32,7 +32,7 @@ public class Pursuit : MonoBehaviour {
 			currentSpeed *= pursuitSpeed;
 			Vector3 tmpVelocity = currentSpeed * Time.fixedDeltaTime * tmpDelta.normalized;
 
-			if (tmpDelta.magnitude < CatchDistance) {
+			if ((tmpDelta.magnitude < CatchDistance)&&(DonutCatchable)) {
 				GameController.instance.donut.Death("Cops");
 			}
 

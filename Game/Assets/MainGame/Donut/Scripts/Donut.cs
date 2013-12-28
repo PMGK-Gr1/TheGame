@@ -9,6 +9,7 @@ public class Donut : MonoBehaviour{
 
 	//public variables
 	public float TargetSpeed = 20.0f;
+    public int SpeedUp = 200;
 	public bool GodMode = false;
     public GameObject Score;
     public GameObject Distance;
@@ -25,7 +26,10 @@ public class Donut : MonoBehaviour{
 	public Material normalMat;
 	public Material burntMat;
 	public Material sugarMat;
+    public Material ghostMat;
 
+
+    public Pursuit pursuit;
     //private variables
 	
 	private bool isAlive = true;
@@ -63,7 +67,7 @@ public class Donut : MonoBehaviour{
 
     
 	void FixedUpdate() {
-        if ((((int)(transform.position.x)) % 200) == 0) TargetSpeed++;
+        if ((((int)(transform.position.x)) % SpeedUp) == 0) TargetSpeed++;
 		if (isAlive) {
 			float force = 0.0f;
 			Distance.guiText.text = ((int)GetDistanceTravelled()).ToString() + " m";
@@ -94,7 +98,7 @@ public class Donut : MonoBehaviour{
 					UnburntDonut();
 			}
 			else {
-				Death("Stinger");
+				if(!GodMode) Death("Stinger");
 			}
 		}
 	}
@@ -142,7 +146,7 @@ public class Donut : MonoBehaviour{
 	}
 
 
-    public void SticykDonut(float t)
+    public void StickyDonut(float t)
     {
         achieve.stickyScore = 0;
         isSticky = true;
@@ -288,6 +292,14 @@ public class Donut : MonoBehaviour{
 	}
 
 
-
+    public void Ghost()
+    {
+        isBurnt = false;
+        isFrosted = false;
+        stingersResistLeft = 0;
+        freshAsphaltResistLeft = 0;
+        explosionParticle.particleSystem.Stop();
+        smokeParticle.particleSystem.Stop();
+    }
    
 }

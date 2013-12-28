@@ -15,6 +15,17 @@ public class LevelBuilder : MonoBehaviour {
     //public int ModuleCount = 20;
     public float LevelLenght = 500.0f;
     public float DestrucionDistance = 200.0f;
+    public int[] DistanceDifficulty;
+
+    public float SugarChance = 0.7f;
+    public float BoostChance = 0.1f;
+    public float ObstacleChance = 0.5f;
+    public float NothingChance = 0.30f;
+
+    public int IncreaseSugarChance = 200;
+    public int IncreaseBoostChance = 200;
+    public int IncreaseObstacleChance = 200;
+    public int DecreaseNothingChance = 200;
     //private variables
     private GameObject levelPrefab;
     //private Properties prop; // unused removed
@@ -47,10 +58,17 @@ public class LevelBuilder : MonoBehaviour {
     
     void FixedUpdate()
     {
-        if (transform.position.x > 2000) difficulty = 3;
-        if (transform.position.x > 5000) difficulty = 2;
-        if (transform.position.x > 9500) difficulty = 1;
-        if (transform.position.x > 15000) difficulty = 0;
+
+        if ((((int)(transform.position.x)) % IncreaseSugarChance) == 0) SugarChance += 0.1f;
+        if ((((int)(transform.position.x)) % IncreaseBoostChance) == 0) BoostChance += 0.15f;
+        if ((((int)(transform.position.x)) % IncreaseObstacleChance) == 0) ObstacleChance += 0.3f;
+        if (((((int)(transform.position.x)) % DecreaseNothingChance) == 0) && (NothingChance > 0.05000001f)) NothingChance -= 0.05f;
+
+
+        if (transform.position.x > DistanceDifficulty[0]) difficulty = 3;
+        if (transform.position.x > DistanceDifficulty[1]) difficulty = 2;
+        if (transform.position.x > DistanceDifficulty[2]) difficulty = 1;
+        if (transform.position.x > DistanceDifficulty[3]) difficulty = 0;
 
 
 
@@ -112,10 +130,10 @@ public class LevelBuilder : MonoBehaviour {
             if (empty) { obstacleChance = sugarChance = boostChance = 0; nothingChance = 1; }
             else
             {
-                obstacleChance = segmentInstance.ObstacleChance;
-                sugarChance = segmentInstance.SugarChance;
-                boostChance = segmentInstance.BoostChance;
-                nothingChance = segmentInstance.NothingChance;
+                obstacleChance = ObstacleChance;
+                sugarChance = SugarChance;
+                boostChance = BoostChance;
+                nothingChance = NothingChance;
             }
           
             if (candiesList.Count == 0) sugarChance = 0;

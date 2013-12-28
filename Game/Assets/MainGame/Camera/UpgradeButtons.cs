@@ -81,7 +81,7 @@ public class UpgradeButtons : MonoBehaviour {
                             break;
                     }
                 }
-                //donut.SticykDonut(10);	//Coins, coins and more coins               		
+                //donut.StickyDonut(10);	//Coins, coins and more coins               		
                 //StartCoroutine("Marmolade");	//Pursuit is slower for 2 sec
                 //if (donut.isFrosted) donut.achieve.VerySweet();		
             };

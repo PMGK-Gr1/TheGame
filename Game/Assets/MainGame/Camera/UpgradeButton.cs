@@ -12,8 +12,6 @@ public class UpgradeButton : MonoBehaviour {
     public Pursuit pursuit;
     public float speed;
 
-
-
     private Donut donut;
 
 	// Use this for initialization
@@ -56,13 +54,18 @@ public class UpgradeButton : MonoBehaviour {
                     donut.upgradeCount--;
                     break;
                 case 3:
-                    donut.SticykDonut(10);
+                    donut.StickyDonut(10);
                     donut.upgradeCount--;
                     break;
                 case 4:
                     StartCoroutine("Marmolade");
                     donut.upgradeCount--;
                     if (donut.isFrosted) donut.achieve.VerySweet();
+                    break;
+                case 5:
+                    StartCoroutine("Ghost");
+                    donut.upgradeCount--;
+
                     break;
             }
 
@@ -77,6 +80,18 @@ public class UpgradeButton : MonoBehaviour {
         FindObjectOfType<Jumper>().canjump = true;
     }
 
+    IEnumerator Ghost()
+    {
+        donut.Ghost();
+        donut.renderer.material = donut.ghostMat;
+        donut.gameObject.layer = 14;
+        donut.pursuit.DonutCatchable = false;
+        yield return new WaitForSeconds(5.0f);
+        donut.renderer.material = donut.normalMat;
+        donut.gameObject.layer = 8;
+        donut.pursuit.DonutCatchable = true;
+
+    }
 
     IEnumerator ChocolateRain()
     {
