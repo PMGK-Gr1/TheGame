@@ -9,6 +9,8 @@ public class PauseButton : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         donut = GameController.instance.donut;
+        this.guiTexture.pixelInset = new Rect(0, 0, Screen.height * 0.15f, Screen.height * 0.15f);
+
 	}
 	
 	// Update is called once per frame
@@ -21,25 +23,15 @@ public class PauseButton : MonoBehaviour {
         FindObjectOfType<Jumper>().canjump = false;
         if (Time.timeScale == 0)
         {
-            Light.GetComponent<Light>().intensity = 1.1f;
             paused = false;
 
-            Time.timeScale = 1;
-            pauseoptions.active = false;
-            donut.GetComponentInChildren<Jumper>().enabled = true;       
-
-
+            Pause();
         }
 
         else
         {
-
-            Light.GetComponent<Light>().intensity = 0.0f;
-
             paused = true;
-            Time.timeScale = 0;
-            pauseoptions.active = true;
-            donut.GetComponentInChildren<Jumper>().enabled = false;       
+            Unpause();
         }
     }
 
@@ -47,5 +39,22 @@ public class PauseButton : MonoBehaviour {
     {
         FindObjectOfType<Jumper>().canjump = true;
     }
-    
+
+
+    public void Pause()
+    {
+        Light.GetComponent<Light>().intensity = 1.1f;
+        Time.timeScale = 1;
+        pauseoptions.SetActive(false);
+        donut.GetComponentInChildren<Jumper>().enabled = true;   
+    }
+
+    public void Unpause()
+    {
+        Light.GetComponent<Light>().intensity = 0.0f;
+        
+        Time.timeScale = 0;
+        pauseoptions.SetActive(true);
+        donut.GetComponentInChildren<Jumper>().enabled = false; 
+    }
 }

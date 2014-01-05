@@ -5,6 +5,7 @@ public class CameraMover : MonoBehaviour {
 
 	public GameObject cylinder;
 	Vector3 startVector;
+    public PauseButton pause;
 	
 	// Use this for initialization
 	void Start () {
@@ -30,7 +31,12 @@ public class CameraMover : MonoBehaviour {
 	void Update() {
 
 
-		if (Input.GetKeyDown(KeyCode.Escape)) Application.Quit();
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Debug.Log("escape");
+            if (pause.paused) { pause.paused = false; pause.Pause(); }
+            else { pause.paused = true; pause.Unpause(); }
+        }
 		if (Input.GetKeyDown(KeyCode.Menu)) Application.LoadLevel(0);
 	}
 

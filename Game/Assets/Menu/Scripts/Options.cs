@@ -5,14 +5,16 @@ public class Options : MonoBehaviour
 {
 
     public GameObject[] MoveableObjects;
-
+    private bool options = false;
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape)) Application.Quit();
-
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (options) ComeBack();
+            else Application.Quit();
+        }
     }
-
 
    public void MoveAway() {
 
@@ -24,7 +26,7 @@ public class Options : MonoBehaviour
            obj.GetComponent<Animator>().SetBool("state1", true);
            
        }
-      
+       options = true;
    }
 
    public void ComeBack()
@@ -35,12 +37,12 @@ public class Options : MonoBehaviour
            obj.GetComponent<Animator>().SetBool("state1", false);
 
        }
-     
+       options = false;
      
 
    }
-    
 
+ 
 
 
 

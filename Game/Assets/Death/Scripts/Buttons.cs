@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Buttons : MonoBehaviour
 {
+    public Vector2 scrollPosition = Vector2.zero;
 
     void OnGUI()
     {
@@ -35,6 +36,17 @@ public class Buttons : MonoBehaviour
         {
             Application.LoadLevel(3);
         }
+        GUI.BeginScrollView(new Rect(100, 3000, 100, 1000), scrollPosition, new Rect(0, 0, 220, 200));
+        GUI.Button(new Rect(0, 0, 100, 20), "Top-left");
+        GUI.Button(new Rect(120, 0, 100, 20), "Top-right");
+        GUI.Button(new Rect(0, 180, 100, 20), "Bottom-left");
+        GUI.Button(new Rect(120, 180, 100, 20), "Bottom-right");
+        GUI.EndScrollView();
+    }
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape)) Application.LoadLevel(0);
+        if (Input.GetKeyDown(KeyCode.Menu)) Application.LoadLevel(0);
     }
 }

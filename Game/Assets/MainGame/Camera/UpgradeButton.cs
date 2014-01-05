@@ -4,11 +4,12 @@ using System.Collections;
 public class UpgradeButton : MonoBehaviour {
 
 
-    public Sprite[] sprite;
+    public Texture[] sprite;
+    public float[] cooldowns;
     public GameObject ChocolateRainParticle;
     public GameObject SpeedParticle;
 
-
+    private bool isCoolingdown = false;
     public Pursuit pursuit;
     public float speed;
 
@@ -16,17 +17,17 @@ public class UpgradeButton : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        this.guiTexture.pixelInset = new Rect(Screen.width * 0.05f, Screen.height * 0.05f, Screen.height * 0.15f, Screen.height * 0.15f);
         donut = GameController.instance.donut;
         speed = 3000.0f;
 
-        donut.upgrade = PlayerPrefs.GetInt("ChosenUpgrade");
-        donut.upgradeCount = PlayerPrefs.GetInt("Upgrade" + donut.upgrade.ToString());
+        
 
         SpeedParticle.particleSystem.Stop();
         ChocolateRainParticle.particleSystem.enableEmission = false;
 
-
-        this.GetComponent<SpriteRenderer>().sprite = sprite[donut.upgrade];
+        this.guiTexture.texture = sprite[donut.upgrade];
+        //this.GetComponent<SpriteRenderer>().sprite = sprite[donut.upgrade];
 	}
 	
 	// Update is called once per frame
@@ -38,8 +39,9 @@ public class UpgradeButton : MonoBehaviour {
     void OnMouseDown()
     {
         FindObjectOfType<Jumper>().canjump = false;
-        if((!(FindObjectOfType<PauseButton>().paused))&&(donut.upgradeCount>0))
+        if((!(FindObjectOfType<PauseButton>().paused))&&(donut.upgradeCount>0)&&donut.isAlive&&(!(isCoolingdown)))
         {
+            
             switch (donut.upgrade)
             {
                 case 0:
@@ -68,11 +70,28 @@ public class UpgradeButton : MonoBehaviour {
 
                     break;
             }
-
+            StartCoroutine("Cooldown", cooldowns[donut.upgrade]);
 
         }
 
 
+    }
+
+    IEnumerator Cooldown(float t)
+    {
+        isCoolingdown = true;
+        this.guiTexture.color = new Color(0.3f, 0.3f,0.3f,0.3f);
+        for (float i = 0; i < t; i += 0.1f)
+        {
+            var c = (i / (t * 0.7f)) + 0.3f;
+            this.guiTexture.color = new Color(0.3f, 0.3f, 0.3f, c);
+            yield return new WaitForSeconds(0.1f);
+        }
+        this.guiTexture.color = new Color(1, 1, 1, 1);
+        this.transform.localScale = new Vector3(0.01f, 0.01f);
+        yield return new WaitForSeconds(0.5f);
+        this.transform.localScale = new Vector3(0, 0);
+        isCoolingdown = false;
     }
 
     void OnMouseUp()

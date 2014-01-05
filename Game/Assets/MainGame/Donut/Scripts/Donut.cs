@@ -20,6 +20,7 @@ public class Donut : MonoBehaviour{
 	public GameObject explosionParticle;
 	public GameObject smokeParticle;
 	public GameObject secondLifeOnParticle;
+    public GameObject speedParticle;
 
 	public bool stingerDisabled;
 
@@ -32,7 +33,7 @@ public class Donut : MonoBehaviour{
     public Pursuit pursuit;
     //private variables
 	
-	private bool isAlive = true;
+	public bool isAlive = true;
 	private Vector3 donutLastVelocity;
 	private Vector3 donutLastLastVelocity;
 
@@ -53,6 +54,11 @@ public class Donut : MonoBehaviour{
 
 	void Start()
 	{
+        Distance.guiText.fontSize = (int)(Screen.height * 0.09f);
+        Score.guiText.fontSize = (int)(Screen.height * 0.09f);
+        Distance.guiText.pixelOffset = new Vector2(Screen.width * 0.8f, Screen.height * 0.8f);
+        Score.guiText.pixelOffset = new Vector2(Screen.width * 0.8f, Screen.height * 0.7f);
+
 		secondLifeOnParticle.particleSystem.enableEmission = false;
 		secondLifeOnParticle.particleSystem.Stop();
 
@@ -63,6 +69,8 @@ public class Donut : MonoBehaviour{
 		smokeParticle.particleSystem.Stop();
 
 		this.renderer.material = normalMat;
+
+
 	}
 
     
@@ -257,6 +265,8 @@ public class Donut : MonoBehaviour{
 		}
 		isAlive = false;
         achieve.death = true;
+        GetComponentInChildren<Jumper>().enabled = false;
+        Ghost();
 		if (Cause == "Viaduct" || Cause == "Stinger")
 			StartCoroutine(this.Soften());
 
@@ -300,6 +310,7 @@ public class Donut : MonoBehaviour{
         freshAsphaltResistLeft = 0;
         explosionParticle.particleSystem.Stop();
         smokeParticle.particleSystem.Stop();
+        speedParticle.particleSystem.Stop();
     }
    
 }

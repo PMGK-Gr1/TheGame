@@ -64,7 +64,7 @@ public class UpgradeButtons : MonoBehaviour {
                 
 
 
-                if (donut.upgradeCount > 0)
+                /*if (donut.upgradeCount > 0)
                 {
                     switch (donut.upgrade)
                     {
@@ -80,8 +80,8 @@ public class UpgradeButtons : MonoBehaviour {
                             donut.upgradeCount--;
                             break;
                     }
-                }
-                //donut.StickyDonut(10);	//Coins, coins and more coins               		
+                }*/
+                donut.StickyDonut(10);	//Coins, coins and more coins               		
                 //StartCoroutine("Marmolade");	//Pursuit is slower for 2 sec
                 //if (donut.isFrosted) donut.achieve.VerySweet();		
             };

@@ -25,4 +25,9 @@ public class ShopCameraButtons : MonoBehaviour {
             Application.LoadLevel(1);
         }
     }
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape)) Application.LoadLevel(0);
+        if (Input.GetKeyDown(KeyCode.Menu)) Application.LoadLevel(0);
+    }
 }
