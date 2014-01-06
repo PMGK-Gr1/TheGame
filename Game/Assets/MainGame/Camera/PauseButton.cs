@@ -10,13 +10,8 @@ public class PauseButton : MonoBehaviour {
 	void Start () {
         donut = GameController.instance.donut;
         this.guiTexture.pixelInset = new Rect(0, 0, Screen.height * 0.15f, Screen.height * 0.15f);
+	}
 
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
     void OnMouseDown()
     {
@@ -24,7 +19,6 @@ public class PauseButton : MonoBehaviour {
         if (Time.timeScale == 0)
         {
             paused = false;
-
             Pause();
         }
 
@@ -51,8 +45,7 @@ public class PauseButton : MonoBehaviour {
 
     public void Unpause()
     {
-        Light.GetComponent<Light>().intensity = 0.0f;
-        
+        Light.GetComponent<Light>().intensity = 0.0f;        
         Time.timeScale = 0;
         pauseoptions.SetActive(true);
         donut.GetComponentInChildren<Jumper>().enabled = false; 

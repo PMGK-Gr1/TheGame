@@ -8,6 +8,7 @@ public class UpgradeButton : MonoBehaviour {
     public float[] cooldowns;
     public GameObject ChocolateRainParticle;
     public GameObject SpeedParticle;
+    public GameObject MagnetParticle;
 
     private bool isCoolingdown = false;
     public Pursuit pursuit;
@@ -57,6 +58,7 @@ public class UpgradeButton : MonoBehaviour {
                     break;
                 case 3:
                     donut.StickyDonut(10);
+                    MagnetParticle.particleSystem.Play();
                     donut.upgradeCount--;
                     break;
                 case 4:

@@ -22,9 +22,7 @@ public class Options : MonoBehaviour
        foreach (var obj in MoveableObjects)
        {
            obj.GetComponent<Animator>().SetBool("state2", false);
-
-           obj.GetComponent<Animator>().SetBool("state1", true);
-           
+           obj.GetComponent<Animator>().SetBool("state1", true);           
        }
        options = true;
    }
@@ -35,15 +33,7 @@ public class Options : MonoBehaviour
        {
            obj.GetComponent<Animator>().SetBool("state2", true);
            obj.GetComponent<Animator>().SetBool("state1", false);
-
        }
-       options = false;
-     
-
-   }
-
- 
-
-
-
+       options = false;  
+   }  
 }

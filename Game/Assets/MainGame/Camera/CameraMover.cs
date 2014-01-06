@@ -16,8 +16,7 @@ public class CameraMover : MonoBehaviour {
 	void FixedUpdate () {
 		Vector3 moveDirection = cylinder.transform.position + startVector - transform.position;
 		if (cylinder.rigidbody != null) {
-						Vector3 dynamicCamera = new Vector3 (0, 0, startVector.z - Mathf.Abs (cylinder.rigidbody.velocity.x));
-				
+						Vector3 dynamicCamera = new Vector3 (0, 0, startVector.z - Mathf.Abs (cylinder.rigidbody.velocity.x));	
 		
 						this.transform.position = new Vector3 (this.transform.position.x, this.transform.position.y, Mathf.Lerp (this.transform.position.z, 0.9f * dynamicCamera.z, 0.2f));
 

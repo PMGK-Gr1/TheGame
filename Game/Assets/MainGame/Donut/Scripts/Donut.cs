@@ -21,6 +21,7 @@ public class Donut : MonoBehaviour{
 	public GameObject smokeParticle;
 	public GameObject secondLifeOnParticle;
     public GameObject speedParticle;
+    public GameObject magnetParticle;
 
 	public bool stingerDisabled;
 
@@ -247,15 +248,9 @@ public class Donut : MonoBehaviour{
 			eye.rigidbody.velocity = vel + Vector3.Cross(transform.position - eye.transform.position, Vector3.forward) * rigidbody.angularVelocity.z;
 			eye.layer = 8;
 		}
-
-
-
-		yield return new WaitForEndOfFrame();
-
+        yield return new WaitForEndOfFrame();
 		cloth.AddForceAtPosition(rigidbody.velocity, transform.position, 1000, ForceMode.VelocityChange);
-		
-		
-	}
+}
 
 	public void Death(string Cause) {
 		if (!isAlive) return; // prevent killing multiple times
@@ -269,7 +264,6 @@ public class Donut : MonoBehaviour{
         Ghost();
 		if (Cause == "Viaduct" || Cause == "Stinger")
 			StartCoroutine(this.Soften());
-
 		Save();
 
 		StartCoroutine(DelayDeath(4));
@@ -278,7 +272,6 @@ public class Donut : MonoBehaviour{
 	public void Save() {
 
 		int distance = (int) GetDistanceTravelled();
-
 		PlayerPrefs.SetInt("Sugar", PlayerPrefs.GetInt("Sugar") + sugarCubes);
 		PlayerPrefs.SetInt("TotalSugarEver", PlayerPrefs.GetInt("TotalSugarEver") + sugarCubes);
 		PlayerPrefs.SetInt("TotalDistance", PlayerPrefs.GetInt("TotalDistance") + distance);
@@ -287,7 +280,6 @@ public class Donut : MonoBehaviour{
 		PlayerPrefs.SetInt("Upgrade" + upgrade.ToString(), upgradeCount);
 		PlayerPrefs.SetInt("LastDistance", distance);
 		PlayerPrefs.SetInt("LastSugar", sugarCubes);
-
 		if (distance > PlayerPrefs.GetInt("HighestScore")) PlayerPrefs.SetInt("HighestScore", distance);
 		PlayerPrefs.Save();
 	}
@@ -311,6 +303,7 @@ public class Donut : MonoBehaviour{
         explosionParticle.particleSystem.Stop();
         smokeParticle.particleSystem.Stop();
         speedParticle.particleSystem.Stop();
+        magnetParticle.particleSystem.Stop();
     }
    
 }
