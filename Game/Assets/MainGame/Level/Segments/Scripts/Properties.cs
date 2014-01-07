@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 
 /// <summary>
@@ -14,4 +15,5 @@ public class Properties : MonoBehaviour {
     public float ObstacleChance = 0.5f;
     public float NothingChance = 0.30f;
     public float LifeTime = 30.0f;
+    public Queue<GameObject> usedObjects = new Queue<GameObject>();
  }

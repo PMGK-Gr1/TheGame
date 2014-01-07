@@ -9,7 +9,7 @@ public class Achievements : MonoBehaviour
 
     private Donut donut;
 
-    private bool sugar20 = true, sugar50 = true, sugar100 = true, sugar200 = true, sugar500 = true, sugar1000 = true;
+    private bool sugar20 = true, sugar50 = true, sugar100 = true, sugar200 = true, sugar500 = true, sugar1000 = true, sugar300madness = true;
     private bool dist100 = true, dist200 = true, dist500 = true, dist1000 = true, dist2000 = true, dist5000 = true;
     private bool marathon = true;
 
@@ -65,7 +65,7 @@ public class Achievements : MonoBehaviour
         if (sugar500 && (donut.sugarCubes >= 500)) Sugar500();
         if (sugar1000 && (donut.sugarCubes >= 1000)) Sugar1000();
 
-        if (death && (donut.sugarCubes == 300)) Sugar300();
+        if (death && (donut.sugarCubes == 300)&&sugar300madness) Sugar300();
         #endregion
         #region distance
 		if (dist100 && (donutDistance >= 100)) Dist100();
@@ -115,6 +115,7 @@ public class Achievements : MonoBehaviour
     }
   void FiveSeconds()
     {
+        fiveseconds = false;    
         Debug.Log("Achievement unlocked: Bezsensowny wysiłek");
     }
 
@@ -209,6 +210,7 @@ public class Achievements : MonoBehaviour
 
     void Sugar300()
     {
+        sugar300madness = false;
         Debug.Log("Achievement unlocked: THIS IS MADNESS");
     }
 

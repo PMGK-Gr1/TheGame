@@ -9,4 +9,10 @@ public class RigidbodySleeper : MonoBehaviour {
 		rigidbody.Sleep();
 		Destroy(this);
 	}
+    void OnEnable()
+    {
+
+        rigidbody.Sleep();
+    }
+
 }

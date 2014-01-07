@@ -6,7 +6,7 @@ public class BurntDonut : MonoBehaviour {
 		Donut donut;
 		if ((donut = other.gameObject.GetComponent<Donut>()) != null) {
 			donut.BurntDonut();
-			Destroy(gameObject);
+            gameObject.SetActive(false);
 		}
 	}
 }

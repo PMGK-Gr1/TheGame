@@ -7,7 +7,7 @@ public class DoubleFrosting : MonoBehaviour {
 		if ((donut = other.gameObject.GetComponent<Donut>()) != null) {
 			donut.FrostDonut();
 			// TODO nice pickup particle effect or some other spectacular thingy
-			Destroy(gameObject);
+            gameObject.SetActive(false);
 		}
 	}
 }

@@ -6,7 +6,7 @@ public class SecondLife : MonoBehaviour {
 		Donut donut;
 		if ((donut = other.gameObject.GetComponent<Donut>()) != null) {
 			donut.GiveSecondLife();
-			Destroy(gameObject);
+            gameObject.SetActive(false);
 		}
 	}
 }

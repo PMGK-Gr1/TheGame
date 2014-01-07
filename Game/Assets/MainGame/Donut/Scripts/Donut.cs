@@ -9,7 +9,7 @@ public class Donut : MonoBehaviour{
 
 	//public variables
 	public float TargetSpeed = 20.0f;
-    public int SpeedUp = 200;
+    public float SpeedUp = 200.0f;
 	public bool GodMode = false;
     public GameObject Score;
     public GameObject Distance;
@@ -76,7 +76,7 @@ public class Donut : MonoBehaviour{
 
     
 	void FixedUpdate() {
-        if ((((int)(transform.position.x)) % SpeedUp) == 0) TargetSpeed++;
+        if ((((int)(transform.position.x)) % SpeedUp) == 0) TargetSpeed += 0.1f;
 		if (isAlive) {
 			float force = 0.0f;
 			Distance.guiText.text = ((int)GetDistanceTravelled()).ToString() + " m";
@@ -198,7 +198,10 @@ public class Donut : MonoBehaviour{
 
     IEnumerator fiveseconds()
     {
-        yield return new WaitForSeconds(5.0f);
+        this.gameObject.layer = 14;
+        yield return new WaitForSeconds(3.0f);
+        this.gameObject.layer = 8;
+        yield return new WaitForSeconds(2.0f);
         achieve.fiveseconds = false;
     }
 
@@ -266,7 +269,7 @@ public class Donut : MonoBehaviour{
 			StartCoroutine(this.Soften());
 		Save();
 
-		StartCoroutine(DelayDeath(4));
+		StartCoroutine(DelayDeath(2));
 	}
 
 	public void Save() {

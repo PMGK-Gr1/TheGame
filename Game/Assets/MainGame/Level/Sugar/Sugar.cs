@@ -21,7 +21,7 @@ public class Sugar : MonoBehaviour {
 		Donut donut;
 		if ((donut = other.gameObject.GetComponent<Donut>()) != null) {
 			donut.SugarPickup(1);
-			Destroy(gameObject);
+            gameObject.SetActive(false);
 		}
 	}
 }
