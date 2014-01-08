@@ -1,8 +1,9 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\MainGame\Flurry\FlurryManager.cs">
     <Files>
-      <File FileName="Assets\MainGame\Flurry\FlurryManager.cs" Line="22" Column="61" />
+      <File FileName="Assets\MainGame\Flurry\FlurryManager.cs" Line="31" Column="1" />
+      <File FileName="Assets\MainGame\Flurry\FlurryManager.cs" Line="35" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
