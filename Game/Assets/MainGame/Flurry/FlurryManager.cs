@@ -17,7 +17,9 @@ public class FlurryManager : MonoSingleton<FlurryManager> {
 		Object.DontDestroyOnLoad(gameObject);
 		FlurryAgent.Instance.onStartSession ("DSYXWKHNM2H2C3QVR9HM");
 		FlurryAgent.Instance.setLogEnabled (true);
-		FlurryAgent.Instance.logEvent ("Scene " + Application.loadedLevelName + " loaded");
+		Dictionary<string, string> p = new Dictionary<string, string>();
+		p.Add ("LevelLoaded", Application.loadedLevelName);
+		FlurryAgent.Instance.logEvent ("GameLaunch", p);
 		FlurryAgent.Instance.onPageView ();
 	}
 
@@ -31,7 +33,9 @@ public class FlurryManager : MonoSingleton<FlurryManager> {
 	}
 
 	public void OnApplicationQuit() {
-		FlurryAgent.Instance.logEvent ("Application closed");
+		Dictionary<string, string> p = new Dictionary<string, string>();
+		p.Add ("FromLevel", Application.loadedLevelName);
+		FlurryAgent.Instance.logEvent ("GameQuit", p);
 		FlurryAgent.Instance.onEndSession ();
 	}
 
