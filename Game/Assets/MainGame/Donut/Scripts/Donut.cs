@@ -20,6 +20,9 @@ public class Donut : MonoBehaviour{
 	public GameObject explosionParticle;
 	public GameObject smokeParticle;
 	public GameObject secondLifeOnParticle;
+	public GameObject useSecondLifeOnParticle1;
+	public GameObject useSecondLifeOnParticle2;
+
     public GameObject speedParticle;
     public GameObject magnetParticle;
 
@@ -40,7 +43,7 @@ public class Donut : MonoBehaviour{
 
 
 	private int stingersResistLeft = 0;
-	private bool secondLife = false;
+	private bool secondLife = true;
 	private int freshAsphaltResistLeft = 0;
 
     private bool isSticky = false;
@@ -63,10 +66,16 @@ public class Donut : MonoBehaviour{
 		secondLifeOnParticle.particleSystem.enableEmission = false;
 		secondLifeOnParticle.particleSystem.Stop();
 
-		explosionParticle.particleSystem.enableEmission = true;
+		useSecondLifeOnParticle1.particleSystem.enableEmission = false;
+		useSecondLifeOnParticle1.particleSystem.Stop();
+
+		useSecondLifeOnParticle2.particleSystem.enableEmission = false;
+		useSecondLifeOnParticle2.particleSystem.Stop();
+
+		explosionParticle.particleSystem.enableEmission = false;
 		explosionParticle.particleSystem.Stop();
 
-		smokeParticle.particleSystem.enableEmission = true;
+		smokeParticle.particleSystem.enableEmission = false;
 		smokeParticle.particleSystem.Stop();
 
 		this.renderer.material = normalMat;
@@ -96,8 +105,6 @@ public class Donut : MonoBehaviour{
         Score.guiText.text = sugarCubes.ToString();
 	}
 
-
-
 	public void StingerHit() {
         if (!stingerDisabled) {
 			achieve.DonutStinger ();
@@ -119,6 +126,9 @@ public class Donut : MonoBehaviour{
 
 	public void BurntDonut() {
         isBurnt = true;
+		explosionParticle.particleSystem.enableEmission = true;
+		smokeParticle.particleSystem.enableEmission = false;
+
 		explosionParticle.particleSystem.Play();
 		smokeParticle.particleSystem.Play();
 		stingersResistLeft = 3;
@@ -167,6 +177,7 @@ public class Donut : MonoBehaviour{
     {
         Sticky.GetComponent<SphereCollider>().enabled = true;
         yield return new WaitForSeconds(t);
+		magnetParticle.particleSystem.Stop();
         UnstickyDonut();
     }
            
@@ -189,6 +200,12 @@ public class Donut : MonoBehaviour{
 	}
 
 	void Rebirth() {
+		useSecondLifeOnParticle1.particleSystem.enableEmission = true;
+		useSecondLifeOnParticle2.particleSystem.enableEmission = true;
+
+		useSecondLifeOnParticle1.particleSystem.Emit(1);
+		useSecondLifeOnParticle2.particleSystem.Emit(1);
+
 		secondLife = false;
         achieve.DonutRebirth();
         achieve.fiveseconds = true;
