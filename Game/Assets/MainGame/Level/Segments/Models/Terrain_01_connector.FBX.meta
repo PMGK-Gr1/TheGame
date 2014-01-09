@@ -1,28 +1,25 @@
 fileFormatVersion: 2
-guid: 97bcdce6fec5e41438e142559fcf6fab
+guid: 89524be1c9e078a45a4b54d2309787df
 ModelImporter:
   serializedVersion: 15
   fileIDToRecycleName:
-    100000: //RootNode
-    100002: Terrain_01
-    100004: Terrain_01_ground
-    100006: Terrain_01_grass
-    400000: //RootNode
-    400002: Terrain_01
-    400004: Terrain_01_ground
-    400006: Terrain_01_grass
-    2300000: //RootNode
-    2300002: Terrain_01
+    100000: Terrain_01
+    100002: //RootNode
+    100004: Terrain_01_grass
+    100006: Terrain_01_ground
+    400000: Terrain_01
+    400002: //RootNode
+    400004: Terrain_01_grass
+    400006: Terrain_01_ground
+    2300000: Terrain_01
+    2300002: Terrain_01_grass
     2300004: Terrain_01_ground
-    2300006: Terrain_01_grass
-    3300000: //RootNode
-    3300002: Terrain_01
+    3300000: Terrain_01
+    3300002: Terrain_01_grass
     3300004: Terrain_01_ground
-    3300006: Terrain_01_grass
-    4300000: Terrain_03
-    4300002: Terrain_01
-    4300004: Terrain_01_ground
-    4300006: Terrain_01_grass
+    4300000: Terrain_01
+    4300002: Terrain_01_ground
+    4300004: Terrain_01_grass
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -39,7 +36,7 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     clipAnimations: []
-    isReadable: 0
+    isReadable: 1
   meshes:
     lODScreenPercentages: []
     globalScale: 1
@@ -49,7 +46,7 @@ ModelImporter:
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMeshForGPU: 0
+    optimizeMeshForGPU: 1
     weldVertices: 1
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
@@ -59,7 +56,7 @@ ModelImporter:
     normalSmoothAngle: 60
     splitTangentsAcrossUV: 1
     normalImportMode: 0
-    tangentImportMode: 1
+    tangentImportMode: 2
   importAnimation: 1
   copyAvatar: 0
   humanDescription:

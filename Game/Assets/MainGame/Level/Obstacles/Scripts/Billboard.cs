@@ -4,10 +4,15 @@ using System.Collections;
 public class Billboard : MonoBehaviour {
 
 	public GameObject particlesOnHit;
+	public Material[] materials;
 
 	void Start()
 	{
 		this.GetComponentInChildren<ParticleSystem>().enableEmission = false;
+		Material mat = materials[Random.Range(0, 5)];
+		for (int i = 0; i < 8; ++i) {
+			transform.GetChild(i).gameObject.renderer.material = mat;
+		}
 	}
 
 	void FixedUpdate()
