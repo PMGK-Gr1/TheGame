@@ -43,7 +43,7 @@ public class Donut : MonoBehaviour{
 
 
 	private int stingersResistLeft = 0;
-	private bool secondLife = true;
+	private bool secondLife = false;
 	private int freshAsphaltResistLeft = 0;
 
     private bool isSticky = false;
