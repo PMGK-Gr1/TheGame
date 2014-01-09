@@ -38,17 +38,16 @@ public class LevelBuilder : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
-        #region cukiernia!
+        /*#region cukiernia!
         GameObject Bakery = GameObject.CreatePrimitive(PrimitiveType.Cube);
         Bakery.layer = groundLayer;
         Bakery.tag = "Ground";
         Bakery.transform.localScale = new Vector3(90.0f, 30.0f, 30.0f);
         Bakery.transform.position = new Vector3(45.0f, 15.0f, 0.0f);
         Destroy(Bakery, 20.0f);
-        #endregion
+        #endregion*/
 
         
-        AddPrefab(LevelPrefabs[0], true);
         AddPrefab(LevelPrefabs[0], true);
         //AddPrefab(LevelPrefabs[0], true);
         
@@ -87,7 +86,7 @@ public class LevelBuilder : MonoBehaviour {
 
     int RandomPrefab()
     {
-		return Random.Range(0, LevelPrefabs.Length-difficulty);
+		return Random.Range(1, LevelPrefabs.Length);
         /*float tmp = UnityEngine.Random.Range(0.0f, 1.0f);
         if (tmp <= 0.2f) return 1;
         if (tmp >= 0.8f) return 2;
