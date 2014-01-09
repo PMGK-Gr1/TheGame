@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Buttons : MonoBehaviour
 {
+	public FlurryManager flurry;
 
     void OnGUI()
     {
@@ -13,6 +14,7 @@ public class Buttons : MonoBehaviour
         menuButton.height = Screen.height * 0.1f;
         if (GUI.Button(menuButton, "Menu"))
         {
+			flurry.SendMessage("Button", "Menu");
             Application.LoadLevel(0);
         }
 
@@ -22,7 +24,8 @@ public class Buttons : MonoBehaviour
         againButton.width = Screen.width * 0.2f;
         againButton.height = Screen.height * 0.1f;
         if (GUI.Button(againButton, "Play Again"))
-        {
+		{
+			flurry.SendMessage ("Button", "Play Again");
             Application.LoadLevel(1);
         }
 
@@ -32,7 +35,8 @@ public class Buttons : MonoBehaviour
         shopButton.width = Screen.width * 0.1f;
         shopButton.height = Screen.height * 0.1f;
         if (GUI.Button(shopButton, "Shop"))
-        {
+		{
+			flurry.SendMessage("Button", "Shop");
             Application.LoadLevel(3);
         }
 

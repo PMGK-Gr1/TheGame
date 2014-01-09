@@ -7,6 +7,7 @@ public class UpgradeButton : MonoBehaviour {
     public Sprite[] sprite;
     public GameObject ChocolateRainParticle;
     public GameObject SpeedParticle;
+	public FlurryManager flurry;
 
 
     public Pursuit pursuit;
@@ -48,27 +49,30 @@ public class UpgradeButton : MonoBehaviour {
                     StartCoroutine("ChocolateRain");		//Let it rain
                     donut.chocoRains++;
                     donut.upgradeCount--;
+					flurry.SendMessage("UpgradeLaunch", "Chocolate rain");
                     break;
                 case 2:
                     SpeedBoost();
-                    donut.upgradeCount--;
+					donut.upgradeCount--;
+					flurry.SendMessage("UpgradeLaunch", "Speed boost");
                     break;
                 case 3:
                     donut.StickyDonut(10);
-                    donut.upgradeCount--;
+					donut.upgradeCount--;
+					flurry.SendMessage("UpgradeLaunch", "Sticky donut");
                     break;
                 case 4:
                     StartCoroutine("Marmolade");
                     donut.upgradeCount--;
-                    if (donut.isFrosted) donut.achieve.VerySweet();
+					if (donut.isFrosted) donut.achieve.VerySweet();
+					flurry.SendMessage("UpgradeLaunch", "Marmolade");
                     break;
                 case 5:
                     StartCoroutine("Ghost");
-                    donut.upgradeCount--;
-
+					donut.upgradeCount--;
+					flurry.SendMessage("UpgradeLaunch", "Ghost donut");
                     break;
             }
-
 
         }
 

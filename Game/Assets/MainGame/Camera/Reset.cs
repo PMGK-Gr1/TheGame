@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Reset : MonoBehaviour {
 
+	public FlurryManager flurry;
 
     void OnGUI()
     {
@@ -12,6 +13,7 @@ public class Reset : MonoBehaviour {
         rectButton.width = Screen.width * 0.1f;
         rectButton.height = Screen.height * 0.1f;        
         if(GUI.Button(rectButton, "Reset")){
+			flurry.SendMessage("Button", "Reset");
             Time.timeScale = 1;
             Application.LoadLevel(0);
         }

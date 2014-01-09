@@ -36,6 +36,7 @@ public class Donut : MonoBehaviour{
 	private Vector3 donutLastVelocity;
 	private Vector3 donutLastLastVelocity;
 
+	private float timer;
 
 	private int stingersResistLeft = 0;
 	private bool secondLife = false;
@@ -51,8 +52,14 @@ public class Donut : MonoBehaviour{
 
     public int upgrade, upgradeCount;
 
+	public FlurryManager flurry;
+
+	private int boostCount = 0;
+
 	void Start()
 	{
+		boostCount = 0;
+		timer = 0.0f;
 		secondLifeOnParticle.particleSystem.enableEmission = false;
 		secondLifeOnParticle.particleSystem.Stop();
 
@@ -77,6 +84,7 @@ public class Donut : MonoBehaviour{
 			donutLastLastVelocity = donutLastVelocity;
 			donutLastVelocity = rigidbody.velocity;
 		}
+		timer += Time.fixedDeltaTime;
 	}
 
 
@@ -109,11 +117,13 @@ public class Donut : MonoBehaviour{
     }
 
 	public void BurntDonut() {
+		boostCount ++;
         isBurnt = true;
 		explosionParticle.particleSystem.Play();
 		smokeParticle.particleSystem.Play();
 		stingersResistLeft = 3;
 		this.renderer.material = burntMat;
+		flurry.SendMessage ("BoostPicked", "Burnt donut");
 	}
 
 	void UnburntDonut() {
@@ -131,11 +141,13 @@ public class Donut : MonoBehaviour{
     }
 
 	public void FrostDonut() {
+		boostCount ++;
 		Debug.Log("I am double frosted ?!?.");
         isFrosted = true;
 		// TODO nice pickup particle effect or some other spectacular thingy
 		freshAsphaltResistLeft = 3;
 		this.renderer.material = sugarMat;
+		flurry.SendMessage ("BoostPicked", "Frost donut");
 	}
 
 	void UnfrostDonut() {
@@ -173,10 +185,12 @@ public class Donut : MonoBehaviour{
 
 	public void GiveSecondLife() {
 		//Debug.Log("I've got a second life.");
-		// TODO nice pickup particle effect or some other spectacular thingy
+		// TODO nice pickup particle effect or some other spectacular thingy4
+		boostCount ++;
 		secondLifeOnParticle.particleSystem.enableEmission = true;
 		secondLifeOnParticle.particleSystem.Emit(1);
 		secondLife = true;
+		flurry.SendMessage ("BoostPicked", "Second life");
 	}
 
 	void Rebirth() {
@@ -255,6 +269,12 @@ public class Donut : MonoBehaviour{
 			Rebirth();
 			return;
 		}
+		flurry.SendMessage ("SessionLength", timer);
+		flurry.SendMessage ("DeathCause", Cause);
+		flurry.SendMessage ("Distance", (int)GetDistanceTravelled ());
+		flurry.SendMessage ("CandiesPicked", sugarCubes);
+		flurry.SendMessage ("BoostNumberPicked", boostCount);
+		flurry.SendMessage ("TotalUpgrades");
 		isAlive = false;
         achieve.death = true;
 		if (Cause == "Viaduct" || Cause == "Stinger")

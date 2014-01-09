@@ -2,6 +2,8 @@
 using System.Collections;
 
 public class ShopCameraButtons : MonoBehaviour {
+	
+	public FlurryManager flurry;
 
     void OnGUI()
     {
@@ -12,6 +14,8 @@ public class ShopCameraButtons : MonoBehaviour {
         menuButton.height = Screen.height * 0.1f;
         if (GUI.Button(menuButton, "Menu"))
         {
+			flurry.SendMessage ("CandiesSpent");
+			flurry.SendMessage("Button", "Menu");
             Application.LoadLevel(0);
         }
 
@@ -21,7 +25,9 @@ public class ShopCameraButtons : MonoBehaviour {
         againButton.width = Screen.width * 0.2f;
         againButton.height = Screen.height * 0.1f;
         if (GUI.Button(againButton, "Play"))
-        {
+		{
+			flurry.SendMessage ("CandiesSpent");
+			flurry.SendMessage("Button", "Play");
             Application.LoadLevel(1);
         }
     }
