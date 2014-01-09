@@ -6,17 +6,22 @@ ModelImporter:
     100000: //RootNode
     100002: Terrain_06
     100004: Terrain_06_ground
+    100006: Terrain_06_grass
     400000: //RootNode
     400002: Terrain_06
     400004: Terrain_06_ground
+    400006: Terrain_06_grass
     2300000: //RootNode
     2300002: Terrain_06
     2300004: Terrain_06_ground
+    2300006: Terrain_06_grass
     3300000: //RootNode
     3300002: Terrain_06
     3300004: Terrain_06_ground
+    3300006: Terrain_06_grass
     4300000: Terrain_06
     4300002: Terrain_06_ground
+    4300004: Terrain_06_grass
     9500000: //RootNode
   materials:
     importMaterials: 1

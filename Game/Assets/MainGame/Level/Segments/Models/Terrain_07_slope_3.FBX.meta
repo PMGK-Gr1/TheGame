@@ -6,15 +6,35 @@ ModelImporter:
     100000: Terrain_05
     100002: Terrain_05_ground
     100004: //RootNode
+    100006: Terrain_05_BGground
+    100008: Terrain_07
+    100010: Terrain_07_grass
+    100012: Terrain_07_ground
     400000: Terrain_05
     400002: Terrain_05_ground
     400004: //RootNode
+    400006: Terrain_05_BGground
+    400008: Terrain_07
+    400010: Terrain_07_grass
+    400012: Terrain_07_ground
     2300000: Terrain_05
     2300002: Terrain_05_ground
+    2300004: Terrain_05_BGground
+    2300006: Terrain_07
+    2300008: Terrain_07_grass
+    2300010: Terrain_07_ground
     3300000: Terrain_05
     3300002: Terrain_05_ground
+    3300004: Terrain_05_BGground
+    3300006: Terrain_07
+    3300008: Terrain_07_grass
+    3300010: Terrain_07_ground
     4300000: Terrain_05
     4300002: Terrain_05_ground
+    4300004: Terrain_07
+    4300006: Terrain_07_ground
+    4300008: Terrain_05_BGground
+    4300010: Terrain_07_grass
     9500000: //RootNode
   materials:
     importMaterials: 1
