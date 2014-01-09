@@ -1,36 +1,45 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class FlurryManager : MonoBehaviour {
+public class FlurryManager : MonoSingleton<FlurryManager> {
 
 	private int UpgradesLaunched = 0;
 	private int MoneySpent;
 
 	void OnLevelWasLoaded(int level) {
+#if !UNITY_EDITOR
 		FlurryAgent.Instance.onEndSession ();
+#endif
 	}
 
 	// Use this for initialization
 	void Start () {
 		UpgradesLaunched = 0;
+		Object.DontDestroyOnLoad(gameObject);
+#if !UNITY_EDITOR
 		FlurryAgent.Instance.onStartSession ("DSYXWKHNM2H2C3QVR9HM");
 		FlurryAgent.Instance.setLogEnabled (true);
 		FlurryAgent.Instance.logEvent ("Scene " + Application.loadedLevelName + " loaded");
 		FlurryAgent.Instance.onPageView ();
+#endif
 	}
 
 	public void OnApplicationPause (bool pause) {
+#if !UNITY_EDITOR
 		if (pause) {
 			FlurryAgent.Instance.onEndSession ();		
 		}
 		else {
 			FlurryAgent.Instance.onStartSession("DSYXWKHNM2H2C3QVR9HM");
 		}
+#endif
 	}
 
 	public void OnApplicationQuit() {
+#if !UNITY_EDITOR
 		FlurryAgent.Instance.logEvent ("Application closed");
 		FlurryAgent.Instance.onEndSession ();
+#endif
 	}
 
 	public void SessionLength(float time) {
@@ -81,15 +90,14 @@ public class FlurryManager : MonoBehaviour {
 
 	public void Button (string button) {
 		Debug.Log ("Works");
+#if !UNITY_EDITOR
 		FlurryAgent.Instance.logEvent (button + " button");
+#endif
 	}
 
-	public void UpgradeBought (string name) {
+	public void UpgradeBought (string name, int price) {
 		Debug.Log ("Works");
-		FlurryAgent.Instance.logEvent (name + " upgrade bought");
-	}
-
-	public void ByeByeMoney(int price) {
 		MoneySpent += price;
+		FlurryAgent.Instance.logEvent (name + " upgrade bought");
 	}
 }

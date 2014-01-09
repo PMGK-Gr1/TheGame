@@ -5,7 +5,6 @@ public class PauseButton : MonoBehaviour {
     public GameObject Light;
     public bool paused;
     public GameObject pauseoptions;
-	public FlurryManager flurry;
     private Donut donut;
 	// Use this for initialization
 	void Start () {
@@ -19,7 +18,7 @@ public class PauseButton : MonoBehaviour {
 
     void OnMouseDown()
     {
-		flurry.SendMessage ("Button", "Pause");
+		FlurryManager.instance.Button ("Pause");
         FindObjectOfType<Jumper>().canjump = false;
         if (Time.timeScale == 0)
         {

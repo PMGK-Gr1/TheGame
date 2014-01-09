@@ -52,8 +52,6 @@ public class Donut : MonoBehaviour{
 
     public int upgrade, upgradeCount;
 
-	public FlurryManager flurry;
-
 	private int boostCount = 0;
 
 	void Start()
@@ -123,7 +121,7 @@ public class Donut : MonoBehaviour{
 		smokeParticle.particleSystem.Play();
 		stingersResistLeft = 3;
 		this.renderer.material = burntMat;
-		flurry.SendMessage ("BoostPicked", "Burnt donut");
+		FlurryManager.instance.BoostPicked ("Burnt donut");
 	}
 
 	void UnburntDonut() {
@@ -147,7 +145,7 @@ public class Donut : MonoBehaviour{
 		// TODO nice pickup particle effect or some other spectacular thingy
 		freshAsphaltResistLeft = 3;
 		this.renderer.material = sugarMat;
-		flurry.SendMessage ("BoostPicked", "Frost donut");
+		FlurryManager.instance.BoostPicked ("Frost donut");
 	}
 
 	void UnfrostDonut() {
@@ -190,7 +188,7 @@ public class Donut : MonoBehaviour{
 		secondLifeOnParticle.particleSystem.enableEmission = true;
 		secondLifeOnParticle.particleSystem.Emit(1);
 		secondLife = true;
-		flurry.SendMessage ("BoostPicked", "Second life");
+		FlurryManager.instance.BoostPicked ("Second life");
 	}
 
 	void Rebirth() {
@@ -269,12 +267,13 @@ public class Donut : MonoBehaviour{
 			Rebirth();
 			return;
 		}
-		flurry.SendMessage ("SessionLength", timer);
-		flurry.SendMessage ("DeathCause", Cause);
-		flurry.SendMessage ("Distance", (int)GetDistanceTravelled ());
-		flurry.SendMessage ("CandiesPicked", sugarCubes);
-		flurry.SendMessage ("BoostNumberPicked", boostCount);
-		flurry.SendMessage ("TotalUpgrades");
+		FlurryManager.instance.SessionLength (timer);
+		FlurryManager.instance.DeathCause (Cause);
+		FlurryManager.instance.Distance ((int)GetDistanceTravelled ());
+		FlurryManager.instance.CandiesPicked (sugarCubes);
+		FlurryManager.instance.BoostNumberPicked (boostCount);
+		FlurryManager.instance.TotalUpgrades ();
+		timer = 0.0f;
 		isAlive = false;
         achieve.death = true;
 		if (Cause == "Viaduct" || Cause == "Stinger")

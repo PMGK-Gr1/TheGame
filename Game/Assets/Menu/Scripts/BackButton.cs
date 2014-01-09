@@ -3,12 +3,10 @@ using System.Collections;
 
 public class BackButton : MonoBehaviour {
 
-	public FlurryManager flurry;
-
     public GameObject Camera;
     void OnMouseUp()
     {      
-		flurry.SendMessage ("Button", "Back");
+		FlurryManager.instance.Button ("Back");
         Camera.GetComponent<Options>().ComeBack();
     }
 }
