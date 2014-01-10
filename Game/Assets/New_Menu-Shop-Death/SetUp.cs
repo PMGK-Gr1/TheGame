@@ -6,7 +6,11 @@ public class SetUp : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        this.guiTexture.pixelInset = new Rect(0.0f, 0.0f, Screen.width,Screen.height);
+        this.guiTexture.pixelInset = new Rect(
+            Screen.width * 0.5f - 0.5f * (Screen.height * 16.0f / 9.0f),
+            0.0f,
+            Screen.height * 16.0f / 9.0f,
+            Screen.height);
         
 	}
 	

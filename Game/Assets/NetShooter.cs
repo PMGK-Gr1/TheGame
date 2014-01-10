@@ -11,6 +11,7 @@ public class NetShooter : MonoBehaviour {
 		transform.rotation = Quaternion.AngleAxis(90, Vector3.forward) * transform.rotation;
 		InteractiveCloth net = gameObject.AddComponent<InteractiveCloth>();
 		net.friction = 1;
+		net.thickness = 0.9f;
 		net.mesh = mesh;
 		//net.useGravity = false;
 		gameObject.AddComponent<ClothRenderer>().material = material;

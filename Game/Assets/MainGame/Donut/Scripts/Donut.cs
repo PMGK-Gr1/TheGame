@@ -48,6 +48,7 @@ public class Donut : MonoBehaviour{
 	private int freshAsphaltResistLeft = 0;
 
     private bool isSticky = false;
+	private float initialX;
     public bool isBurnt = false;
     public bool isFrosted = false;
 
@@ -81,7 +82,7 @@ public class Donut : MonoBehaviour{
 
 		this.renderer.material = normalMat;
 
-
+		initialX = transform.position.x;
 	}
 
     
@@ -311,7 +312,7 @@ public class Donut : MonoBehaviour{
 	}
 
 	public float GetDistanceTravelled() {
-		return transform.position.x / 10;
+		return (transform.position.x - initialX) / 10;
 	}
 
 	IEnumerator DelayDeath(float delay) {
