@@ -9,9 +9,9 @@ public class ReturnButtonScript_Options : MonoBehaviour {
 
         this.guiTexture.pixelInset = new Rect(
              Screen.width * 0.3f,
-             Screen.height * 0.05f,
-             Screen.height * 0.655f,
-               Screen.height * 0.25f);
+             Screen.height * 0.1f,
+             Screen.width * 0.4f,
+               Screen.height * 0.2f);
 
 	}
 
