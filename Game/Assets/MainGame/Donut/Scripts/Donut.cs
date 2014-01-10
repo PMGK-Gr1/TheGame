@@ -285,6 +285,9 @@ public class Donut : MonoBehaviour{
         PlayerPrefs.SetInt("died", 1);
         GetComponentInChildren<Jumper>().enabled = false;
         Ghost();
+		if (Cause == "Cops") {
+			GameController.instance.helicopter.netShooter.Shoot(this.gameObject);
+		}
 		if (Cause == "Viaduct" || Cause == "Stinger")
 			StartCoroutine(this.Soften());
 		Save();
