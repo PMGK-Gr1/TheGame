@@ -32,7 +32,7 @@ public class CameraMover : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Debug.Log("escape");
+
             if (pause.paused) { pause.paused = false; pause.Pause(); }
             else { pause.paused = true; pause.Unpause(); }
         }

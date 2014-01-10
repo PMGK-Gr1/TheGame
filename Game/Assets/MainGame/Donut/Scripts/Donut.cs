@@ -90,7 +90,7 @@ public class Donut : MonoBehaviour{
 			float force = 0.0f;
 			Distance.guiText.text = ((int)GetDistanceTravelled()).ToString() + " m";
 
-			force = 50.0f / (1.0f + Mathf.Pow(2, this.rigidbody.velocity.x - TargetSpeed));
+			force = 70.0f / (1.0f + Mathf.Pow(2, this.rigidbody.velocity.x - TargetSpeed));
 			rigidbody.AddForce(new Vector3(force, 0, 0), ForceMode.Acceleration);
 			donutLastLastVelocity = donutLastVelocity;
 			donutLastVelocity = rigidbody.velocity;
@@ -126,6 +126,7 @@ public class Donut : MonoBehaviour{
 
 	public void BurntDonut() {
         isBurnt = true;
+        freshAsphaltResistLeft = 0;
 		explosionParticle.particleSystem.enableEmission = true;
 		smokeParticle.particleSystem.enableEmission = false;
 
@@ -154,6 +155,7 @@ public class Donut : MonoBehaviour{
         isFrosted = true;
 		// TODO nice pickup particle effect or some other spectacular thingy
 		freshAsphaltResistLeft = 3;
+        stingersResistLeft = 0;
 		this.renderer.material = sugarMat;
 	}
 
@@ -277,13 +279,14 @@ public class Donut : MonoBehaviour{
 		}
 		isAlive = false;
         achieve.death = true;
+        PlayerPrefs.SetInt("died", 1);
         GetComponentInChildren<Jumper>().enabled = false;
         Ghost();
 		if (Cause == "Viaduct" || Cause == "Stinger")
 			StartCoroutine(this.Soften());
 		Save();
 
-		StartCoroutine(DelayDeath(4));
+		StartCoroutine(DelayDeath(2));
 	}
 
 	public void Save() {
@@ -307,7 +310,7 @@ public class Donut : MonoBehaviour{
 
 	IEnumerator DelayDeath(float delay) {
 		yield return new WaitForSeconds(delay);
-		if (!GodMode) Application.LoadLevel(2);
+		if (!GodMode) Application.LoadLevel(0);
 	}
 
 
