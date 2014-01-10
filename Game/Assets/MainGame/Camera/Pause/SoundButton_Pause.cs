@@ -19,9 +19,11 @@ public class SoundButton_Pause : MonoBehaviour {
 
     void OnMouseUp()
     {
-        int music = PlayerPrefs.GetInt("sound");
-        PlayerPrefs.SetInt("sound", music * (-1));
-        camera.GetComponent<AudioListener>().enabled = !camera.GetComponent<AudioListener>().enabled;
+        int sound = PlayerPrefs.GetInt("sound");
+        sound *= -1;
+        PlayerPrefs.SetInt("sound", sound);
+        if (sound > 0) AudioListener.volume = 0.0f;
+        else AudioListener.volume = 1.0f;
 
 
     }

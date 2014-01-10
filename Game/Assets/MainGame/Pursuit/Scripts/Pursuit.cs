@@ -20,6 +20,7 @@ public class Pursuit : MonoBehaviour {
 		startTime = Time.time + PursuitDelay;
 		donut = GameController.instance.donut;
 		pursuitSpeed = donut.TargetSpeed;
+        PlayerPrefs.SetInt("ChosenUpgrade", 5);
 	}
 
 	// Update is called once per frame
