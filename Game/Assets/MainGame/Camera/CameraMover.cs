@@ -8,8 +8,18 @@ public class CameraMover : MonoBehaviour {
     public PauseButton pause;
 	
 	// Use this for initialization
+    void Awake()
+    {
+        int music = PlayerPrefs.GetInt("music");
+        int sound = PlayerPrefs.GetInt("sound");
+        if (sound > 0) this.GetComponent<AudioListener>().enabled = true;
+        if (music > 0) { this.GetComponent<AudioSource>().enabled = true; this.GetComponent<AudioSource>().Play(); }
+     
+    }
+
 	void Start () {
 		startVector = this.transform.position - cylinder.transform.position;
+       
 	}
 	
 	// Update is called once per frame
@@ -32,7 +42,7 @@ public class CameraMover : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Debug.Log("escape");
+
             if (pause.paused) { pause.paused = false; pause.Pause(); }
             else { pause.paused = true; pause.Unpause(); }
         }

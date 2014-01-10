@@ -4,14 +4,15 @@ using System.Collections;
 public class reset : MonoBehaviour {
 
 
-    public GameObject plane;
+   // public GameObject plane;
     public GameObject confirm;
 
     private bool reseting = false;
 
     void Start()
     {
-        confirm.guiText.fontSize = (int)(Screen.height * 0.2f);
+        confirm.guiText.fontSize = (int)(Screen.height * 0.3f);
+        confirm.guiText.pixelOffset = new Vector2(Screen.width * 0.2f, Screen.height * 0.5f);
     }
 
     void Update()
@@ -23,10 +24,10 @@ public class reset : MonoBehaviour {
     void OnMouseUp()
     {
         reseting = true;
-        plane.transform.localPosition = new Vector3(
-            plane.transform.localPosition.x,
-            plane.transform.localPosition.y,
-            plane.transform.localPosition.z - 20.0f);
+      //  plane.transform.localPosition = new Vector3(
+      //      plane.transform.localPosition.x,
+      //      plane.transform.localPosition.y,
+     //       plane.transform.localPosition.z - 20.0f);
         confirm.SetActive(true);
     }
 
@@ -53,10 +54,10 @@ public class reset : MonoBehaviour {
                 PlayerPrefs.Save();
                 reseting = false;
                 confirm.SetActive(false);
-            plane.transform.localPosition = new Vector3(
-            plane.transform.localPosition.x,
-            plane.transform.localPosition.y,
-            plane.transform.localPosition.z +20.0f);
+     //       plane.transform.localPosition = new Vector3(
+      //      plane.transform.localPosition.x,
+     //       plane.transform.localPosition.y,
+      //      plane.transform.localPosition.z +20.0f);
             }
 
             if (GUI.Button(new Rect(Screen.width * 0.6f, Screen.height * 0.8f, Screen.width * 0.2f, Screen.height * 0.1f), "NO WAI"))
@@ -64,10 +65,10 @@ public class reset : MonoBehaviour {
                 reseting = false;
                 confirm.SetActive(false);
 
-                plane.transform.localPosition = new Vector3(
-            plane.transform.localPosition.x,
-            plane.transform.localPosition.y,
-            plane.transform.localPosition.z + 20.0f);
+       //         plane.transform.localPosition = new Vector3(
+      //      plane.transform.localPosition.x,
+      //      plane.transform.localPosition.y,
+      //      plane.transform.localPosition.z + 20.0f);
             }
 
         }

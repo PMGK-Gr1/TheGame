@@ -17,9 +17,13 @@ public class Donut : MonoBehaviour{
     public Achievements achieve;
     public int sugarCubes = 0;
     public int billboardHits = 0;
+
 	public GameObject explosionParticle;
 	public GameObject smokeParticle;
 	public GameObject secondLifeOnParticle;
+	public GameObject useSecondLifeOnParticle1;
+	public GameObject useSecondLifeOnParticle2;
+
     public GameObject speedParticle;
     public GameObject magnetParticle;
 
@@ -63,10 +67,16 @@ public class Donut : MonoBehaviour{
 		secondLifeOnParticle.particleSystem.enableEmission = false;
 		secondLifeOnParticle.particleSystem.Stop();
 
-		explosionParticle.particleSystem.enableEmission = true;
+		useSecondLifeOnParticle1.particleSystem.enableEmission = false;
+		useSecondLifeOnParticle1.particleSystem.Stop();
+
+		useSecondLifeOnParticle2.particleSystem.enableEmission = false;
+		useSecondLifeOnParticle2.particleSystem.Stop();
+
+		explosionParticle.particleSystem.enableEmission = false;
 		explosionParticle.particleSystem.Stop();
 
-		smokeParticle.particleSystem.enableEmission = true;
+		smokeParticle.particleSystem.enableEmission = false;
 		smokeParticle.particleSystem.Stop();
 
 		this.renderer.material = normalMat;
@@ -81,7 +91,7 @@ public class Donut : MonoBehaviour{
 			float force = 0.0f;
 			Distance.guiText.text = ((int)GetDistanceTravelled()).ToString() + " m";
 
-			force = 50.0f / (1.0f + Mathf.Pow(2, this.rigidbody.velocity.x - TargetSpeed));
+			force = 70.0f / (1.0f + Mathf.Pow(2, this.rigidbody.velocity.x - TargetSpeed));
 			rigidbody.AddForce(new Vector3(force, 0, 0), ForceMode.Acceleration);
 			donutLastLastVelocity = donutLastVelocity;
 			donutLastVelocity = rigidbody.velocity;
@@ -95,8 +105,6 @@ public class Donut : MonoBehaviour{
         if (isSticky) achieve.stickyScore += value;
         Score.guiText.text = sugarCubes.ToString();
 	}
-
-
 
 	public void StingerHit() {
         if (!stingerDisabled) {
@@ -119,6 +127,10 @@ public class Donut : MonoBehaviour{
 
 	public void BurntDonut() {
         isBurnt = true;
+        freshAsphaltResistLeft = 0;
+		explosionParticle.particleSystem.enableEmission = true;
+		smokeParticle.particleSystem.enableEmission = true;
+
 		explosionParticle.particleSystem.Play();
 		smokeParticle.particleSystem.Play();
 		stingersResistLeft = 3;
@@ -144,7 +156,10 @@ public class Donut : MonoBehaviour{
         isFrosted = true;
 		// TODO nice pickup particle effect or some other spectacular thingy
 		freshAsphaltResistLeft = 3;
+        stingersResistLeft = 0;
 		this.renderer.material = sugarMat;
+        explosionParticle.particleSystem.Stop();
+        smokeParticle.particleSystem.Stop();
 	}
 
 	void UnfrostDonut() {
@@ -167,6 +182,7 @@ public class Donut : MonoBehaviour{
     {
         Sticky.GetComponent<SphereCollider>().enabled = true;
         yield return new WaitForSeconds(t);
+		magnetParticle.particleSystem.Stop();
         UnstickyDonut();
     }
            
@@ -189,6 +205,12 @@ public class Donut : MonoBehaviour{
 	}
 
 	void Rebirth() {
+		useSecondLifeOnParticle1.particleSystem.enableEmission = true;
+		useSecondLifeOnParticle2.particleSystem.enableEmission = true;
+
+		useSecondLifeOnParticle1.particleSystem.Emit(1);
+		useSecondLifeOnParticle2.particleSystem.Emit(1);
+
 		secondLife = false;
         achieve.DonutRebirth();
         achieve.fiveseconds = true;
@@ -260,13 +282,14 @@ public class Donut : MonoBehaviour{
 		}
 		isAlive = false;
         achieve.death = true;
+        PlayerPrefs.SetInt("died", 1);
         GetComponentInChildren<Jumper>().enabled = false;
         Ghost();
 		if (Cause == "Viaduct" || Cause == "Stinger")
 			StartCoroutine(this.Soften());
 		Save();
 
-		StartCoroutine(DelayDeath(4));
+		StartCoroutine(DelayDeath(2));
 	}
 
 	public void Save() {
@@ -290,7 +313,7 @@ public class Donut : MonoBehaviour{
 
 	IEnumerator DelayDeath(float delay) {
 		yield return new WaitForSeconds(delay);
-		if (!GodMode) Application.LoadLevel(2);
+		if (!GodMode) Application.LoadLevel(0);
 	}
 
 
