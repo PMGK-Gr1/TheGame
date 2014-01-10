@@ -4,6 +4,8 @@ using System.Collections;
 public class SoundButton_Pause : MonoBehaviour {
 
 	// Use this for initialization
+    public Camera camera;
+
 	void Start () {
 
 
@@ -13,7 +15,16 @@ public class SoundButton_Pause : MonoBehaviour {
           Screen.width * 0.1f,
           Screen.width * 0.1f);
 	}
-	
+
+
+    void OnMouseUp()
+    {
+        int music = PlayerPrefs.GetInt("sound");
+        PlayerPrefs.SetInt("sound", music * (-1));
+        camera.GetComponent<AudioListener>().enabled = !camera.GetComponent<AudioListener>().enabled;
+
+
+    }
 	// Update is called once per frame
 	void Update () {
 	

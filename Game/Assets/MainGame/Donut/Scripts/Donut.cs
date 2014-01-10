@@ -158,6 +158,8 @@ public class Donut : MonoBehaviour{
 		freshAsphaltResistLeft = 3;
         stingersResistLeft = 0;
 		this.renderer.material = sugarMat;
+        explosionParticle.particleSystem.Stop();
+        smokeParticle.particleSystem.Stop();
 	}
 
 	void UnfrostDonut() {

@@ -5,6 +5,12 @@ public class MusicButtonScript : MonoBehaviour {
 
    
 	// Use this for initialization
+
+    void Awake()
+    {
+        if (!PlayerPrefs.HasKey("music")) PlayerPrefs.SetInt("music", 1);
+    }
+
 	void Start () {
 	
         this.guiTexture.pixelInset = new Rect(
@@ -15,7 +21,13 @@ public class MusicButtonScript : MonoBehaviour {
 	
 
 	}
-	
+
+    void OnMouseUp()
+    {
+        int music = PlayerPrefs.GetInt("music");
+        PlayerPrefs.SetInt("music", music * (-1));  
+
+    }
 	// Update is called once per frame
 	void Update () {
 	
