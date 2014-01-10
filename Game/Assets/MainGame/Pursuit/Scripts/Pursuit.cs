@@ -8,6 +8,7 @@ public class Pursuit : MonoBehaviour {
 	public float CatchDistance = 60.0f;
 	public float PursuitDelay = 2.0f;
 	public float pursuitSpeed;
+	public NetShooter netShooter;
     public bool DonutCatchable = true;
     //private variables
 	private float startTime = 0.0f;
