@@ -277,7 +277,7 @@ public class Donut : MonoBehaviour{
 
 	public void Death(string Cause) {
 		if (!isAlive) return; // prevent killing multiple times
-		if (secondLife && Cause != "Cops") {
+		if (secondLife && Cause != "Cops" && Cause != "Fall") {
 			Rebirth();
 			return;
 		}
@@ -288,6 +288,9 @@ public class Donut : MonoBehaviour{
         Ghost();
 		if (Cause == "Cops") {
 			GameController.instance.helicopter.netShooter.Shoot(this.gameObject);
+		}
+		if (Cause == "Fall") {
+			Camera.main.GetComponent<CameraMover>().enabled = false;
 		}
 		if (Cause == "Viaduct" || Cause == "Stinger")
 			StartCoroutine(this.Soften());

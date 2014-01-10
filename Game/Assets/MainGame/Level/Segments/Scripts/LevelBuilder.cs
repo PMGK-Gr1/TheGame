@@ -17,15 +17,13 @@ public class LevelBuilder : MonoBehaviour {
     public float DestrucionDistance = 200.0f;
     public int[] DistanceDifficulty;
 
-    public float SugarChance = 0.7f;
-    public float BoostChance = 0.1f;
-    public float ObstacleChance = 0.5f;
-    public float NothingChance = 0.30f;
+    public float SugarChance = 1f;
+    public float BoostChance = 0.2f;
+    public float ObstacleChance = 0.4f;
+    public float NothingChance = 1f;
 
-    public int IncreaseSugarChance = 200;
-    public int IncreaseBoostChance = 200;
-    public int IncreaseObstacleChance = 200;
-    public int DecreaseNothingChance = 200;
+	public float difficultyDistance;
+	public float difficultyPeriod;
     //private variables
     private GameObject levelPrefab;
     //private Properties prop; // unused removed
@@ -57,12 +55,18 @@ public class LevelBuilder : MonoBehaviour {
     
     void FixedUpdate()
     {
-
+		/*
         if ((((int)(transform.position.x)) % IncreaseSugarChance) == 0) SugarChance += 0.1f;
         if ((((int)(transform.position.x)) % IncreaseBoostChance) == 0) BoostChance += 0.15f;
         if ((((int)(transform.position.x)) % IncreaseObstacleChance) == 0) ObstacleChance += 0.3f;
         if (((((int)(transform.position.x)) % DecreaseNothingChance) == 0) && (NothingChance > 0.05000001f)) NothingChance -= 0.05f;
+		*/
 
+		if (transform.position.x > difficultyDistance) {
+			difficultyDistance += difficultyPeriod;
+			BoostChance += 0.15f;
+			NothingChance = Mathf.Max(NothingChance - 0.1f, 0f);
+		}
 
         if (transform.position.x > DistanceDifficulty[0]) difficulty = 3;
         if (transform.position.x > DistanceDifficulty[1]) difficulty = 2;

@@ -20,7 +20,7 @@ public class FreshAsphalt : MonoBehaviour {
 				Destroy(this);
 			}
 			else {
-				other.rigidbody.drag = 10.0f;
+				other.rigidbody.drag = 3.0f;
 			}
 		}
         donut.slippyCount++;
