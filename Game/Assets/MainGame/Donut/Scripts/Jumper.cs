@@ -22,11 +22,13 @@ public class Jumper : MonoBehaviour {
 
    if(canjump){
 		if (prevJumpPhase == JumpPhase.JumpStarted) {
+			gameObject.GetComponent<AudioSource>().Play();
 			donut.rigidbody.AddForce(new Vector3(0, InstantJumpForce, 0), ForceMode.VelocityChange);
 		}
 		else if (prevJumpPhase == JumpPhase.JumpOnGoing) {
 			donut.rigidbody.AddForce(new Vector3(0, LongJumpForce, 0), ForceMode.Acceleration);
 		}
+		
        }
 	}
 

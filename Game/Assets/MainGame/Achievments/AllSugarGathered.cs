@@ -24,4 +24,9 @@ public class AllSugarGathered : MonoBehaviour {
 
 
 	}
+
+	void OnDelete()
+	{
+		this.GetComponent<AudioSource>().Play();
+	}
 }
