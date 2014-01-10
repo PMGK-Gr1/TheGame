@@ -137,7 +137,7 @@ public class Donut : MonoBehaviour{
 
 		explosionParticle.particleSystem.Play();
 		smokeParticle.particleSystem.Play();
-		stingersResistLeft = 3;
+		stingersResistLeft = 1;
 		this.renderer.material = burntMat;
 	}
 
@@ -159,7 +159,7 @@ public class Donut : MonoBehaviour{
 		Debug.Log("I am double frosted ?!?.");
         isFrosted = true;
 		// TODO nice pickup particle effect or some other spectacular thingy
-		freshAsphaltResistLeft = 3;
+		freshAsphaltResistLeft = 1;
         stingersResistLeft = 0;
 		this.renderer.material = sugarMat;
         explosionParticle.particleSystem.Stop();
