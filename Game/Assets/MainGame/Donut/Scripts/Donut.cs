@@ -17,6 +17,7 @@ public class Donut : MonoBehaviour{
     public Achievements achieve;
     public int sugarCubes = 0;
     public int billboardHits = 0;
+
 	public GameObject explosionParticle;
 	public GameObject smokeParticle;
 	public GameObject secondLifeOnParticle;
@@ -127,7 +128,7 @@ public class Donut : MonoBehaviour{
 	public void BurntDonut() {
         isBurnt = true;
 		explosionParticle.particleSystem.enableEmission = true;
-		smokeParticle.particleSystem.enableEmission = false;
+		smokeParticle.particleSystem.enableEmission = true;
 
 		explosionParticle.particleSystem.Play();
 		smokeParticle.particleSystem.Play();

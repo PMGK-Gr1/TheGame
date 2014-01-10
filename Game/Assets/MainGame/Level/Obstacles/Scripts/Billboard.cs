@@ -34,6 +34,7 @@ public class Billboard : MonoBehaviour {
         if ((donut = other.gameObject.GetComponent<Donut>()) != null)
         {
             donut.BillboardHit();
+			gameObject.GetComponent<AudioSource>().Play();
 			particlesOnHit.transform.position = new Vector3(transform.position.x, other.transform.position.y, other.transform.position.z);
 			particlesOnHit.particleSystem.Emit(100);
             this.enabled = false;
