@@ -120,10 +120,6 @@ public class Controller : MonoBehaviour {
             UpgradePositions[i] = Upgrades[i].transform.position + a;
 
         }
-
-      
-      
-
             float t = 0;
  
             do

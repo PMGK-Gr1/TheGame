@@ -35,6 +35,7 @@ public class Donut : MonoBehaviour{
     public Material ghostMat;
 
 	public GameObject dingSound;
+	public GameObject splashSound;
 
     public Pursuit pursuit;
     //private variables
@@ -158,6 +159,7 @@ public class Donut : MonoBehaviour{
 	public void FrostDonut() {
 		Debug.Log("I am double frosted ?!?.");
         isFrosted = true;
+
 		// TODO nice pickup particle effect or some other spectacular thingy
 		freshAsphaltResistLeft = 3;
         stingersResistLeft = 0;
