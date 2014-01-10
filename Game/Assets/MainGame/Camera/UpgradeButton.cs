@@ -17,9 +17,20 @@ public class UpgradeButton : MonoBehaviour {
     private Donut donut;
 
 	// Use this for initialization
+
+    void Awake()
+    {
+        donut = GameController.instance.donut;
+        if (donut.upgradeCount == 0)
+        {
+            PlayerPrefs.SetInt("ChosenUpgrade", 0);
+            donut.upgrade = 0;
+        }
+    }
+
 	void Start () {
         this.guiTexture.pixelInset = new Rect(Screen.width * 0.05f, Screen.height * 0.05f, Screen.height * 0.15f, Screen.height * 0.15f);
-        donut = GameController.instance.donut;
+        
         speed = 3000.0f;
 
         
