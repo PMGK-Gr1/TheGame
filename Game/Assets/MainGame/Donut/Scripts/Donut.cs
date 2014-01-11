@@ -238,8 +238,8 @@ public class Donut : MonoBehaviour{
 	IEnumerator Soften() {
 		InteractiveCloth cloth = gameObject.AddComponent<InteractiveCloth>();
 		cloth.pressure = 1.0f;
-		cloth.stretchingStiffness = 0.5f;
-		cloth.bendingStiffness = 0.5f;
+		cloth.stretchingStiffness = 0.7f;
+		cloth.bendingStiffness = 0.7f;
 		cloth.density = 1.0f;
 
 		gameObject.AddComponent<ClothRenderer>();

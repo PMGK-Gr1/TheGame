@@ -13,6 +13,7 @@ public class Pursuit : MonoBehaviour {
     //private variables
 	private float startTime = 0.0f;
 	private Donut donut;
+	private float velocity;
 
 
 	// Use this for initialization
@@ -27,12 +28,14 @@ public class Pursuit : MonoBehaviour {
 	void FixedUpdate() {
 		if (Time.time > startTime) {
 			Vector3 tmpDelta = donut.transform.position - transform.position;
-            this.light.intensity = 5.0f / tmpDelta.magnitude;
+            //this.light.intensity = 5.0f / tmpDelta.magnitude;
 			float tmpX = tmpDelta.magnitude / CatchDistance;
 			tmpX -= 2;
 			float currentSpeed = tmpX * tmpX * tmpX * 0.2f + 1;
 			currentSpeed *= pursuitSpeed;
-			Vector3 tmpVelocity = currentSpeed * Time.fixedDeltaTime * tmpDelta.normalized;
+			Vector3 tmpVelocity = currentSpeed * Time.fixedDeltaTime * tmpDelta.normalized * 1.1f;
+			velocity = 0.95f * velocity + 0.05f * donut.rigidbody.velocity.magnitude;
+			transform.rotation = Quaternion.Euler(0, 0, -0.4f * velocity + 20);
 
 			if ((tmpDelta.magnitude < CatchDistance)&&(DonutCatchable)) {
 				GameController.instance.donut.Death("Cops");

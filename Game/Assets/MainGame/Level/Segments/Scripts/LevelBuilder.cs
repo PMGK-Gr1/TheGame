@@ -22,7 +22,7 @@ public class LevelBuilder : MonoBehaviour {
     public float ObstacleChance = 0.4f;
     public float NothingChance = 1f;
 
-	public float difficultyDistance;
+	private float difficultyDistance;
 	public float difficultyPeriod;
     //private variables
     private GameObject levelPrefab;
@@ -36,6 +36,7 @@ public class LevelBuilder : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
+		difficultyDistance = difficultyPeriod;
         /*#region cukiernia!
         GameObject Bakery = GameObject.CreatePrimitive(PrimitiveType.Cube);
         Bakery.layer = groundLayer;
@@ -62,10 +63,10 @@ public class LevelBuilder : MonoBehaviour {
         if (((((int)(transform.position.x)) % DecreaseNothingChance) == 0) && (NothingChance > 0.05000001f)) NothingChance -= 0.05f;
 		*/
 
-		if (transform.position.x > difficultyDistance) {
+		if (GameController.instance.donut.GetDistanceTravelled() > difficultyDistance) {
 			difficultyDistance += difficultyPeriod;
-			BoostChance += 0.15f;
-			NothingChance = Mathf.Max(NothingChance - 0.1f, 0f);
+			ObstacleChance += 0.2f;
+			//NothingChance = Mathf.Max(NothingChance - 0.1f, 0f);
 		}
 
         if (transform.position.x > DistanceDifficulty[0]) difficulty = 3;
@@ -90,7 +91,14 @@ public class LevelBuilder : MonoBehaviour {
 
     int RandomPrefab()
     {
-		return Random.Range(1, LevelPrefabs.Length);
+		int prefabsCount = 1;
+		float distance = endPosition.x / 10;
+		if (distance > 800) prefabsCount = 5;
+		else if (distance > 400) prefabsCount = 4;
+		else if (distance > 200) prefabsCount = 3;
+		else if (distance > 100) prefabsCount = 2;
+
+		return Random.Range(1, prefabsCount + 1);
         /*float tmp = UnityEngine.Random.Range(0.0f, 1.0f);
         if (tmp <= 0.2f) return 1;
         if (tmp >= 0.8f) return 2;
