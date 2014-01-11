@@ -120,10 +120,6 @@ public class Controller : MonoBehaviour {
             UpgradePositions[i] = Upgrades[i].transform.position + a;
 
         }
-
-      
-      
-
             float t = 0;
  
             do
@@ -132,7 +128,7 @@ public class Controller : MonoBehaviour {
                 t += 0.5f * Time.deltaTime;
                 float s;
                 if (fast) s = 2.0f;
-                else s = t / d;
+                else s = 2*  t / d;
 
                 for (int i = 0; i < Upgrades.GetLength(0); i++)
                 {

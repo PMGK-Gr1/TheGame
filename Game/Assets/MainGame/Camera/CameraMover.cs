@@ -10,11 +10,15 @@ public class CameraMover : MonoBehaviour {
 	// Use this for initialization
     void Awake()
     {
+        
+
         int music = PlayerPrefs.GetInt("music");
         int sound = PlayerPrefs.GetInt("sound");
-        if (sound > 0) this.GetComponent<AudioListener>().enabled = true;
+        if (sound < 0) AudioListener.volume = 0.0f;
+        else AudioListener.volume = 1.0f;
         if (music > 0) { this.GetComponent<AudioSource>().enabled = true; this.GetComponent<AudioSource>().Play(); }
-     
+        else this.GetComponent<AudioSource>().enabled = false;
+        Debug.Log(music);
     }
 
 	void Start () {

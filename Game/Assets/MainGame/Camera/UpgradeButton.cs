@@ -17,9 +17,20 @@ public class UpgradeButton : MonoBehaviour {
     private Donut donut;
 
 	// Use this for initialization
+
+    void Awake()
+    {
+        donut = GameController.instance.donut;
+        if (donut.upgradeCount == 0)
+        {
+            PlayerPrefs.SetInt("ChosenUpgrade", 0);
+            donut.upgrade = 0;
+        }
+    }
+
 	void Start () {
         this.guiTexture.pixelInset = new Rect(Screen.width * 0.05f, Screen.height * 0.05f, Screen.height * 0.15f, Screen.height * 0.15f);
-        donut = GameController.instance.donut;
+        
         speed = 3000.0f;
 
         
@@ -39,44 +50,46 @@ public class UpgradeButton : MonoBehaviour {
 
     void OnMouseDown()
     {
-        FindObjectOfType<Jumper>().canjump = false;
-        if((!(FindObjectOfType<PauseButton>().paused))&&(donut.upgradeCount>0)&&donut.isAlive&&(!(isCoolingdown)))
+        if (donut.upgrade > 0)
         {
-            
-            switch (donut.upgrade)
+            FindObjectOfType<Jumper>().canjump = false;
+            if ((!(FindObjectOfType<PauseButton>().paused)) && (donut.upgradeCount > 0) && donut.isAlive && (!(isCoolingdown)))
             {
-                case 0:
-                    break;
-                case 1:
-                    StartCoroutine("ChocolateRain");		//Let it rain
-                    donut.chocoRains++;
-                    donut.upgradeCount--;
-                    break;
-                case 2:
-                    SpeedBoost();
-                    donut.upgradeCount--;
-                    break;
-                case 3:
-                    donut.StickyDonut(10);
-                    MagnetParticle.particleSystem.Play();
-                    donut.upgradeCount--;
-                    break;
-                case 4:
-                    StartCoroutine("Marmolade");
-                    donut.upgradeCount--;
-                    if (donut.isFrosted) donut.achieve.VerySweet();
-                    break;
-                case 5:
-                    StartCoroutine("Ghost");
-                    donut.upgradeCount--;
 
-                    break;
+                switch (donut.upgrade)
+                {
+                    case 0:
+                        break;
+                    case 1:
+                        StartCoroutine("ChocolateRain");		//Let it rain
+                        donut.chocoRains++;
+                        donut.upgradeCount--;
+                        break;
+                    case 2:
+                        SpeedBoost();
+                        donut.upgradeCount--;
+                        break;
+                    case 3:
+                        donut.StickyDonut(10);
+                        MagnetParticle.particleSystem.Play();
+                        donut.upgradeCount--;
+                        break;
+                    case 4:
+                        StartCoroutine("Marmolade");
+                        donut.upgradeCount--;
+                        if (donut.isFrosted) donut.achieve.VerySweet();
+                        break;
+                    case 5:
+                        StartCoroutine("Ghost");
+                        donut.upgradeCount--;
+
+                        break;
+                }
+                StartCoroutine("Cooldown", cooldowns[donut.upgrade]);
+
             }
-            StartCoroutine("Cooldown", cooldowns[donut.upgrade]);
 
         }
-
-
     }
 
     IEnumerator Cooldown(float t)

@@ -6,7 +6,7 @@ public class upgradesleft : MonoBehaviour {
     private Donut donut;
     void Start()
     {
-        this.guiText.fontSize = (int)(Screen.height * 0.08f);
+        this.guiText.fontSize = (int)(Screen.height * 0.04f);
         this.guiText.pixelOffset = new Vector2(Screen.width * 0.075f, Screen.height * 0.055f);
         donut = GameController.instance.donut;
         donut.upgrade = PlayerPrefs.GetInt("ChosenUpgrade");

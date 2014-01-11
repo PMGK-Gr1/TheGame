@@ -34,6 +34,8 @@ public class Donut : MonoBehaviour{
 	public Material sugarMat;
     public Material ghostMat;
 
+	public GameObject dingSound;
+	public GameObject splashSound;
 
     public Pursuit pursuit;
     //private variables
@@ -104,6 +106,7 @@ public class Donut : MonoBehaviour{
 	public void SugarPickup(int value) {
 		sugarCubes += value;
         if (isSticky) achieve.stickyScore += value;
+		GameObject.Instantiate(dingSound);
         Score.guiText.text = sugarCubes.ToString();
 	}
 
@@ -131,10 +134,11 @@ public class Donut : MonoBehaviour{
         freshAsphaltResistLeft = 0;
 		explosionParticle.particleSystem.enableEmission = true;
 		smokeParticle.particleSystem.enableEmission = true;
+		explosionParticle.GetComponent<AudioSource>().Play();
 
 		explosionParticle.particleSystem.Play();
 		smokeParticle.particleSystem.Play();
-		stingersResistLeft = 3;
+		stingersResistLeft = 1;
 		this.renderer.material = burntMat;
 	}
 
@@ -155,8 +159,9 @@ public class Donut : MonoBehaviour{
 	public void FrostDonut() {
 		Debug.Log("I am double frosted ?!?.");
         isFrosted = true;
+
 		// TODO nice pickup particle effect or some other spectacular thingy
-		freshAsphaltResistLeft = 3;
+		freshAsphaltResistLeft = 1;
         stingersResistLeft = 0;
 		this.renderer.material = sugarMat;
         explosionParticle.particleSystem.Stop();

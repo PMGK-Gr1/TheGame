@@ -8,7 +8,7 @@ public class SetUp : MonoBehaviour {
 	void Start () {
         this.guiTexture.pixelInset = new Rect(
             Screen.width * 0.5f - 0.5f * (Screen.height * 16.0f / 9.0f),
-            0.0f,
+            -3.0f,
             Screen.height * 16.0f / 9.0f,
             Screen.height);
         
