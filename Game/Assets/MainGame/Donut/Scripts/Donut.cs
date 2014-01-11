@@ -144,7 +144,6 @@ public class Donut : MonoBehaviour{
 
 	void UnburntDonut() {
         isBurnt = false;
-		// TODO reverse the effects
 		explosionParticle.particleSystem.Stop();
 		smokeParticle.particleSystem.Stop();
 		this.renderer.material = normalMat;
@@ -157,10 +156,8 @@ public class Donut : MonoBehaviour{
     }
 
 	public void FrostDonut() {
-		Debug.Log("I am double frosted ?!?.");
         isFrosted = true;
 
-		// TODO nice pickup particle effect or some other spectacular thingy
 		freshAsphaltResistLeft = 1;
         stingersResistLeft = 0;
 		this.renderer.material = sugarMat;
@@ -169,9 +166,7 @@ public class Donut : MonoBehaviour{
 	}
 
 	void UnfrostDonut() {
-		Debug.Log("I am no longer frosted.");
         isFrosted = false;
-		// TODO reverse the effects
 		this.renderer.material = normalMat;
 	}
 
@@ -180,8 +175,7 @@ public class Donut : MonoBehaviour{
     {
         achieve.stickyScore = 0;
         isSticky = true;
-        Debug.Log("Come to me, my dear sugar");
-        StartCoroutine("StickyTime", t);
+        StartCoroutine(StickyTime(t));
     }
 
     IEnumerator StickyTime(float t)
@@ -195,16 +189,12 @@ public class Donut : MonoBehaviour{
     void UnstickyDonut() 
     {
         isSticky = false;
-       Debug.Log("well... ");
        Sticky.GetComponent<SphereCollider>().enabled = false;
-            
     }
 
 
 
 	public void GiveSecondLife() {
-		//Debug.Log("I've got a second life.");
-		// TODO nice pickup particle effect or some other spectacular thingy
 		secondLifeOnParticle.particleSystem.enableEmission = true;
 		secondLifeOnParticle.particleSystem.Emit(1);
 		secondLife = true;
@@ -220,8 +210,7 @@ public class Donut : MonoBehaviour{
 		secondLife = false;
         achieve.DonutRebirth();
         achieve.fiveseconds = true;
-        StartCoroutine("fiveseconds");
-		// TODO some epic rebirth effect
+        StartCoroutine(fiveseconds());
 	}
 
     IEnumerator fiveseconds()
@@ -294,11 +283,12 @@ public class Donut : MonoBehaviour{
 		if (Cause == "Cops") {
 			GameController.instance.helicopter.netShooter.Shoot(this.gameObject);
 		}
-		if (Cause == "Fall") {
+		else if (Cause == "Fall") {
 			Camera.main.GetComponent<CameraMover>().enabled = false;
 		}
-		if (Cause == "Viaduct" || Cause == "Stinger")
+		else if (Cause == "Viaduct" || Cause == "Stinger") {
 			StartCoroutine(this.Soften());
+		}
 		Save();
 
 		StartCoroutine(DelayDeath(2));
