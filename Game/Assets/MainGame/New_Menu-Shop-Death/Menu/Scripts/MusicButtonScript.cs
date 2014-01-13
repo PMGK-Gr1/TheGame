@@ -5,6 +5,9 @@ public class MusicButtonScript : MonoBehaviour {
 
    
 	// Use this for initialization
+    public Texture2D musicOnTexture;
+    public Texture2D musicOffTexture;
+
 
     void Awake()
     {
@@ -18,14 +21,35 @@ public class MusicButtonScript : MonoBehaviour {
             Screen.height * 0.55f,
             Screen.width * 0.15f,
             Screen.height * 0.25f);
-	
 
+        if (PlayerPrefs.GetInt("music", 1) == 1)
+        {
+            guiTexture.texture = musicOnTexture;
+        }
+        else
+        {
+            guiTexture.texture = musicOffTexture;
+        }
 	}
 
     void OnMouseUp() {
 		FlurryManager.instance.Button("Music");
-        int music = PlayerPrefs.GetInt("music");
-        PlayerPrefs.SetInt("music", music * (-1));  
+        int music = PlayerPrefs.GetInt("music", 1);
+
+        if (music == 0)
+        {
+        
+            guiTexture.texture = musicOnTexture;
+            music = 1;
+        }
+        else
+        {
+            music = 0;
+            guiTexture.texture = musicOffTexture;
+          
+        }
+
+        PlayerPrefs.SetInt("music", music);
 
     }
 }
