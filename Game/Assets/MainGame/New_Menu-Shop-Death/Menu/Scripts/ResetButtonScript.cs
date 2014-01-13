@@ -8,7 +8,7 @@ public class ResetButtonScript : MonoBehaviour {
 	
         this.guiTexture.pixelInset = new Rect(
              Screen.width * 0.3f,
-             Screen.height * 0.35f,
+             Screen.height * 0.15f,
              Screen.width * 0.4f,
                Screen.height * 0.2f);
 
