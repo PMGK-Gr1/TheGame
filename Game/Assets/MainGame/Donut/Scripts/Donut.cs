@@ -115,7 +115,10 @@ public class Donut : MonoBehaviour{
 	public void SugarPickup(int value) {
 		sugarCubes += value;
         if (isSticky) achieve.stickyScore += value;
-		GameObject.Instantiate(dingSound);
+		if (PlayerPrefs.GetInt("sound", 1) == 1)
+		{
+			GameObject.Instantiate(dingSound);
+		}
         Score.guiText.text = sugarCubes.ToString();
 	}
 
@@ -144,8 +147,10 @@ public class Donut : MonoBehaviour{
         freshAsphaltResistLeft = 0;
 		explosionParticle.particleSystem.enableEmission = true;
 		smokeParticle.particleSystem.enableEmission = true;
-		explosionParticle.GetComponent<AudioSource>().Play();
-
+		if (PlayerPrefs.GetInt("sound", 1) == 1)
+		{
+			explosionParticle.GetComponent<AudioSource>().Play();
+		}
 		explosionParticle.particleSystem.Play();
 		smokeParticle.particleSystem.Play();
 		stingersResistLeft = 1;
@@ -211,7 +216,7 @@ public class Donut : MonoBehaviour{
 		secondLifeOnParticle.particleSystem.enableEmission = true;
 		secondLifeOnParticle.particleSystem.Emit(1);
 		secondLife = true;
-		heartIcon.GetComponent<HeartIcon>().ToggleIcon();
+		heartIcon.GetComponent<HeartIcon>().Enable();
 		FlurryManager.instance.BoostPicked ("Second life");
 	}
 
@@ -225,7 +230,7 @@ public class Donut : MonoBehaviour{
 		secondLife = false;
         achieve.DonutRebirth();
         achieve.fiveseconds = true;
-		heartIcon.GetComponent<HeartIcon>().ToggleIcon();
+		heartIcon.GetComponent<HeartIcon>().Disable();
 
         StartCoroutine(fiveseconds());
 	}

@@ -3,27 +3,46 @@ using System.Collections;
 
 public class SoundButton_Pause : MonoBehaviour {
 
+	public Texture2D sfxOnTexture;
+	public Texture2D sfxOffTexture;
+
 	// Use this for initialization
     //public float soundVolume; 
-    
+  
 	void Start () {
         this.guiTexture.pixelInset = new Rect(
           Screen.width * 0.55f,
           Screen.height * 0.45f,
           Screen.width * 0.1f,
           Screen.width * 0.1f);
+
+		if( PlayerPrefs.GetInt("sound", 1) == 1)
+		{
+			guiTexture.texture = sfxOnTexture;
+		}
+		else
+		{
+			guiTexture.texture = sfxOffTexture;
+		}
 	}
 
 
     void OnMouseUp()
     {
-        int sound = PlayerPrefs.GetInt("sound");
-        sound *= -1;
-        PlayerPrefs.SetInt("sound", sound);
-        if (sound > 0) AudioListener.volume = 0.0f;
-        else AudioListener.volume = 1.0f;
-
-
+		int sound = PlayerPrefs.GetInt("sound");
+		
+		if (sound == 0)
+		{
+			sound = 1;
+			guiTexture.texture = sfxOnTexture;
+		}
+		else
+		{
+			sound = 0;
+			guiTexture.texture = sfxOffTexture;
+		}
+		
+		PlayerPrefs.SetInt("sound", sound);
     }
 	// Update is called once per frame
 	/*void Update () {
