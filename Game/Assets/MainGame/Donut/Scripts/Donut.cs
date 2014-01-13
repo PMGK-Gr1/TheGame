@@ -305,6 +305,7 @@ public class Donut : MonoBehaviour{
 		PlayerPrefs.SetInt("Upgrade" + upgrade.ToString(), upgradeCount);
 		PlayerPrefs.SetInt("LastDistance", distance);
 		PlayerPrefs.SetInt("LastSugar", sugarCubes);
+        PlayerPrefs.SetInt("ChosenUpgrade", upgrade);
 		if (distance > PlayerPrefs.GetInt("HighestScore")) PlayerPrefs.SetInt("HighestScore", distance);
 		PlayerPrefs.Save();
 	}

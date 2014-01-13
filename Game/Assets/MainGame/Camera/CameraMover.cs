@@ -18,7 +18,7 @@ public class CameraMover : MonoBehaviour {
         else AudioListener.volume = 1.0f;
         if (music > 0) { this.GetComponent<AudioSource>().enabled = true; this.GetComponent<AudioSource>().Play(); }
         else this.GetComponent<AudioSource>().enabled = false;
-        Debug.Log(music);
+
     }
 
 	void Start () {

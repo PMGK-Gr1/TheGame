@@ -14,7 +14,7 @@ public class UpgradeCounter : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        this.guiText.text = PlayerPrefs.GetInt("Upgrade" + UpgradeId.ToString()).ToString();     
+        if(UpgradeId!=0) this.guiText.text = PlayerPrefs.GetInt("Upgrade" + UpgradeId.ToString()).ToString();     
 
 	}
 }

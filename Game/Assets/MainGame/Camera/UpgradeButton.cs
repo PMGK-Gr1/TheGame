@@ -21,6 +21,8 @@ public class UpgradeButton : MonoBehaviour {
     void Awake()
     {
         donut = GameController.instance.donut;
+        donut.upgrade = PlayerPrefs.GetInt("ChosenUpgrade");
+        donut.upgradeCount = PlayerPrefs.GetInt("Upgrade" + donut.upgrade.ToString());
         if (donut.upgradeCount == 0)
         {
             PlayerPrefs.SetInt("ChosenUpgrade", 0);
