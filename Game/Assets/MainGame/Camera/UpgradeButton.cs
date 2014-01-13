@@ -92,6 +92,11 @@ public class UpgradeButton : MonoBehaviour {
             }
 
         }
+        else
+        {
+            PlayerPrefs.SetInt("ChosenUpgrade", 0);
+            donut.upgrade = 0;
+        }
     }
 
     IEnumerator Cooldown(float t)

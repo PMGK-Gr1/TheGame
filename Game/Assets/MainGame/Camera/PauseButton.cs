@@ -27,18 +27,18 @@ public class PauseButton : MonoBehaviour {
         if (Time.timeScale == 0)
         {
             paused = false;
-			guiTexture.texture = normalPause;
+			
             Pause();
         }
 
         else
         {
             paused = true;
-			guiTexture.texture = normalPlay;
+			
             Unpause();
         }
 
-		PausePlane.renderer.enabled = paused;
+		
     }
 
     void OnMouseUp()
@@ -52,7 +52,9 @@ public class PauseButton : MonoBehaviour {
         //Light.GetComponent<Light>().intensity = 1.1f;
 		Time.timeScale = timeScale;
         pauseoptions.SetActive(false);
-        donut.GetComponentInChildren<Jumper>().enabled = true;   
+        donut.GetComponentInChildren<Jumper>().enabled = true;
+        guiTexture.texture = normalPause;
+        PausePlane.renderer.enabled = paused;
     }
 
     public void Unpause()
@@ -60,6 +62,8 @@ public class PauseButton : MonoBehaviour {
         //Light.GetComponent<Light>().intensity = 0.0f;        
         Time.timeScale = 0;
         pauseoptions.SetActive(true);
-        donut.GetComponentInChildren<Jumper>().enabled = false; 
+        donut.GetComponentInChildren<Jumper>().enabled = false;
+        guiTexture.texture = normalPlay;
+        PausePlane.renderer.enabled = paused;
     }
 }

@@ -14,7 +14,7 @@ public class MusicButtonScript : MonoBehaviour {
 	void Start () {
 	
         this.guiTexture.pixelInset = new Rect(
-            Screen.width * 0.55f,
+            Screen.width * 0.3f,
             Screen.height * 0.65f,
             Screen.width * 0.15f,
             Screen.height * 0.25f);
