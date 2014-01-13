@@ -1,10 +1,10 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\MainGame\Camera\PauseButton.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\MainGame\Camera\CameraMover.cs">
     <Files>
-      <File FileName="Assets\MainGame\Donut\Scripts\Donut.cs" Line="114" Column="5" />
-      <File FileName="Assets\MainGame\Camera\CameraMover.cs" Line="8" Column="17" />
-      <File FileName="Assets\MainGame\Camera\PauseButton.cs" Line="53" Column="29" />
+      <File FileName="Assets\MainGame\Donut\Scripts\Donut.cs" Line="69" Column="68" />
+      <File FileName="Assets\MainGame\Camera\CameraMover.cs" Line="9" Column="1" />
+      <File FileName="Assets\MainGame\Camera\PauseButton.cs" Line="18" Column="59" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

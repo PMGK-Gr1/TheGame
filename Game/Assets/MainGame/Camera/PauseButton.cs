@@ -15,7 +15,7 @@ public class PauseButton : MonoBehaviour {
 	void Start () {
 		paused = false;
         donut = GameController.instance.donut;
-		this.guiTexture.pixelInset = new Rect(Screen.width * 0.8f, Screen.height * 0.05f, Screen.height * 0.15f, Screen.height * 0.15f);
+		this.guiTexture.pixelInset = new Rect(Screen.width * 0.85f, Screen.height * 0.03f, Screen.height * 0.15f, Screen.height * 0.15f);
 		PausePlane.renderer.enabled = false;
 		timeScale = Time.timeScale;
 	}
