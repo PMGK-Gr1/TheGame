@@ -32,6 +32,9 @@ public class LevelBuilder : MonoBehaviour {
 	private Vector3 endPosition = Vector3.zero;
 	private Queue<Properties> level = new Queue<Properties>();
 	private const int groundLayer = 10;
+
+	private bool highscoreSign = false;
+	public GameObject highscorePrefab;
     //private int difficulty = 4;
 	// Use this for initialization
 	void Start ()
@@ -46,9 +49,7 @@ public class LevelBuilder : MonoBehaviour {
         Destroy(Bakery, 20.0f);
         #endregion*/
 
-        
-        AddPrefab(LevelPrefabs[0], true);
-        //AddPrefab(LevelPrefabs[0], true);
+		AddPrefab(LevelPrefabs[0], true);
         
 	}
 
@@ -56,25 +57,11 @@ public class LevelBuilder : MonoBehaviour {
     
     void FixedUpdate()
     {
-		/*
-        if ((((int)(transform.position.x)) % IncreaseSugarChance) == 0) SugarChance += 0.1f;
-        if ((((int)(transform.position.x)) % IncreaseBoostChance) == 0) BoostChance += 0.15f;
-        if ((((int)(transform.position.x)) % IncreaseObstacleChance) == 0) ObstacleChance += 0.3f;
-        if (((((int)(transform.position.x)) % DecreaseNothingChance) == 0) && (NothingChance > 0.05000001f)) NothingChance -= 0.05f;
-		*/
-
 		if (GameController.instance.donut.GetDistanceTravelled() > difficultyDistance) {
 			difficultyDistance += difficultyPeriod;
 			ObstacleChance += 0.2f;
 			//NothingChance = Mathf.Max(NothingChance - 0.1f, 0f);
 		}
-		/*
-        if (transform.position.x > DistanceDifficulty[0]) difficulty = 3;
-        if (transform.position.x > DistanceDifficulty[1]) difficulty = 2;
-        if (transform.position.x > DistanceDifficulty[2]) difficulty = 1;
-        if (transform.position.x > DistanceDifficulty[3]) difficulty = 0;
-		*/
-
 
 		while (transform.position.x - level.Peek().transform.position.x - level.Peek().dimentions.x > DestrucionDistance)
         {
@@ -99,10 +86,6 @@ public class LevelBuilder : MonoBehaviour {
 		else if (distance > 100) prefabsCount = 2;
 
 		return Random.Range(1, prefabsCount + 1);
-        /*float tmp = UnityEngine.Random.Range(0.0f, 1.0f);
-        if (tmp <= 0.2f) return 1;
-        if (tmp >= 0.8f) return 2;
-        else return 0;*/
     }
 
 
@@ -110,9 +93,21 @@ public class LevelBuilder : MonoBehaviour {
     {
 		var segmentInstance = (Instantiate(prefabToAdd, endPosition, Quaternion.identity) as GameObject).GetComponent<Properties>();
         level.Enqueue(segmentInstance);
-        endPosition += prefabToAdd.GetComponent<Properties>().dimentions;
         var placesList = segmentInstance.GetComponentsInChildren<SubelementPlacer>();
-  
+
+		float beginning = endPosition.x + GameController.instance.donut.initialX;
+		float height = endPosition.y;
+		endPosition += prefabToAdd.GetComponent<Properties>().dimentions;
+		if (!highscoreSign &&
+			PlayerPrefs.GetInt("HighestScore") * 10 + GameController.instance.donut.initialX > beginning &&
+			PlayerPrefs.GetInt("HighestScore") * 10 + GameController.instance.donut.initialX < endPosition.x + GameController.instance.donut.initialX) 
+		{
+			highscoreSign = true;
+			GameObject sign = Instantiate(highscorePrefab, new Vector3(PlayerPrefs.GetInt("HighestScore") * 10 + GameController.instance.donut.initialX, height, 20), highscorePrefab.transform.rotation) as GameObject;
+			sign.transform.Find("Score").GetComponent<TextMesh>().text = PlayerPrefs.GetInt("HighestScore").ToString();
+		}
+
+			
 
         foreach (var place in placesList)
         {
@@ -170,6 +165,7 @@ public class LevelBuilder : MonoBehaviour {
 			if(tmpObject != null) tmpObject.transform.parent = segmentInstance.transform;
             Destroy(place.gameObject);
         }
+
     }
 }
 
