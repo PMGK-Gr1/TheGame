@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class FreshAsphalt : MonoBehaviour {
-
+	public float strength = 3.0f;
 	// Use this for initialization
 	void Start () {
 	
@@ -20,7 +20,7 @@ public class FreshAsphalt : MonoBehaviour {
 				Destroy(this);
 			}
 			else {
-				other.rigidbody.drag = 3.0f;
+				other.rigidbody.drag = strength;
 			}
 		}
         donut.slippyCount++;
