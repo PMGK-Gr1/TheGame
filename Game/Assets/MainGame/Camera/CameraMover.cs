@@ -6,19 +6,19 @@ public class CameraMover : MonoBehaviour {
 	public GameObject cylinder;
 	Vector3 startVector;
     public PauseButton pause;
-	
+    public int sound, music;
 	// Use this for initialization
     void Awake()
     {
         
 
-        int music = PlayerPrefs.GetInt("music");
-        int sound = PlayerPrefs.GetInt("sound");
+        music = PlayerPrefs.GetInt("music");
+        sound = PlayerPrefs.GetInt("sound");
         if (sound < 0) AudioListener.volume = 0.0f;
         else AudioListener.volume = 1.0f;
         if (music > 0) { this.GetComponent<AudioSource>().enabled = true; this.GetComponent<AudioSource>().Play(); }
         else this.GetComponent<AudioSource>().enabled = false;
-        Debug.Log(music);
+
     }
 
 	void Start () {
@@ -42,7 +42,8 @@ public class CameraMover : MonoBehaviour {
 	}
 
 	void Update() {
-
+        music = PlayerPrefs.GetInt("music");
+        sound = PlayerPrefs.GetInt("sound");
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {

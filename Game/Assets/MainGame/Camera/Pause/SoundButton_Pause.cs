@@ -5,7 +5,8 @@ public class SoundButton_Pause : MonoBehaviour {
 
 	// Use this for initialization
     public Camera camera;
-
+    public float vol;
+    
 	void Start () {
 
 
@@ -29,6 +30,7 @@ public class SoundButton_Pause : MonoBehaviour {
     }
 	// Update is called once per frame
 	void Update () {
-	
+        vol = AudioListener.volume;
+
 	}
 }

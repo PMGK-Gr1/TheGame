@@ -5,6 +5,7 @@ public class SugarCounterScript : MonoBehaviour {
 
 	// Use this for initialization]
     public GUIText SugarCount;
+    
 	void Start () {
 
 	this.guiTexture.pixelInset = new Rect(

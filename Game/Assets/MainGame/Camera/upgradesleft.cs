@@ -9,8 +9,7 @@ public class upgradesleft : MonoBehaviour {
         this.guiText.fontSize = (int)(Screen.height * 0.04f);
         this.guiText.pixelOffset = new Vector2(Screen.width * 0.075f, Screen.height * 0.055f);
         donut = GameController.instance.donut;
-        donut.upgrade = PlayerPrefs.GetInt("ChosenUpgrade");
-        donut.upgradeCount = PlayerPrefs.GetInt("Upgrade" + donut.upgrade.ToString());
+        
         if (donut.upgrade == 0) Destroy(this.gameObject);
     }
 	void FixedUpdate () {
