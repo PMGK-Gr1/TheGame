@@ -14,8 +14,8 @@ public class TwitterButtonScript : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-    void OnMouseUp()
-    {
+    void OnMouseUp() {
+		FlurryManager.instance.Button("Twitter");
         if (!control.optionsOn) Application.OpenURL("http://www.twitter.com/donutmadness");
     }
 }

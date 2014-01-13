@@ -22,14 +22,10 @@ public class MusicButtonScript : MonoBehaviour {
 
 	}
 
-    void OnMouseUp()
-    {
+    void OnMouseUp() {
+		FlurryManager.instance.Button("Music");
         int music = PlayerPrefs.GetInt("music");
         PlayerPrefs.SetInt("music", music * (-1));  
 
     }
-	// Update is called once per frame
-	void Update () {
-	
-	}
 }

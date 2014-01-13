@@ -27,8 +27,9 @@ public class SoundButton_Pause : MonoBehaviour {
 	}
 
 
-    void OnMouseUp()
-    {
+    void OnMouseUp() {
+		FlurryManager.instance.Button("SoundPause");
+
 		int sound = PlayerPrefs.GetInt("sound");
 		
 		if (sound == 0)

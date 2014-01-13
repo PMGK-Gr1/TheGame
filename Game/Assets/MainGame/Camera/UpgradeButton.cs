@@ -44,14 +44,9 @@ public class UpgradeButton : MonoBehaviour {
         //this.GetComponent<SpriteRenderer>().sprite = sprite[donut.upgrade];
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
-
-    void OnMouseDown()
-    {
+    void OnMouseDown() {
+		FlurryManager.instance.Button("LaunchUpgrade");
         if (donut.upgrade > 0)
         {
             FindObjectOfType<Jumper>().canjump = false;
@@ -63,36 +58,32 @@ public class UpgradeButton : MonoBehaviour {
                     case 0:
                         break;
                     case 1:
-                        StartCoroutine("ChocolateRain");		//Let it rain
+                        StartCoroutine(ChocolateRain());		//Let it rain
                         donut.chocoRains++;
                         donut.upgradeCount--;
-						FlurryManager.instance.UpgradeLaunch("Chocolate rain");
                         break;
                     case 2:
                         SpeedBoost();
                         donut.upgradeCount--;
-						FlurryManager.instance.UpgradeLaunch("Speed");
                         break;
                     case 3:
                         donut.StickyDonut(10);
                         MagnetParticle.particleSystem.Play();
-						FlurryManager.instance.UpgradeLaunch("Magnet");
                         donut.upgradeCount--;
                         break;
                     case 4:
-                        StartCoroutine("Marmolade");
+                        StartCoroutine(Marmolade());
                         donut.upgradeCount--;
                         if (donut.isFrosted) donut.achieve.VerySweet();
-						FlurryManager.instance.UpgradeLaunch("Marmolade");
                         break;
                     case 5:
-                        StartCoroutine("Ghost");
+                        StartCoroutine(Ghost());
                         donut.upgradeCount--;
-						FlurryManager.instance.UpgradeLaunch("Ghost donut");
 
                         break;
-                }
-                StartCoroutine("Cooldown", cooldowns[donut.upgrade]);
+				}
+				FlurryManager.instance.UpgradeLaunch();
+                StartCoroutine(Cooldown(cooldowns[donut.upgrade]));
 
             }
 
@@ -158,12 +149,12 @@ public class UpgradeButton : MonoBehaviour {
         while (true)
         {
             pursuit.pursuitSpeed /= 2;
-            Debug.Log("Slower pursuit");
+            //Debug.Log("Slower pursuit");
             yield return new WaitForSeconds(3.0f);
             break;
         }
         pursuit.pursuitSpeed *= 2;
-        Debug.Log("Faster pursuit");
+        //Debug.Log("Faster pursuit");
     }
 
 

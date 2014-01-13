@@ -17,14 +17,9 @@ public class SoundButtonScript : MonoBehaviour {
                Screen.height * 0.25f);
 	}
 
-    void OnMouseUp()
-    {
+    void OnMouseUp() {
+		FlurryManager.instance.Button("Sound");
         int music = PlayerPrefs.GetInt("sound");
         PlayerPrefs.SetInt("sound", music * (-1));
     }
-
-	// Update is called once per frame
-	void Update () {
-	
-	}
 }

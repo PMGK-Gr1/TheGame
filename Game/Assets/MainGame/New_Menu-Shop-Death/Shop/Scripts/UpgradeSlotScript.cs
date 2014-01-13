@@ -21,8 +21,8 @@ public class UpgradeSlotScript : MonoBehaviour {
         slotCount.UpgradeId = UpgradeId;
 	}
 
-    public void Equip(int id)
-    {
+    public void Equip(int id) {
+		FlurryManager.instance.Button("UpgradeEquip");
         PlayerPrefs.SetInt("ChosenUpgrade", id);
         UpgradeId = id;
         this.guiTexture.texture = UpradeTextures[id];

@@ -15,14 +15,9 @@ public class ReturnButton_Pause : MonoBehaviour {
 
 	}
 
-    void OnMouseUp()
-    {
+    void OnMouseUp() {
+		FlurryManager.instance.Button("PauseReturn");
         pause.paused = false;
         pause.Pause();
     }
-
-	// Update is called once per frame
-	void Update () {
-	
-	}
 }

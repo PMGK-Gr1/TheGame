@@ -16,13 +16,10 @@ public class ReturnButtonScript : MonoBehaviour {
 	
 	}
 
-    void OnMouseUp()
-    {
+    void OnMouseUp() {
+		FlurryManager.instance.Button("ShopReturn");
+		FlurryManager.instance.CandiesSpent();
         control.BackToMenu();
         control.inshop = false;
     }
-	// Update is called once per frame
-	void Update () {
-	
-	}
 }

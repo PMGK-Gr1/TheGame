@@ -12,13 +12,9 @@ public class ShopButtonScript : MonoBehaviour {
 	}
 
 
-    void OnMouseUp()
-    {
-     if(!control.optionsOn)   control.ToShop();
-     control.inshop = true;
+    void OnMouseUp() {
+		FlurryManager.instance.Button("Shop");
+		if(!control.optionsOn)   control.ToShop();
+		control.inshop = true;
     }
-	// Update is called once per frame
-	void Update () {
-	
-	}
 }
