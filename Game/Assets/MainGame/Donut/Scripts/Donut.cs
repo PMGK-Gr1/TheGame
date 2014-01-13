@@ -68,7 +68,7 @@ public class Donut : MonoBehaviour{
 	{
 
 		boostCount = 0;
-		timer = 0.0f;
+		timer = Time.fixedTime;
 
         Distance.guiText.fontSize = (int)(Screen.height * 0.09f);
         Score.guiText.fontSize = (int)(Screen.height * 0.09f);
@@ -107,7 +107,7 @@ public class Donut : MonoBehaviour{
 			donutLastLastVelocity = donutLastVelocity;
 			donutLastVelocity = rigidbody.velocity;
 		}
-		timer += Time.fixedDeltaTime;
+		//timer += Time.fixedDeltaTime;
 	}
 
 
@@ -150,7 +150,7 @@ public class Donut : MonoBehaviour{
 		smokeParticle.particleSystem.Play();
 		stingersResistLeft = 1;
 		this.renderer.material = burntMat;
-		FlurryManager.instance.BoostPicked ("Burnt donut");
+		//FlurryManager.instance.BoostPicked ("Burnt donut");
 	}
 
 	void UnburntDonut() {
@@ -167,12 +167,13 @@ public class Donut : MonoBehaviour{
     }
 
 	public void FrostDonut() {
+		boostCount++;
         isFrosted = true;
 
 		freshAsphaltResistLeft = 1;
         stingersResistLeft = 0;
 		this.renderer.material = sugarMat;
-		FlurryManager.instance.BoostPicked ("Frost donut");
+		//FlurryManager.instance.BoostPicked ("Frost donut");
         explosionParticle.particleSystem.Stop();
         smokeParticle.particleSystem.Stop();
 	}
@@ -212,7 +213,7 @@ public class Donut : MonoBehaviour{
 		secondLifeOnParticle.particleSystem.Emit(1);
 		secondLife = true;
 		heartIcon.GetComponent<HeartIcon>().ToggleIcon();
-		FlurryManager.instance.BoostPicked ("Second life");
+		//FlurryManager.instance.BoostPicked ("Second life");
 	}
 
 	void Rebirth() {
@@ -292,13 +293,15 @@ public class Donut : MonoBehaviour{
 			Rebirth();
 			return;
 		}
-		FlurryManager.instance.SessionLength (timer);
+		timer = Time.fixedTime - timer;
+		/*FlurryManager.instance.SessionLength (timer);
 		FlurryManager.instance.DeathCause (Cause);
 		FlurryManager.instance.Distance ((int)GetDistanceTravelled ());
 		FlurryManager.instance.CandiesPicked (sugarCubes);
 		FlurryManager.instance.BoostNumberPicked (boostCount);
-		FlurryManager.instance.TotalUpgrades ();
-		timer = 0.0f;
+		FlurryManager.instance.TotalUpgrades ();*/
+		FlurryManager.instance.EndRun(timer, (int)GetDistanceTravelled(), sugarCubes, Cause, boostCount);
+		//timer = 0.0f;
 		isAlive = false;
         achieve.death = true;
         PlayerPrefs.SetInt("died", 1);

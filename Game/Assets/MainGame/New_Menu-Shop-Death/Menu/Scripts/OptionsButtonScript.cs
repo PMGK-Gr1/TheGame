@@ -19,11 +19,8 @@ public class OptionsButtonScript : MonoBehaviour {
 
     void OnMouseUp()
     {
+		FlurryManager.instance.Button("Options");
         if (!control.optionsOn) control.ToOptions();
         else control.FromOptions();
     }
-	// Update is called once per frame
-	void Update () {
-	
-	}
 }

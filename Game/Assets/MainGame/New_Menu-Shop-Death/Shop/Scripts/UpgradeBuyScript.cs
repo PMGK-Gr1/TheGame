@@ -32,11 +32,7 @@ public class UpgradeBuyScript : MonoBehaviour
         {
             PlayerPrefs.SetInt("Sugar", PlayerPrefs.GetInt("Sugar") - Price);
             PlayerPrefs.SetInt("Upgrade" + UpgradeId.ToString(), PlayerPrefs.GetInt("Upgrade" + UpgradeId.ToString()) + 1);
+			FlurryManager.instance.UpgradeBought(Price);
         }
     }
-
-	// Update is called once per frame
-	void Update () {
-	
-	}
 }

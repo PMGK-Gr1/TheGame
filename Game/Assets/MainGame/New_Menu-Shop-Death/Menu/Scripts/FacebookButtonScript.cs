@@ -15,8 +15,8 @@ public class FacebookButtonScript : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-    void OnMouseUp()
-    {
+    void OnMouseUp() {
+		FlurryManager.instance.Button("Facebook");
         if (!control.optionsOn) Application.OpenURL("http://www.facebook.com/pages/Donut-Madness/343761999100579");
     }
 }

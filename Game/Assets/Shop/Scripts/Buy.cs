@@ -14,7 +14,7 @@ public class Buy : MonoBehaviour {
         {
             PlayerPrefs.SetInt("Sugar", PlayerPrefs.GetInt("Sugar") - price);
             PlayerPrefs.SetInt("Upgrade"+id.ToString(), PlayerPrefs.GetInt("Upgrade"+id.ToString()) + 1);
-			FlurryManager.instance.UpgradeBought(name, price);
+			//FlurryManager.instance.UpgradeBought(name, price);
         }
     }
 	

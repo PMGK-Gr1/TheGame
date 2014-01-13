@@ -14,6 +14,7 @@ public class PlayButtonScript : MonoBehaviour {
 
     void OnMouseUp()
     {
+		FlurryManager.instance.Button("Play");
         Application.LoadLevel("MainScene");
     }
 

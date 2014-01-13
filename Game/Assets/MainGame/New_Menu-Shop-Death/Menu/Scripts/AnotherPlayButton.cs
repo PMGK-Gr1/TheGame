@@ -22,6 +22,7 @@ public class AnotherPlayButton : MonoBehaviour
 
     void OnMouseUp()
     {
+		FlurryManager.instance.CandiesSpent();
         Application.LoadLevel("MainScene");
     }
 
