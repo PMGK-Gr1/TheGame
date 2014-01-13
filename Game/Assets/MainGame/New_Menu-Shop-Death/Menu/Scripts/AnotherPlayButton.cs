@@ -20,8 +20,8 @@ public class AnotherPlayButton : MonoBehaviour
             Screen.width * 0.1f);
     }
 
-    void OnMouseUp()
-    {
+    void OnMouseUp() {
+		FlurryManager.instance.Button("ShopPlay");
 		FlurryManager.instance.CandiesSpent();
         Application.LoadLevel("MainScene");
     }

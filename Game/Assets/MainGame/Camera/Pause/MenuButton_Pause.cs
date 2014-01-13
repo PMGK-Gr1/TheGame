@@ -17,13 +17,9 @@ public class MenuButton_Pause : MonoBehaviour {
 
     void OnMouseUp()
     {
+		FlurryManager.instance.Button("RetToMenu");
         Time.timeScale = 1.0f;
         donut.Save();
         Application.LoadLevel(0);
     }
-
-	// Update is called once per frame
-	void Update () {
-	
-	}
 }

@@ -13,6 +13,7 @@ public class MusicButton_Pause : MonoBehaviour {
 
     void OnMouseUp()
     {
+		FlurryManager.instance.Button("PauseMusic");
         int music = PlayerPrefs.GetInt("music");
         PlayerPrefs.SetInt("music", (music * (-1)));
 		Camera.main.GetComponent<AudioSource>().enabled = !Camera.main.GetComponent<AudioSource>().enabled;
