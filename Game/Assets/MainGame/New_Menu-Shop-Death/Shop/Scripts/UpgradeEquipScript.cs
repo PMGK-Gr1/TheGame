@@ -6,7 +6,7 @@ public class UpgradeEquipScript : MonoBehaviour
 
     public int UpgradeId;
     public UpgradeSlotScript slot;
-    private Rect pixel;
+    //private Rect pixel;
 
     Vector3 p;
     private bool inMove = false;
@@ -22,7 +22,7 @@ public class UpgradeEquipScript : MonoBehaviour
 
         this.transform.position = new Vector3(2.0f + 0.1f, (0.65f - 2.0f * (float)UpgradeId / 10.0f), this.transform.position.z);
 
-        pixel = this.guiTexture.pixelInset;
+        //pixel = this.guiTexture.pixelInset;
 
 
         p = transform.position;
