@@ -23,6 +23,7 @@ public class Donut : MonoBehaviour{
 	public GameObject secondLifeOnParticle;
 	public GameObject useSecondLifeOnParticle1;
 	public GameObject useSecondLifeOnParticle2;
+	public GameObject heartIcon;
 
     public GameObject speedParticle;
     public GameObject magnetParticle;
@@ -47,7 +48,7 @@ public class Donut : MonoBehaviour{
 	private float timer;
 
 	private int stingersResistLeft = 0;
-	private bool secondLife = false;
+	public bool secondLife = false;
 	private int freshAsphaltResistLeft = 0;
 
     private bool isSticky = false;
@@ -210,6 +211,7 @@ public class Donut : MonoBehaviour{
 		secondLifeOnParticle.particleSystem.enableEmission = true;
 		secondLifeOnParticle.particleSystem.Emit(1);
 		secondLife = true;
+		heartIcon.GetComponent<HeartIcon>().ToggleIcon();
 		FlurryManager.instance.BoostPicked ("Second life");
 	}
 
@@ -223,6 +225,8 @@ public class Donut : MonoBehaviour{
 		secondLife = false;
         achieve.DonutRebirth();
         achieve.fiveseconds = true;
+		heartIcon.GetComponent<HeartIcon>().ToggleIcon();
+
         StartCoroutine(fiveseconds());
 	}
 

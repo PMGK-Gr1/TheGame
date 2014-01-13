@@ -55,6 +55,11 @@ public class PauseButton : MonoBehaviour {
         pauseoptions.SetActive(false);
         donut.GetComponentInChildren<Jumper>().enabled = true;
         guiTexture.texture = normalPause;
+
+		Color colorT = guiTexture.color;
+		colorT.a = 0.4f;
+		guiTexture.color = colorT;
+
         PausePlane.renderer.enabled = paused;
     }
 
@@ -65,6 +70,8 @@ public class PauseButton : MonoBehaviour {
         pauseoptions.SetActive(true);
         donut.GetComponentInChildren<Jumper>().enabled = false;
         guiTexture.texture = normalPlay;
+		guiTexture.color = new Color(guiTexture.color.r, guiTexture.color.g, guiTexture.color.b, 1.0f);
+
         PausePlane.renderer.enabled = paused;
     }
 }
