@@ -1,13 +1,17 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\MainGame\Level\Segments\Scripts\LevelBuilder.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\MainGame\Level\Obstacles\Scripts\Billboard.cs">
     <Files>
-      <File FileName="Assets\MainGame\Level\Segments\Scripts\LevelBuilder.cs" Line="106" Column="41" />
-      <File FileName="Assets\MainGame\HUD\HeartIcon.cs" Line="1" Column="1" />
-      <File FileName="Assets\MainGame\Donut\Scripts\Donut.cs" Line="1" Column="1" />
+      <File FileName="Assets\MainGame\Donut\Scripts\Donut.cs" Line="233" Column="46" />
       <File FileName="Assets\MainGame\Camera\CameraMover.cs" Line="1" Column="1" />
       <File FileName="Assets\MainGame\Camera\PauseButton.cs" Line="1" Column="1" />
       <File FileName="Assets\MainGame\HUD\SugarCube.cs" Line="1" Column="1" />
+      <File FileName="Assets\Shop\Scripts\Buy.cs" Line="1" Column="1" />
+      <File FileName="Assets\MainGame\Donut\Scripts\Jumper.cs" Line="1" Column="1" />
+      <File FileName="Assets\MainGame\HUD\HeartIcon.cs" Line="24" Column="30" />
+      <File FileName="Assets\MainGame\Camera\Pause\MusicButton_Pause.cs" Line="16" Column="1" />
+      <File FileName="Assets\MainGame\Camera\Pause\SoundButton_Pause.cs" Line="42" Column="39" />
+      <File FileName="Assets\MainGame\Level\Obstacles\Scripts\Billboard.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

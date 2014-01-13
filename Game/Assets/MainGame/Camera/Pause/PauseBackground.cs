@@ -8,9 +8,9 @@ public class PauseBackground : MonoBehaviour {
 
         this.guiTexture.pixelInset = new Rect(
             Screen.width * 0.3f,
-            Screen.height * 0.1f,
+            Screen.height * 0.4f,
             Screen.width * 0.4f,
-            Screen.height * 0.8f);
+            Screen.height * 0.45f);
 
 	}
 	

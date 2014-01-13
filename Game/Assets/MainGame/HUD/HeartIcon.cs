@@ -14,8 +14,13 @@ public class HeartIcon : MonoBehaviour {
 	void Update () {
 	}
 
-	public void ToggleIcon()
+	public void Enable()
 	{
-		guiTexture.enabled = !guiTexture.enabled;
+		guiTexture.enabled = true;
+	}
+
+	public void Disable()
+	{
+		guiTexture.enabled = false;
 	}
 }

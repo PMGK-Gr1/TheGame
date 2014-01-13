@@ -13,21 +13,24 @@ public class CameraMover : MonoBehaviour {
     void Awake()
     {
         
-
-        music = PlayerPrefs.GetInt("music");
-        sound = PlayerPrefs.GetInt("sound");
-        if (sound < 0) AudioListener.volume = 0.0f;
-        else AudioListener.volume = 1.0f;
-        if (music > 0) { this.GetComponent<AudioSource>().enabled = true; this.GetComponent<AudioSource>().Play(); }
-        else this.GetComponent<AudioSource>().enabled = false;
+        sound = PlayerPrefs.GetInt("sound", 1);
 
     }
 
 	void Start () {
 		startVector = this.transform.position - cylinder.transform.position;
        
+		music = PlayerPrefs.GetInt("music", 1);
+
+		Debug.Log(music.ToString());
+
+		if (music == 1)
+		{
+			this.GetComponent<AudioSource>().Play();
+		}
 	}
-	
+
+
 	// Update is called once per frame
 	void FixedUpdate () {
 		Vector3 moveDirection = cylinder.transform.position + startVector - transform.position;
@@ -44,8 +47,8 @@ public class CameraMover : MonoBehaviour {
 	}
 
 	void Update() {
-        music = PlayerPrefs.GetInt("music");
-        sound = PlayerPrefs.GetInt("sound");
+        music = PlayerPrefs.GetInt("music", 1);
+        sound = PlayerPrefs.GetInt("sound", 1);
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
