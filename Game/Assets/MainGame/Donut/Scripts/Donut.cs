@@ -44,6 +44,7 @@ public class Donut : MonoBehaviour{
 	private Vector3 donutLastVelocity;
 	private Vector3 donutLastLastVelocity;
 
+	private float timer;
 
 	private int stingersResistLeft = 0;
 	private bool secondLife = false;
@@ -60,13 +61,19 @@ public class Donut : MonoBehaviour{
 
     public int upgrade, upgradeCount;
 
+	private int boostCount = 0;
+
 	void Start()
 	{
-        Distance.guiText.fontSize = (int)(Screen.height * 0.1f);
-        Score.guiText.fontSize = (int)(Screen.height * 0.1f);
 
-        Distance.guiText.pixelOffset = new Vector2(Screen.width * 0.05f, Screen.height * 0.9f);
-        Score.guiText.pixelOffset = new Vector2(Screen.width * 0.05f, Screen.height * 0.8f);
+		boostCount = 0;
+		timer = 0.0f;
+
+        Distance.guiText.fontSize = (int)(Screen.height * 0.09f);
+        Score.guiText.fontSize = (int)(Screen.height * 0.09f);
+
+        Distance.guiText.pixelOffset = new Vector2(Screen.width * 0.01f, Screen.height * 0.93f);
+        Score.guiText.pixelOffset = new Vector2(Screen.width * 0.05f, Screen.height * 0.85f);
 
 		secondLifeOnParticle.particleSystem.enableEmission = false;
 		secondLifeOnParticle.particleSystem.Stop();
@@ -87,8 +94,7 @@ public class Donut : MonoBehaviour{
 
 		initialX = transform.position.x;
 	}
-
-    
+	   
 	void FixedUpdate() {
         if ((((int)(transform.position.x)) % SpeedUp) == 0) TargetSpeed++;
 		if (isAlive) {
@@ -100,6 +106,7 @@ public class Donut : MonoBehaviour{
 			donutLastLastVelocity = donutLastVelocity;
 			donutLastVelocity = rigidbody.velocity;
 		}
+		timer += Time.fixedDeltaTime;
 	}
 
 
@@ -108,7 +115,7 @@ public class Donut : MonoBehaviour{
 		sugarCubes += value;
         if (isSticky) achieve.stickyScore += value;
 		GameObject.Instantiate(dingSound);
-        Score.guiText.text = sugarCubes.ToString() + " candies";
+        Score.guiText.text = sugarCubes.ToString();
 	}
 
 	public void StingerHit() {
@@ -131,6 +138,7 @@ public class Donut : MonoBehaviour{
     }
 
 	public void BurntDonut() {
+		boostCount ++;
         isBurnt = true;
         freshAsphaltResistLeft = 0;
 		explosionParticle.particleSystem.enableEmission = true;
@@ -141,6 +149,7 @@ public class Donut : MonoBehaviour{
 		smokeParticle.particleSystem.Play();
 		stingersResistLeft = 1;
 		this.renderer.material = burntMat;
+		FlurryManager.instance.BoostPicked ("Burnt donut");
 	}
 
 	void UnburntDonut() {
@@ -162,6 +171,7 @@ public class Donut : MonoBehaviour{
 		freshAsphaltResistLeft = 1;
         stingersResistLeft = 0;
 		this.renderer.material = sugarMat;
+		FlurryManager.instance.BoostPicked ("Frost donut");
         explosionParticle.particleSystem.Stop();
         smokeParticle.particleSystem.Stop();
 	}
@@ -196,9 +206,11 @@ public class Donut : MonoBehaviour{
 
 
 	public void GiveSecondLife() {
+		boostCount ++;
 		secondLifeOnParticle.particleSystem.enableEmission = true;
 		secondLifeOnParticle.particleSystem.Emit(1);
 		secondLife = true;
+		FlurryManager.instance.BoostPicked ("Second life");
 	}
 
 	void Rebirth() {
@@ -276,6 +288,13 @@ public class Donut : MonoBehaviour{
 			Rebirth();
 			return;
 		}
+		FlurryManager.instance.SessionLength (timer);
+		FlurryManager.instance.DeathCause (Cause);
+		FlurryManager.instance.Distance ((int)GetDistanceTravelled ());
+		FlurryManager.instance.CandiesPicked (sugarCubes);
+		FlurryManager.instance.BoostNumberPicked (boostCount);
+		FlurryManager.instance.TotalUpgrades ();
+		timer = 0.0f;
 		isAlive = false;
         achieve.death = true;
         PlayerPrefs.SetInt("died", 1);
