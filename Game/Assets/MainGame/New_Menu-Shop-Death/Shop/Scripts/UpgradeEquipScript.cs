@@ -20,7 +20,7 @@ public class UpgradeEquipScript : MonoBehaviour
             Screen.width * 0.1f,
             Screen.width * 0.1f);
 
-        this.transform.position = new Vector3(2.0f + 0.1f, (0.65f - 2.0f * (float)UpgradeId / 10.0f), this.transform.position.z);
+        this.transform.position = new Vector3(2.0f + 0.305f, (0.65f - 2.0f * (float)UpgradeId / 10.0f), this.transform.position.z);
 
         pixel = this.guiTexture.pixelInset;
 
