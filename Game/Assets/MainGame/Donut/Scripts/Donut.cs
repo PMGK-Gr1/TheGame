@@ -62,10 +62,11 @@ public class Donut : MonoBehaviour{
 
 	void Start()
 	{
-        Distance.guiText.fontSize = (int)(Screen.height * 0.09f);
-        Score.guiText.fontSize = (int)(Screen.height * 0.09f);
-        Distance.guiText.pixelOffset = new Vector2(Screen.width * 0.8f, Screen.height * 0.8f);
-        Score.guiText.pixelOffset = new Vector2(Screen.width * 0.8f, Screen.height * 0.7f);
+        Distance.guiText.fontSize = (int)(Screen.height * 0.1f);
+        Score.guiText.fontSize = (int)(Screen.height * 0.1f);
+
+        Distance.guiText.pixelOffset = new Vector2(Screen.width * 0.05f, Screen.height * 0.9f);
+        Score.guiText.pixelOffset = new Vector2(Screen.width * 0.05f, Screen.height * 0.8f);
 
 		secondLifeOnParticle.particleSystem.enableEmission = false;
 		secondLifeOnParticle.particleSystem.Stop();
@@ -107,7 +108,7 @@ public class Donut : MonoBehaviour{
 		sugarCubes += value;
         if (isSticky) achieve.stickyScore += value;
 		GameObject.Instantiate(dingSound);
-        Score.guiText.text = sugarCubes.ToString();
+        Score.guiText.text = sugarCubes.ToString() + " candies";
 	}
 
 	public void StingerHit() {
