@@ -88,7 +88,7 @@ public class UpgradeButtons : MonoBehaviour {
             // if (GUI.Button(button2, "Uprgade 2")) { };
             // if (GUI.Button(button3, "Uprgade 3")) { };
 
-            Rect button = new Rect(Screen.width * 0.1f, Screen.height * 0.1f, Screen.width * 0.1f, Screen.height * 0.1f);
+            // Rect button = new Rect(Screen.width * 0.1f, Screen.height * 0.1f, Screen.width * 0.1f, Screen.height * 0.1f);
 
             if (pausebuttons && (GUI.Button(new Rect(Screen.width * 0.4f, Screen.height * 0.1f, Screen.width * 0.2f, Screen.height * 0.1f), "menu")))
             {
