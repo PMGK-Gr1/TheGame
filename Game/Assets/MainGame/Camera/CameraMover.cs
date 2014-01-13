@@ -6,6 +6,8 @@ public class CameraMover : MonoBehaviour {
 	public GameObject cylinder;
 	Vector3 startVector;
     public PauseButton pause;
+
+
     public int sound, music;
 	// Use this for initialization
     void Awake()

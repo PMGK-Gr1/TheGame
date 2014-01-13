@@ -20,7 +20,7 @@ public class UpgradeEquipScript : MonoBehaviour
             Screen.width * 0.1f,
             Screen.width * 0.1f);
 
-        this.transform.position = new Vector3(2.0f + 0.1f, (0.65f - 2.0f * (float)UpgradeId / 10.0f), this.transform.position.z);
+        this.transform.position = new Vector3(2.0f + 0.305f, (1.02f - 2.0f * (float)UpgradeId / 10.0f), this.transform.position.z);
 
         //pixel = this.guiTexture.pixelInset;
 
@@ -35,6 +35,17 @@ public class UpgradeEquipScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            if (
+                    Mathf.Sqrt(Mathf.Pow((this.transform.position.x - slot.transform.position.x), 2.0f) + Mathf.Pow((this.transform.position.y - slot.transform.position.y), 2.0f))
+                    < 0.12f)
+                slot.Equip(UpgradeId);
+            if (inMove) transform.position = p;
+            inMove = false;
+            slot.swiper.canSwipe = true;
+        }
 
 
         if (Input.touchCount > 0 && (Input.GetTouch(0).phase == TouchPhase.Stationary || Input.GetTouch(0).phase == TouchPhase.Began) && this.guiTexture.HitTest(Input.GetTouch(0).position) && slot.swiper.canSwipe)
@@ -65,6 +76,14 @@ public class UpgradeEquipScript : MonoBehaviour
                 inMove = true;
 
             }
+
+
+
+            if (Input.touchCount <= 0)
+            {
+                this.transform.position = new Vector3(Input.mousePosition.x / Screen.width, Input.mousePosition.y / Screen.height, this.transform.position.z);
+
+            }
         }
 
     }
@@ -83,4 +102,14 @@ public class UpgradeEquipScript : MonoBehaviour
         else return false;
 
     }
+
+
+    void OnMouseDown()
+    {
+        p = transform.position;
+
+        inMove = true;
+        slot.swiper.canSwipe = false;
+    }
+
 }
