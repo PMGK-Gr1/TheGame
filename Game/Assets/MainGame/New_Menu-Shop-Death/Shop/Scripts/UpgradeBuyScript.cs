@@ -18,7 +18,7 @@ public class UpgradeBuyScript : MonoBehaviour
                 Screen.width * 0.1f);
 
         this.transform.position = new Vector3(2 + 0.1f,
-                (0.65f - 2.0f * (float)UpgradeId / 10.0f), this.transform.position.z);
+                (1.02f - 2.0f * (float)UpgradeId / 10.0f), this.transform.position.z);
 
         PriceTag.text = Price.ToString();
         PriceTag.fontSize = (int)(Screen.height * 0.05f);

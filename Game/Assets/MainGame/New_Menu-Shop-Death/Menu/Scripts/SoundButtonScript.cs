@@ -12,7 +12,7 @@ public class SoundButtonScript : MonoBehaviour {
 	void Start () {
         this.guiTexture.pixelInset = new Rect(
                Screen.width * 0.55f,
-               Screen.height * 0.65f,
+               Screen.height * 0.55f,
                Screen.width * 0.15f,
                Screen.height * 0.25f);
 	}

@@ -52,7 +52,7 @@ public class Donut : MonoBehaviour{
 	private int freshAsphaltResistLeft = 0;
 
     private bool isSticky = false;
-	private float initialX;
+	public float initialX;
     public bool isBurnt = false;
     public bool isFrosted = false;
 
