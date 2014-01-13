@@ -5,7 +5,7 @@ public class UpgradeButton : MonoBehaviour {
 
 
     public Texture[] sprite;
-    public float[] cooldowns;
+    public int[] cooldowns;
     public GameObject ChocolateRainParticle;
     public GameObject SpeedParticle;
     public GameObject MagnetParticle;
@@ -14,6 +14,7 @@ public class UpgradeButton : MonoBehaviour {
     public Pursuit pursuit;
     public float speed;
 
+    public GUIText CooldownCount;
     private Donut donut;
 
 	// Use this for initialization
@@ -23,16 +24,19 @@ public class UpgradeButton : MonoBehaviour {
         donut = GameController.instance.donut;
         donut.upgrade = PlayerPrefs.GetInt("ChosenUpgrade");
         donut.upgradeCount = PlayerPrefs.GetInt("Upgrade" + donut.upgrade.ToString());
-        if (donut.upgradeCount == 0)
-        {
-            PlayerPrefs.SetInt("ChosenUpgrade", 0);
-            donut.upgrade = 0;
-        }
+     
+
+
+
+
+        CooldownCount.guiText.pixelOffset = new Vector2(Screen.width * 0.105f, Screen.height * 0.125f);
+        CooldownCount.guiText.fontSize = (int)(Screen.height * 0.1f);
+        CooldownCount.enabled = false;
     }
 
 	void Start () {
         this.guiTexture.pixelInset = new Rect(Screen.width * 0.05f, Screen.height * 0.05f, Screen.height * 0.15f, Screen.height * 0.15f);
-        
+       
         speed = 3000.0f;
 
         
@@ -88,29 +92,28 @@ public class UpgradeButton : MonoBehaviour {
             }
 
         }
-        else
-        {
-            PlayerPrefs.SetInt("ChosenUpgrade", 0);
-            donut.upgrade = 0;
-        }
+       
     }
 
-    IEnumerator Cooldown(float t)
+    IEnumerator Cooldown(int t)
     {
         isCoolingdown = true;
-        this.guiTexture.color = new Color(0.3f, 0.3f,0.3f,0.3f);
-        for (float i = 0; i < t; i += 0.05f)
+        this.guiTexture.color = new Color(0.05f, 0.05f, 0.05f, 0.2f);
+        int c = t;
+        CooldownCount.enabled = true;
+
+        while (c >= 0)
         {
-            var c = (i / (t * 0.7f)) + 0.3f;
-            this.guiTexture.color = new Color(0.3f, 0.3f, 0.3f, c);
-            yield return new WaitForSeconds(0.1f);
+            CooldownCount.guiText.text = c.ToString();
+           yield return new WaitForSeconds(1.0f);
+            c--;
         }
-        this.guiTexture.color = new Color(0.5f, 0.5f, 0.5f, 1.0f);
-        this.transform.localScale = new Vector3(0.01f, 0.01f);
-        yield return new WaitForSeconds(0.5f);
-        this.transform.localScale = new Vector3(0, 0);
+        CooldownCount.guiText.text = "";
+        CooldownCount.enabled = false;
+
         isCoolingdown = false;
-        this.guiTexture.color = new Color(0.5f, 0.5f, 0.5f, 0.5f);
+        this.guiTexture.color = new Color(0.5f, 0.5f, 0.5f, 0.4f);
+        yield return null;
     }
 
     void OnMouseUp()

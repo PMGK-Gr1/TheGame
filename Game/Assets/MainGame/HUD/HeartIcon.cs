@@ -6,7 +6,7 @@ public class HeartIcon : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		this.guiTexture.pixelInset = new Rect(Screen.width * 0.475f, Screen.height * 0.88f, Screen.height * 0.1f, Screen.height * 0.1f);
+		this.guiTexture.pixelInset = new Rect(Screen.width * 0.475f, Screen.height * 0.83f, Screen.height * 0.1f, Screen.height * 0.1f);
 		guiTexture.enabled = false;
 	}
 	

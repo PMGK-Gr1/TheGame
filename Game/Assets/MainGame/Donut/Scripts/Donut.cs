@@ -64,6 +64,8 @@ public class Donut : MonoBehaviour{
 
 	private int boostCount = 0;
 
+
+    public GameObject upgradebutton, pausebutton;
 	void Start()
 	{
 
@@ -73,8 +75,8 @@ public class Donut : MonoBehaviour{
         Distance.guiText.fontSize = (int)(Screen.height * 0.09f);
         Score.guiText.fontSize = (int)(Screen.height * 0.09f);
 
-        Distance.guiText.pixelOffset = new Vector2(Screen.width * 0.01f, Screen.height * 0.93f);
-        Score.guiText.pixelOffset = new Vector2(Screen.width * 0.05f, Screen.height * 0.85f);
+        Distance.guiText.pixelOffset = new Vector2(Screen.width * 0.05f, Screen.height * 0.90f);
+        Score.guiText.pixelOffset = new Vector2(Screen.width * 0.09f, Screen.height * 0.82f);
 
 		secondLifeOnParticle.particleSystem.enableEmission = false;
 		secondLifeOnParticle.particleSystem.Stop();
@@ -304,6 +306,10 @@ public class Donut : MonoBehaviour{
 		//timer = 0.0f;
 		isAlive = false;
         achieve.death = true;
+        pausebutton.SetActive(false);
+        upgradebutton.SetActive(false);
+
+
         PlayerPrefs.SetInt("died", 1);
         GetComponentInChildren<Jumper>().enabled = false;
         Ghost();

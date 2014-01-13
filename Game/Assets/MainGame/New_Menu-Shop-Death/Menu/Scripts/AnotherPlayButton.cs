@@ -21,6 +21,7 @@ public class AnotherPlayButton : MonoBehaviour
     }
 
     void OnMouseUp() {
+        PlayerPrefs.Save();
 		FlurryManager.instance.Button("ShopPlay");
 		FlurryManager.instance.CandiesSpent();
         Application.LoadLevel("MainScene");

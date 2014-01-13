@@ -8,7 +8,7 @@ public class UpgradeCounter : MonoBehaviour {
 	void Start () {
 
         this.guiText.fontSize = (int)(Screen.height * 0.09f);
-        this.guiText.pixelOffset = new Vector2(Screen.width * 0.01f, 0.0f);
+        this.guiText.pixelOffset = new Vector2(Screen.width * 0.31f, 0.0f);
 	}
 	
 	// Update is called once per frame
