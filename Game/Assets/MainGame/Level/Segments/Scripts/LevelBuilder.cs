@@ -32,7 +32,7 @@ public class LevelBuilder : MonoBehaviour {
 	private Vector3 endPosition = Vector3.zero;
 	private Queue<Properties> level = new Queue<Properties>();
 	private const int groundLayer = 10;
-    private int difficulty = 4;
+    //private int difficulty = 4;
 	// Use this for initialization
 	void Start ()
     {
@@ -68,12 +68,12 @@ public class LevelBuilder : MonoBehaviour {
 			ObstacleChance += 0.2f;
 			//NothingChance = Mathf.Max(NothingChance - 0.1f, 0f);
 		}
-
+		/*
         if (transform.position.x > DistanceDifficulty[0]) difficulty = 3;
         if (transform.position.x > DistanceDifficulty[1]) difficulty = 2;
         if (transform.position.x > DistanceDifficulty[2]) difficulty = 1;
         if (transform.position.x > DistanceDifficulty[3]) difficulty = 0;
-
+		*/
 
 
 		while (transform.position.x - level.Peek().transform.position.x - level.Peek().dimentions.x > DestrucionDistance)

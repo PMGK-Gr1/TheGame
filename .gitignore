@@ -7,3 +7,4 @@ Temp
 /Game/*.sln
 /Game/*.csproj
 /Game/*.pidb
+/Game/ProjectSettings/Physics2DSettings.asset

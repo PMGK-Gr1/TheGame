@@ -4,12 +4,9 @@ using System.Collections;
 public class SoundButton_Pause : MonoBehaviour {
 
 	// Use this for initialization
-    public Camera camera;
-    public float vol;
+    //public float soundVolume; 
     
 	void Start () {
-
-
         this.guiTexture.pixelInset = new Rect(
           Screen.width * 0.55f,
           Screen.height * 0.45f,
@@ -29,8 +26,7 @@ public class SoundButton_Pause : MonoBehaviour {
 
     }
 	// Update is called once per frame
-	void Update () {
-        vol = AudioListener.volume;
-
-	}
+	/*void Update () {
+        soundVolume = AudioListener.volume;
+	}*/
 }
