@@ -24,7 +24,7 @@ public class PauseButton : MonoBehaviour {
     void OnMouseDown()
     {
 		FlurryManager.instance.Button ("Pause");
-        //FindObjectOfType<Jumper>().canjump = false;
+        FindObjectOfType<Jumper>().canjump = false;
         if (Time.timeScale == 0)
         {
             paused = false;
@@ -44,7 +44,7 @@ public class PauseButton : MonoBehaviour {
 
     void OnMouseUp()
     {
-        //FindObjectOfType<Jumper>().canjump = true;
+        FindObjectOfType<Jumper>().canjump = true;
     }
 
 
