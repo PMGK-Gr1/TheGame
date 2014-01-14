@@ -75,12 +75,12 @@ public class UpgradeButton : MonoBehaviour {
                         MagnetParticle.particleSystem.Play();
                         donut.upgradeCount--;
                         break;
-                    case 4:
+                    case 5:
                         StartCoroutine(Marmolade());
                         donut.upgradeCount--;
                         if (donut.isFrosted) donut.achieve.VerySweet();
                         break;
-                    case 5:
+                    case 4:
                         StartCoroutine(Ghost());
                         donut.upgradeCount--;
 
