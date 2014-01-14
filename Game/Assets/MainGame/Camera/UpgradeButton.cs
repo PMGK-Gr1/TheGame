@@ -29,7 +29,7 @@ public class UpgradeButton : MonoBehaviour {
 
 
 
-        CooldownCount.guiText.pixelOffset = new Vector2(Screen.width * 0.105f, Screen.height * 0.125f);
+        CooldownCount.guiText.pixelOffset = new Vector2(Screen.width * 0.095f, Screen.height * 0.125f);
         CooldownCount.guiText.fontSize = (int)(Screen.height * 0.1f);
         CooldownCount.enabled = false;
     }
@@ -112,7 +112,7 @@ public class UpgradeButton : MonoBehaviour {
         CooldownCount.enabled = false;
 
         isCoolingdown = false;
-        this.guiTexture.color = new Color(0.5f, 0.5f, 0.5f, 0.4f);
+        this.guiTexture.color = new Color(0.5f, 0.5f, 0.5f, 0.35f);
         yield return null;
     }
 
