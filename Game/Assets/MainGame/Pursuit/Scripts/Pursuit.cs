@@ -27,6 +27,7 @@ public class Pursuit : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate() {
 		if (Time.time > startTime) {
+			pursuitSpeed = donut.TargetSpeed;
 			Vector3 tmpDelta = donut.transform.position - transform.position;
             //this.light.intensity = 5.0f / tmpDelta.magnitude;
 			float tmpX = tmpDelta.magnitude / CatchDistance;
