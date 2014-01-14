@@ -8,6 +8,7 @@ public class Controller : MonoBehaviour {
     public bool optionsOn = false;
     public bool inshop = false;
     public bool deathscreen = false;
+    public GameObject reset;
     int died;
 	// Use this for initialization
 
@@ -38,7 +39,9 @@ public class Controller : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (optionsOn) { FromOptions(); optionsOn = false; }
+            if (reset.activeSelf) reset.SetActive(false);
+
+            else if (optionsOn) { FromOptions(); optionsOn = false; }
             else if (inshop) { BackToMenu(); inshop = false; }
             else if (deathscreen) { DeathToMenu(); deathscreen = false; }
             else Application.Quit();
