@@ -15,9 +15,9 @@ public class FlurryManager : MonoSingleton<FlurryManager> {
 
 		//FlurryAgent.Instance.onStartSession ("DSYXWKHNM2H2C3QVR9HM");
 
-		FlurryAgent.Instance.onStartSession("B35PZVVJMGN7JG7N3VNH"); // Official donut account
+		//FlurryAgent.Instance.onStartSession("B35PZVVJMGN7JG7N3VNH"); // Official donut account
 
-		//FlurryAgent.Instance.onStartSession("TDN8Z75V4VQWVFT6YRPQ"); // Debug account
+		FlurryAgent.Instance.onStartSession("TDN8Z75V4VQWVFT6YRPQ"); // Debug account
 		
 
 		FlurryAgent.Instance.setLogEnabled (true);
