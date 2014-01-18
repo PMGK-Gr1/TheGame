@@ -24,7 +24,7 @@ public class AnotherPlayButton : MonoBehaviour
         PlayerPrefs.Save();
 		FlurryManager.instance.Button("ShopPlay");
 		FlurryManager.instance.CandiesSpent();
-        Application.LoadLevel("MainScene");
+        LoadingScreen.LoadLevel("MainScene");
     }
 
     // Update is called once per frame

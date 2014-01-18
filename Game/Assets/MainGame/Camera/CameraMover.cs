@@ -56,7 +56,7 @@ public class CameraMover : MonoBehaviour {
             if (pause.paused) { pause.paused = false; pause.Pause(); }
             else { pause.paused = true; pause.Unpause(); }
         }
-		if (Input.GetKeyDown(KeyCode.Menu)) Application.LoadLevel(0);
+		if (Input.GetKeyDown(KeyCode.Menu)) LoadingScreen.LoadLevel(0);
 	}
 
 

@@ -13,7 +13,7 @@ public class Reset : MonoBehaviour {
         if(GUI.Button(rectButton, "Reset")){
 			FlurryManager.instance.Button ("Reset");
             Time.timeScale = 1;
-            Application.LoadLevel(0);
+            LoadingScreen.LoadLevel(0);
         }
 
     }

@@ -14,7 +14,7 @@ public class Buttons : MonoBehaviour
         menuButton.height = Screen.height * 0.1f;
         if (GUI.Button(menuButton, "Menu"))
         {
-            Application.LoadLevel(0);
+            LoadingScreen.LoadLevel(0);
         }
 
         Rect againButton = new Rect();
@@ -24,7 +24,7 @@ public class Buttons : MonoBehaviour
         againButton.height = Screen.height * 0.1f;
         if (GUI.Button(againButton, "Play Again"))
         {
-            Application.LoadLevel(1);
+            LoadingScreen.LoadLevel(1);
         }
 
         Rect shopButton = new Rect();
@@ -34,7 +34,7 @@ public class Buttons : MonoBehaviour
         shopButton.height = Screen.height * 0.1f;
         if (GUI.Button(shopButton, "Shop"))
         {
-            Application.LoadLevel(3);
+            LoadingScreen.LoadLevel(3);
         }
         GUI.BeginScrollView(new Rect(100, 3000, 100, 1000), scrollPosition, new Rect(0, 0, 220, 200));
         GUI.Button(new Rect(0, 0, 100, 20), "Top-left");
@@ -46,7 +46,7 @@ public class Buttons : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape)) Application.LoadLevel(0);
-        if (Input.GetKeyDown(KeyCode.Menu)) Application.LoadLevel(0);
+        if (Input.GetKeyDown(KeyCode.Escape)) LoadingScreen.LoadLevel(0);
+        if (Input.GetKeyDown(KeyCode.Menu)) LoadingScreen.LoadLevel(0);
     }
 }

@@ -354,7 +354,7 @@ public class Donut : MonoBehaviour{
 
 	IEnumerator DelayDeath(float delay) {
 		yield return new WaitForSeconds(delay);
-		if (!GodMode) Application.LoadLevel(0);
+		if (!GodMode) LoadingScreen.LoadLevel(0);
 	}
 
 

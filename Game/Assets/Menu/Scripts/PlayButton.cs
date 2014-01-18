@@ -8,6 +8,6 @@ public class PlayButton : MonoBehaviour {
 
 		FlurryManager.instance.Button ("Play");
         Time.timeScale = 1.0f;
-        Application.LoadLevel(1);
+        LoadingScreen.LoadLevel(1);
     }
 }

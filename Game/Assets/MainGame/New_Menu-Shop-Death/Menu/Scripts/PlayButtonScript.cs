@@ -17,7 +17,7 @@ public class PlayButtonScript : MonoBehaviour {
         PlayerPrefs.Save();
 
 		FlurryManager.instance.Button("Play");
-        Application.LoadLevel("MainScene");
+        LoadingScreen.LoadLevel("MainScene");
     }
 
 	// Update is called once per frame

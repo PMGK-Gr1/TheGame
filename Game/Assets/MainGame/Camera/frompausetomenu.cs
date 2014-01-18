@@ -13,6 +13,6 @@ public class frompausetomenu : MonoBehaviour {
 		FlurryManager.instance.Button ("Menu");
         Time.timeScale = 1.0f;
         donut.Save();
-        Application.LoadLevel(0);
+        LoadingScreen.LoadLevel(0);
     }
 }

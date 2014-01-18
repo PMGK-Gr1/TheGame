@@ -15,7 +15,7 @@ public class ShopCameraButtons : MonoBehaviour {
         {
 			FlurryManager.instance.CandiesSpent();
 			FlurryManager.instance.Button ("Menu");
-            Application.LoadLevel(0);
+            LoadingScreen.LoadLevel(0);
         }
 
         Rect againButton = new Rect();
@@ -27,12 +27,12 @@ public class ShopCameraButtons : MonoBehaviour {
 		{
 			FlurryManager.instance.CandiesSpent();
 			FlurryManager.instance.Button ("Play");
-            Application.LoadLevel(1);
+            LoadingScreen.LoadLevel(1);
         }
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape)) Application.LoadLevel(0);
-        if (Input.GetKeyDown(KeyCode.Menu)) Application.LoadLevel(0);
+        if (Input.GetKeyDown(KeyCode.Escape)) LoadingScreen.LoadLevel(0);
+        if (Input.GetKeyDown(KeyCode.Menu)) LoadingScreen.LoadLevel(0);
     }
 }

@@ -17,7 +17,7 @@ public class PlayAgain : MonoBehaviour {
 	
     void OnMouseUp()
     {
-        Application.LoadLevel("MainScene");
+        LoadingScreen.LoadLevel("MainScene");
         control.deathscreen = false;
 
     }

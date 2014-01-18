@@ -96,7 +96,7 @@ public class UpgradeButtons : MonoBehaviour {
 
                 Time.timeScale = 1.0f;
                 donut.Save();
-                Application.LoadLevel(0);
+                LoadingScreen.LoadLevel(0);
             }
 
             if (pausebuttons && (GUI.Button(new Rect(Screen.width * 0.4f, Screen.height * 0.3f, Screen.width * 0.2f, Screen.height * 0.1f), "sound"))) { }

@@ -20,6 +20,6 @@ public class MenuButton_Pause : MonoBehaviour {
 		FlurryManager.instance.Button("RetToMenu");
         Time.timeScale = 1.0f;
         donut.Save();
-        Application.LoadLevel(0);
+        LoadingScreen.LoadLevel(0);
     }
 }
