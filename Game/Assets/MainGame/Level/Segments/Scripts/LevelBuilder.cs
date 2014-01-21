@@ -103,8 +103,7 @@ public class LevelBuilder : MonoBehaviour {
 			PlayerPrefs.GetInt("HighestScore") * 10 + GameController.instance.donut.initialX < endPosition.x + GameController.instance.donut.initialX) 
 		{
 			highscoreSign = true;
-			GameObject sign = Instantiate(highscorePrefab, new Vector3(PlayerPrefs.GetInt("HighestScore") * 10 + GameController.instance.donut.initialX, height, 28), highscorePrefab.transform.rotation) as GameObject;
-			//sign.transform.Find("Score").GetComponent<TextMesh>().text = PlayerPrefs.GetInt("HighestScore").ToString();
+			Instantiate(highscorePrefab, new Vector3(PlayerPrefs.GetInt("HighestScore") * 10 + GameController.instance.donut.initialX, height, 28), highscorePrefab.transform.rotation);
 		}
 
 			
