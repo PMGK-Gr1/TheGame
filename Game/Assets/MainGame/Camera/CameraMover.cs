@@ -59,5 +59,18 @@ public class CameraMover : MonoBehaviour {
 		if (Input.GetKeyDown(KeyCode.Menu)) LoadingScreen.LoadLevel(0);
 	}
 
+    void OnApplicationFocus(bool p)
+    {
 
+        pause.paused = true;
+        pause.Unpause();
+    }
+
+
+    void OnApplicationPause(bool p)
+    {
+
+        pause.paused = true;
+        pause.Unpause();
+    }
 }
