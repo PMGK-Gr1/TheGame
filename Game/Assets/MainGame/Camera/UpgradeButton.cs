@@ -68,6 +68,7 @@ public class UpgradeButton : MonoBehaviour {
                         break;
                     case 2:
                         SpeedBoost();
+                        if (donut.isBurnt) donut.achieve.isBurntandSpeed = true;
                         donut.upgradeCount--;
                         break;
                     case 3:
@@ -78,7 +79,7 @@ public class UpgradeButton : MonoBehaviour {
                     case 5:
                         StartCoroutine(Marmolade());
                         donut.upgradeCount--;
-                        if (donut.isFrosted) donut.achieve.VerySweet();
+                       // if (donut.isFrosted) donut.achieve.VerySweet();
                         break;
                     case 4:
                         StartCoroutine(Ghost());

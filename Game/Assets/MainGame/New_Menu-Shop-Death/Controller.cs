@@ -3,8 +3,9 @@ using System.Collections;
 
 public class Controller : MonoBehaviour {
 
-    public GameObject Menu, Shop, Busted, Options;
+    public GameObject Menu, Shop, Busted, Options, Achievement;
     public GameObject[] Upgrades;
+    public GameObject[] Achievements;
     public bool optionsOn = false;
     public bool inshop = false;
     public bool deathscreen = false;
@@ -13,6 +14,7 @@ public class Controller : MonoBehaviour {
     public OptionsButtonScript opt;
     public ShopButtonScript shop;
     public ReturnButtonScript rtrn;
+    public AchievementsReturnButton achrt;
     int died;
 	// Use this for initialization
 
@@ -23,7 +25,7 @@ public class Controller : MonoBehaviour {
         Menu.SetActive(false);
     }
 	void Start () {
-
+        Achievements = Achievement.GetComponent<UpgradesSwipe>().Upgrades;
 
         if (died == 1)
         {
@@ -53,13 +55,25 @@ public class Controller : MonoBehaviour {
         }
 	}
 
+    public void ToAchievements()
+    {
+        foreach (var up in Upgrades) up.SetActive(false);
+        Shop.SetActive(false);
+        StartCoroutine(Move(4.0f, true));
+    }
+
+    public void FromAchievements()
+    {
+        foreach (var up in Upgrades) up.SetActive(false);
+
+        Shop.SetActive(false);
+        StartCoroutine(Move(4.0f, false));
+    }
+
     public void DeathToShop()
     {
         Menu.SetActive(false);
         StartCoroutine(Move(4.0f, true));
-
-
-
     }
 
     public void DeathToMenu()
@@ -118,6 +132,7 @@ public class Controller : MonoBehaviour {
     {
         rtrn.active = false;
         shop.active = false;
+        achrt.active = false;
         Vector3 a;
         if(left) a = d * Vector3.left;
         else a = d * Vector3.right;
@@ -125,6 +140,7 @@ public class Controller : MonoBehaviour {
         var MenuPosition = Menu.transform.position + a;
         var ShopPosition = Shop.transform.position + a;
         var BustedPosition = Busted.transform.position + a;
+        var AchievementPosition = Achievement.transform.position + a;
 
         Vector3[] UpgradePositions = new Vector3[Upgrades.GetLength(0)];
         for (int i = 0; i < Upgrades.GetLength(0); i++)
@@ -132,6 +148,15 @@ public class Controller : MonoBehaviour {
             UpgradePositions[i] = Upgrades[i].transform.position + a;
 
         }
+
+        Vector3[] AchievementsPositions = new Vector3[Achievements.GetLength(0)];
+        for (int i = 0; i < Achievements.GetLength(0); i++)
+        {
+            AchievementsPositions[i] = Achievements[i].transform.position + a;
+
+        }
+
+
             float t = 0;
  
             do
@@ -146,7 +171,10 @@ public class Controller : MonoBehaviour {
                 {
                     Upgrades[i].transform.position = Vector3.Lerp(Upgrades[i].transform.position, UpgradePositions[i], s);
                 }
-                        
+                for (int i = 0; i < Achievements.GetLength(0); i++)
+                {
+                    Achievements[i].transform.position = Vector3.Lerp(Achievements[i].transform.position, AchievementsPositions[i], s);
+                }     
                 
                 Menu.transform.position = Vector3.Lerp(Menu.transform.position, MenuPosition, s);
                         
@@ -154,13 +182,18 @@ public class Controller : MonoBehaviour {
                         
                 Busted.transform.position = Vector3.Lerp(Busted.transform.position, BustedPosition, s);
 
+                Achievement.transform.position = Vector3.Lerp(Achievement.transform.position, AchievementPosition, s);
+
             } while (Menu.transform.position != MenuPosition && Shop.transform.position != ShopPosition
                 && Busted.transform.position != BustedPosition);
         
             Menu.SetActive(true);
+            Shop.SetActive(true);
+            foreach (var up in Upgrades) up.SetActive(true);
 
             rtrn.active = true;
             shop.active = true;
+            achrt.active = true;
             yield return null;
         
     }

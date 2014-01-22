@@ -63,8 +63,10 @@ public class Donut : MonoBehaviour{
     public int upgrade, upgradeCount;
 
 	private int boostCount = 0;
+    private int fall = 0;
 
 
+  
     public GameObject upgradebutton, pausebutton;
 	void Start()
 	{
@@ -301,6 +303,12 @@ public class Donut : MonoBehaviour{
 			return;
 		}
 		timer = Time.fixedTime - timer;
+
+        if (Cause == "Fall")
+        {
+            fall = 1;
+            achieve.donutfell = true;
+        }
 		/*FlurryManager.instance.SessionLength (timer);
 		FlurryManager.instance.DeathCause (Cause);
 		FlurryManager.instance.Distance ((int)GetDistanceTravelled ());
@@ -335,6 +343,7 @@ public class Donut : MonoBehaviour{
 	public void Save() {
 
 		int distance = (int) GetDistanceTravelled();
+        PlayerPrefs.SetInt("Falls", PlayerPrefs.GetInt("Falls") + fall);
 		PlayerPrefs.SetInt("Sugar", PlayerPrefs.GetInt("Sugar") + sugarCubes);
 		PlayerPrefs.SetInt("TotalSugarEver", PlayerPrefs.GetInt("TotalSugarEver") + sugarCubes);
 		PlayerPrefs.SetInt("TotalDistance", PlayerPrefs.GetInt("TotalDistance") + distance);
