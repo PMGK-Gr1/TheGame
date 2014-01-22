@@ -6,6 +6,8 @@ public class ReturnButtonScript : MonoBehaviour {
     
     public Controller control;
 
+    public bool active = true;
+
 	// Use this for initialization
 	void Start () {
 	this.guiTexture.pixelInset = new Rect(
@@ -17,9 +19,12 @@ public class ReturnButtonScript : MonoBehaviour {
 	}
 
     void OnMouseUp() {
-		FlurryManager.instance.Button("ShopReturn");
-		FlurryManager.instance.CandiesSpent();
-        control.BackToMenu();
-        control.inshop = false;
+        if (active)
+        {
+            FlurryManager.instance.Button("ShopReturn");
+            FlurryManager.instance.CandiesSpent();
+            control.BackToMenu();
+            control.inshop = false;
+        }
     }
 }

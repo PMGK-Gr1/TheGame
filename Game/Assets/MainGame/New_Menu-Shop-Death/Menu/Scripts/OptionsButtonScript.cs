@@ -5,6 +5,7 @@ public class OptionsButtonScript : MonoBehaviour {
 
     public Controller control;
 
+    public bool active = true;
 	// Use this for initialization
 	void Start () {
 
@@ -19,8 +20,11 @@ public class OptionsButtonScript : MonoBehaviour {
 
     void OnMouseUp()
     {
-		FlurryManager.instance.Button("Options");
-        if (!control.optionsOn) control.ToOptions();
-        else control.FromOptions();
+        if (active)
+        {
+            FlurryManager.instance.Button("Options");
+            if (!control.optionsOn) control.ToOptions();
+            else control.FromOptions();
+        }
     }
 }

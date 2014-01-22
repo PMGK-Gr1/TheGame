@@ -3,6 +3,8 @@ using System.Collections;
 
 public class ShopButtonScript : MonoBehaviour {
     public Controller control;
+
+    public bool active = true;
 	// Use this for initialization
 	void Start () {
         this.guiTexture.pixelInset = new Rect(0.8f * (float)Screen.width,
@@ -13,8 +15,11 @@ public class ShopButtonScript : MonoBehaviour {
 
 
     void OnMouseUp() {
-		FlurryManager.instance.Button("Shop");
-		if(!control.optionsOn)   control.ToShop();
-		control.inshop = true;
+        if (active)
+        {
+            FlurryManager.instance.Button("Shop");
+            if (!control.optionsOn) control.ToShop();
+            control.inshop = true;
+        }
     }
 }

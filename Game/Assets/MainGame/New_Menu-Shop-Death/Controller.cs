@@ -9,6 +9,10 @@ public class Controller : MonoBehaviour {
     public bool inshop = false;
     public bool deathscreen = false;
     public GameObject reset;
+
+    public OptionsButtonScript opt;
+    public ShopButtonScript shop;
+    public ReturnButtonScript rtrn;
     int died;
 	// Use this for initialization
 
@@ -77,6 +81,7 @@ public class Controller : MonoBehaviour {
 
     IEnumerator OptionsMove(bool on)
     {
+        opt.active = false;
         Vector3 a;
         if(on) a = 3 * Vector3.down;
         else a = 3* Vector3.up;
@@ -90,6 +95,8 @@ public class Controller : MonoBehaviour {
                   OptionsPosition,
                   t / 3.0f);
           } while (Options.transform.position != OptionsPosition);
+          opt.active = true;
+
          yield return null;
     }
 
@@ -109,6 +116,8 @@ public class Controller : MonoBehaviour {
 
     IEnumerator Move(float d, bool left, bool fast=false)
     {
+        rtrn.active = false;
+        shop.active = false;
         Vector3 a;
         if(left) a = d * Vector3.left;
         else a = d * Vector3.right;
@@ -149,6 +158,9 @@ public class Controller : MonoBehaviour {
                 && Busted.transform.position != BustedPosition);
         
             Menu.SetActive(true);
+
+            rtrn.active = true;
+            shop.active = true;
             yield return null;
         
     }
