@@ -16,6 +16,9 @@ public class Controller : MonoBehaviour {
     int died;
 	// Use this for initialization
 
+	private float maxVolume;
+	private const float volumeJump = 0.01f;
+
     void Awake()
     {
 
@@ -23,7 +26,14 @@ public class Controller : MonoBehaviour {
         Menu.SetActive(false);
     }
 	void Start () {
-
+		maxVolume = this.GetComponent<AudioSource>().volume;
+		int music = PlayerPrefs.GetInt("music", 1);
+		
+		if (music == 1)
+		{
+			this.GetComponent<AudioSource>().volume = 0;
+			this.GetComponent<AudioSource>().Play();
+		}
 
         if (died == 1)
         {
@@ -40,7 +50,11 @@ public class Controller : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
+		
+		if (this.GetComponent<AudioSource>().volume < maxVolume)
+		{
+			this.GetComponent<AudioSource>().volume += volumeJump;
+		}
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (reset.activeSelf) reset.SetActive(false);

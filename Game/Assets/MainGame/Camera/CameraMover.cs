@@ -7,25 +7,25 @@ public class CameraMover : MonoBehaviour {
 	Vector3 startVector;
     public PauseButton pause;
 
-
+	private const float maxVolume = 0.05f;
+	private const float volumeJump = 0.00025f;
+	
     public int sound, music;
 	// Use this for initialization
     void Awake()
     {
-        
         sound = PlayerPrefs.GetInt("sound", 1);
 
     }
 
 	void Start () {
 		startVector = this.transform.position - cylinder.transform.position;
-       
-		music = PlayerPrefs.GetInt("music", 1);
 
-		Debug.Log(music.ToString());
+		music = PlayerPrefs.GetInt("music", 1);
 
 		if (music == 1)
 		{
+			this.GetComponent<AudioSource>().volume = 0;
 			this.GetComponent<AudioSource>().Play();
 		}
 	}
@@ -47,6 +47,12 @@ public class CameraMover : MonoBehaviour {
 	}
 
 	void Update() {
+
+		if (this.GetComponent<AudioSource>().volume < maxVolume)
+		{
+			this.GetComponent<AudioSource>().volume += volumeJump;
+		}
+
         music = PlayerPrefs.GetInt("music", 1);
         sound = PlayerPrefs.GetInt("sound", 1);
 
