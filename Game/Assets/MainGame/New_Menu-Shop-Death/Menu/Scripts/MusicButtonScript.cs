@@ -7,7 +7,7 @@ public class MusicButtonScript : MonoBehaviour {
 	// Use this for initialization
     public Texture2D musicOnTexture;
     public Texture2D musicOffTexture;
-
+	public AudioSource musicMenu;
 
     void Awake()
     {
@@ -41,11 +41,13 @@ public class MusicButtonScript : MonoBehaviour {
         
             guiTexture.texture = musicOnTexture;
             music = 1;
+			musicMenu.Play();
         }
         else
         {
             music = 0;
             guiTexture.texture = musicOffTexture;
+			musicMenu.Stop();
           
         }
 

@@ -37,11 +37,12 @@ public class AchievementsReturnButton : MonoBehaviour
 
     void OnMouseUp()
     {
-        swipe.canSwipe = true;
+        
         if (active)
         {
             active = false;
             control.FromAchievements();
         }
+        swipe.canSwipe = true;
     }
 }
