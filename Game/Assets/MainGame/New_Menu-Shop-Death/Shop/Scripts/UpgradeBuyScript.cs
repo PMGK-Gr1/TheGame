@@ -8,6 +8,7 @@ public class UpgradeBuyScript : MonoBehaviour
     public int UpgradeId;
     public int Price;
     public GUIText PriceTag;
+    public SugarCounterScript counter;
     // Use this for initialization
 	void Awake () {
 
@@ -18,7 +19,7 @@ public class UpgradeBuyScript : MonoBehaviour
                 Screen.width * 0.1f);
 
         this.transform.position = new Vector3(2 + 0.1f,
-                (1.02f - 2.0f * (float)UpgradeId / 10.0f), this.transform.position.z);
+                (0.75f - 1.85f * (float)UpgradeId / 10.0f), this.transform.position.z);
 
         PriceTag.text = Price.ToString();
         PriceTag.fontSize = (int)(Screen.height * 0.05f);
@@ -32,7 +33,11 @@ public class UpgradeBuyScript : MonoBehaviour
         {
             PlayerPrefs.SetInt("Sugar", PlayerPrefs.GetInt("Sugar") - Price);
             PlayerPrefs.SetInt("Upgrade" + UpgradeId.ToString(), PlayerPrefs.GetInt("Upgrade" + UpgradeId.ToString()) + 1);
-			FlurryManager.instance.UpgradeBought(Price);
+            FlurryManager.instance.UpgradeBought(Price);
+        }
+        else
+        {
+            counter.NO();
         }
     }
 }

@@ -58,6 +58,8 @@ public class Achievements : MonoBehaviour
     private bool burntandspeed = true;
     public bool isBurntandSpeed = false;
 
+    public Animator notification;
+
     void Awake()
     {
         if(PlayerPrefs.GetInt("Achievement1")!=0) sugar20 = false;
@@ -89,11 +91,11 @@ public class Achievements : MonoBehaviour
         if(PlayerPrefs.GetInt("Achievement27")!=0) billboard100 = false;
         if(PlayerPrefs.GetInt("Achievement28")!=0) stinger10 = false;
         if(PlayerPrefs.GetInt("Achievement29")!=0) fall10 = false;
-        if(PlayerPrefs.GetInt("Achievement30")!=0) warpSpeed = false;
-        if(PlayerPrefs.GetInt("Achievement31")!=0) choco = false;
-        if(PlayerPrefs.GetInt("Achievement32")!=0) overViaduct = false;
-        if(PlayerPrefs.GetInt("Achievement33")!=0) burntandspeed = false;
-        if(PlayerPrefs.GetInt("Achievement34") != 0) fiveseconds = false;
+        //if(PlayerPrefs.GetInt("Achievement30")!=0) warpSpeed = false;
+        if(PlayerPrefs.GetInt("Achievement30")!=0) choco = false;
+        if(PlayerPrefs.GetInt("Achievement31")!=0) overViaduct = false;
+        if(PlayerPrefs.GetInt("Achievement32")!=0) burntandspeed = false;
+        if(PlayerPrefs.GetInt("Achievement33") != 0) fiveseconds = false;
     }
 
 
@@ -154,39 +156,46 @@ public class Achievements : MonoBehaviour
         if (overViaduct && over) OverViaduct();
         if (fiveseconds && death) FiveSeconds();
         if (choco&&(PlayerPrefs.GetInt("ChocalateRains") + donut.chocoRains) >= 10) Choco();
-		if (donut.gameObject.GetComponent<Rigidbody> () != null) {
+		/*if (donut.gameObject.GetComponent<Rigidbody> () != null) {
 						if (warpSpeed && (donut.rigidbody.velocity.x > 100)) WarpSpeed ();
-				}
+				}*/
         if (slippy && (donut.slippyCount >= 5)) Slippy();
 
         if(fall10 && donutfell && death && PlayerPrefs.GetInt("Falls") >= 9) Fall10();
 
         if (burntandspeed && isBurntandSpeed) BurntandSpeed();
+
+
+       // notification.SetBool("unlock", false);
+
     }
 
     void Diabetes()
     {
+        notification.Play("unlocked");
         PlayerPrefs.SetInt("Achievement8", 1);
         diabetes = false;
     }
 
-    void WarpSpeed()
+   /* void WarpSpeed()
     {
         PlayerPrefs.SetInt("Achievement30", 1);
 
         warpSpeed = false;
         //Debug.Log("Achievement unlocked: Prędkość warpowa panie Sulu");
-    }
+    }*/
   void FiveSeconds()
     {
         fiveseconds = false;
-        PlayerPrefs.SetInt("Achievement34", 1);
+        notification.Play("unlocked");
+        PlayerPrefs.SetInt("Achievement33", 1);
 
         //Debug.Log("Achievement unlocked: Bezsensowny wysiłek");
     }
 
   void Slippy()
   {
+      notification.Play("unlocked");
       PlayerPrefs.SetInt("Achievement24", 1);
 
       slippy = false;
@@ -198,7 +207,8 @@ public class Achievements : MonoBehaviour
   }*/
   public void BurntandSpeed()
   {
-      PlayerPrefs.SetInt("Achievement33", 1);
+      notification.Play("unlocked");
+      PlayerPrefs.SetInt("Achievement32", 1);
       
       burntandspeed = false;
       //Debug.Log("Achievement unlocked: 88 mil na godzinę");
@@ -212,6 +222,7 @@ public class Achievements : MonoBehaviour
 
     void Rebirth1()
     {
+        notification.Play("unlocked");
         PlayerPrefs.SetInt("Achievement21", 1);
 
         rebirth1 = false;
@@ -220,6 +231,7 @@ public class Achievements : MonoBehaviour
 
     void Rebirth4()
     {
+        notification.Play("unlocked");
         PlayerPrefs.SetInt("Achievement22", 1);
 
         rebirth4 = false;
@@ -228,6 +240,7 @@ public class Achievements : MonoBehaviour
 
     void Rebirth8()
     {
+        notification.Play("unlocked");
         PlayerPrefs.SetInt("Achievement23", 1);
         rebirth8 = false;
         //Debug.Log("Achievement unlocked: Koci pączek");
@@ -240,6 +253,7 @@ public class Achievements : MonoBehaviour
     }
     void Stinger10()
     {
+        notification.Play("unlocked");
         PlayerPrefs.SetInt("Achievement28", 1);
         stinger10 = false;
         //Debug.Log("Achievement unlocked: Fakir");
@@ -257,6 +271,7 @@ public class Achievements : MonoBehaviour
 
     void Sugar20()
     {
+        notification.Play("unlocked");
         PlayerPrefs.SetInt("Achievement1", 1);
         sugar20 = false;
         //Debug.Log("Achievement unlocked: Słodka przekąska");
@@ -264,30 +279,35 @@ public class Achievements : MonoBehaviour
 
     void Sugar50()
     {
+        notification.Play("unlocked");
         PlayerPrefs.SetInt("Achievement2", 1);
         sugar50 = false;
         //Debug.Log("Achievement unlocked: (50 cukierków)");
     }
     void Sugar100()
     {
+        notification.Play("unlocked");
         PlayerPrefs.SetInt("Achievement3", 1);
         sugar100 = false;
         //Debug.Log("Achievement unlocked: (100 cukierków)");
     }
     void Sugar200()
     {
+        notification.Play("unlocked");
         PlayerPrefs.SetInt("Achievement4", 1);
         sugar200 = false;
         //Debug.Log("Achievement unlocked: Koneser cukru");
     }
     void Sugar500()
     {
+        notification.Play("unlocked");
         PlayerPrefs.SetInt("Achievement5", 1);
         sugar500 = false;
         //Debug.Log("Achievement unlocked: Cukrowy nałogowiec");
     }
     void Sugar1000()
     {
+        notification.Play("unlocked");
         PlayerPrefs.SetInt("Achievement6", 1);
         sugar1000 = false;
         //Debug.Log("Achievement unlocked: (1000 cukierków)");
@@ -295,6 +315,7 @@ public class Achievements : MonoBehaviour
 
     void Sugar300()
     {
+        notification.Play("unlocked");
         PlayerPrefs.SetInt("Achievement7", 1);
         sugar300 = false;
         //Debug.Log("Achievement unlocked: THIS IS MADNESS");
@@ -305,11 +326,14 @@ public class Achievements : MonoBehaviour
     {
         PlayerPrefs.SetInt("Achievement14", 1);
         dist100 = false;
-        //Debug.Log("Achievement unlocked: Rozprostawnie nóg");
+        Debug.Log("Achievement unlocked: Rozprostawnie nóg");
+        notification.Play("unlocked");
+
     }
 
     void Dist200()
     {
+        notification.Play("unlocked");
         PlayerPrefs.SetInt("Achievement15", 1);
         dist200 = false;
         //Debug.Log("Achievement unlocked: Spacerek");
@@ -317,6 +341,7 @@ public class Achievements : MonoBehaviour
 
     void Dist500()
     {
+        notification.Play("unlocked");
         PlayerPrefs.SetInt("Achievement16", 1);
         dist500 = false;
         //Debug.Log("Achievement unlocked: Wycieczka");
@@ -324,6 +349,7 @@ public class Achievements : MonoBehaviour
 
     void Dist1000()
     {
+        notification.Play("unlocked");
         PlayerPrefs.SetInt("Achievement17", 1);
         dist1000 = false;
         //Debug.Log("Achievement unlocked: Wyprawa");
@@ -331,6 +357,7 @@ public class Achievements : MonoBehaviour
 
     void Dist2000()
     {
+        notification.Play("unlocked");
         PlayerPrefs.SetInt("Achievement18", 1);
         dist2000 = false;
         //Debug.Log("Achievement unlocked: Podróż dookoła świata");
@@ -338,6 +365,7 @@ public class Achievements : MonoBehaviour
 
     void Dist5000()
     {
+        notification.Play("unlocked");
         PlayerPrefs.SetInt("Achievement19", 1);
         dist5000 = false;
         //Debug.Log("Achievement unlocked: Gdzie żaden pączek nie dotarł");
@@ -345,6 +373,7 @@ public class Achievements : MonoBehaviour
 
     void Marathon()
     {
+        notification.Play("unlocked");
         PlayerPrefs.SetInt("Achievement20", 1);
         marathon = false;
         //Debug.Log("Achievement unlocked: Maraton");
@@ -359,6 +388,7 @@ public class Achievements : MonoBehaviour
 
     void Billboard10()
     {
+        notification.Play("unlocked");
         PlayerPrefs.SetInt("Achievement26", 1);
         billboard10 = false;
         //Debug.Log("Achievement unlocked: Pączek zniszczenia");
@@ -366,6 +396,7 @@ public class Achievements : MonoBehaviour
 
     void Billboard100()
     {
+        notification.Play("unlocked");
         PlayerPrefs.SetInt("Achievement27", 1);
         billboard100 = false;
         //Debug.Log("Achievement unlocked: AdBlock");
@@ -374,6 +405,7 @@ public class Achievements : MonoBehaviour
     void Sticky50()
     {
         //Debug.Log("Achievement unlocked: Lepkie ręce");
+        notification.Play("unlocked");
         PlayerPrefs.SetInt("Achievement25", 1);
         sticky50 = false;
     }
@@ -381,6 +413,7 @@ public class Achievements : MonoBehaviour
     void AllCandy1()
     {
         //Debug.Log("Achievement unlocked: (wszystkie z 1 formacji)");
+        notification.Play("unlocked");
         PlayerPrefs.SetInt("Achievement9", 1);
         allCandy1 = false;
     }
@@ -388,6 +421,7 @@ public class Achievements : MonoBehaviour
     void AllCandy2()
     {
         //Debug.Log("Achievement unlocked: (wszystkie z 2 formacji)");
+        notification.Play("unlocked");
         PlayerPrefs.SetInt("Achievement10", 1);
         allCandy2 = false;
     }
@@ -395,18 +429,21 @@ public class Achievements : MonoBehaviour
     void AllCandy5()
     {
         //Debug.Log("Achievement unlocked: (wszystkie z 5 formacji)");
+        notification.Play("unlocked");
         PlayerPrefs.SetInt("Achievement11", 1);
         allCandy5 = false;
     }
     void AllCandy12()
     {
         //Debug.Log("Achievement unlocked: (wszystkie ze wszystkich)");
+        notification.Play("unlocked");
         PlayerPrefs.SetInt("Achievement12", 1);
         allCandy12 = false;
     }
     void AllCandyDM()
     {
         //Debug.Log("Achievement unlocked:    DONUT MADNESS");
+        notification.Play("unlocked");
         PlayerPrefs.SetInt("Achievement13", 1);
         allCandyDM = false;
     }
@@ -450,7 +487,8 @@ public class Achievements : MonoBehaviour
 
     void OverViaduct()
     {
-        PlayerPrefs.SetInt("Achievement32", 1);
+        notification.Play("unlocked");
+        PlayerPrefs.SetInt("Achievement31", 1);
         //Debug.Log("Achievement unlocked: Trasa alternatywna");
         overViaduct = false;
     }
@@ -458,13 +496,15 @@ public class Achievements : MonoBehaviour
 
     public void Fall10()
      {
+         notification.Play("unlocked");
          PlayerPrefs.SetInt("Achievement29", 1);
          fall10 = false;
          //Debug.Log("Achievement unlocked: Górnik");
     }
     void Choco()
     {
-        PlayerPrefs.SetInt("Achievement31", 1);
+        notification.Play("unlocked");
+        PlayerPrefs.SetInt("Achievement30", 1);
         choco = false;
         //Debug.Log("Achievement unlocked: Apokalipsa");
     }

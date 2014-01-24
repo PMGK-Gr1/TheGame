@@ -17,14 +17,13 @@ public class UpgradesSwipe : MonoBehaviour {
 
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved && canSwipe)
         {
-          if((Input.GetTouch(0).position.x >= Screen.width * 0.005f) && (Input.GetTouch(0).position.x <= Screen.width * 0.5f ))
-            {
+          
             var delta = Input.GetTouch(0).deltaPosition.y;
-            if (delta > 0 && Upgrades[6].transform.localPosition.y <= 0.6f) foreach(var up in Upgrades) up.transform.localPosition += new Vector3(0, Mathf.Sign(delta) / 20.0f, 0);
-            else if (delta < 0 && Upgrades[5].transform.localPosition.y >= 0.1f) foreach (var up in Upgrades) up.transform.localPosition += new Vector3(0, Mathf.Sign(delta) / 20.0f, 0);
+            if (delta > 0 && Upgrades[32].transform.localPosition.y <= 0.7f) foreach(var up in Upgrades) up.transform.localPosition += new Vector3(0, Mathf.Sign(delta) / 20.0f, 0);
+            else if (delta < 0 && Upgrades[0].transform.localPosition.y >= 0.1f) foreach (var up in Upgrades) up.transform.localPosition += new Vector3(0, Mathf.Sign(delta) / 20.0f, 0);
          
           
-        }}
+        }
 
         
 

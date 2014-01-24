@@ -9,6 +9,7 @@ public class Controller : MonoBehaviour {
     public bool optionsOn = false;
     public bool inshop = false;
     public bool deathscreen = false;
+    public bool inachivs = false;
     public GameObject reset;
 
     public OptionsButtonScript opt;
@@ -50,6 +51,7 @@ public class Controller : MonoBehaviour {
             else if (optionsOn) { FromOptions(); optionsOn = false; }
             else if (inshop) { BackToMenu(); inshop = false; }
             else if (deathscreen) { DeathToMenu(); deathscreen = false; }
+            else if (inachivs) { FromAchievements(); inachivs = false; }
             else Application.Quit();
 
         }
@@ -57,6 +59,8 @@ public class Controller : MonoBehaviour {
 
     public void ToAchievements()
     {
+        inachivs = true;
+
         foreach (var up in Upgrades) up.SetActive(false);
         Shop.SetActive(false);
         StartCoroutine(Move(4.0f, true));
@@ -64,6 +68,7 @@ public class Controller : MonoBehaviour {
 
     public void FromAchievements()
     {
+        inachivs = false;
         foreach (var up in Upgrades) up.SetActive(false);
 
         Shop.SetActive(false);

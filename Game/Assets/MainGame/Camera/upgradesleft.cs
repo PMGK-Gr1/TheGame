@@ -8,7 +8,7 @@ public class upgradesleft : MonoBehaviour {
     void Start()
     {
         this.guiText.fontSize = (int)(Screen.height * 0.04f);
-        this.guiText.pixelOffset = new Vector2(Screen.width * 0.16f, Screen.height * 0.065f);
+        this.guiText.pixelOffset = new Vector2(Screen.width * 0.1675f, Screen.height * 0.065f);
         donut = GameController.instance.donut;
 
         if (donut.upgrade == 0)

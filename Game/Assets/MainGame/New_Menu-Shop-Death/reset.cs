@@ -42,8 +42,15 @@ public class reset : MonoBehaviour {
         PlayerPrefs.SetInt("ChosenUpgrade", 0);
         for (int i = 1; i <= 5; i++)
         {
-            PlayerPrefs.SetInt("Upgrade" + i.ToString(), 0);
+            PlayerPrefs.SetInt("Upgrade" + i, 0);
         }
+
+        for (int i = 1; i < 34; i++)
+        {
+            PlayerPrefs.SetInt("Achievement" + i, 0);
+        }
+
+
         PlayerPrefs.SetInt("LastDistance", 0);
         PlayerPrefs.SetInt("LastSugar", 0);
         PlayerPrefs.SetInt("HighestScore", 0);

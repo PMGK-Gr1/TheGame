@@ -7,7 +7,7 @@ public class CounterBackground : MonoBehaviour {
 	void Start () {
 
         this.guiTexture.pixelInset = new Rect(
-            Screen.width * 0.305f, 0,
+            Screen.width * 0.31f, 0,
             Screen.width * 0.1f,
             Screen.height * 0.1f);
 
